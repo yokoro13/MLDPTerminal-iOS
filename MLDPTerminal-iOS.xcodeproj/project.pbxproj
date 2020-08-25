@@ -1,0 +1,595 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		EE302CD624F4A89400D3E45D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE302CD524F4A89400D3E45D /* AppDelegate.swift */; };
+		EE302CD824F4A89400D3E45D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE302CD724F4A89400D3E45D /* SceneDelegate.swift */; };
+		EE302CDA24F4A89400D3E45D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE302CD924F4A89400D3E45D /* ViewController.swift */; };
+		EE302CDD24F4A89400D3E45D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE302CDB24F4A89400D3E45D /* Main.storyboard */; };
+		EE302CDF24F4A89900D3E45D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EE302CDE24F4A89900D3E45D /* Assets.xcassets */; };
+		EE302CE224F4A89900D3E45D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EE302CE024F4A89900D3E45D /* LaunchScreen.storyboard */; };
+		EE302CED24F4A89A00D3E45D /* MLDPTerminal_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE302CEC24F4A89A00D3E45D /* MLDPTerminal_iOSTests.swift */; };
+		EE302CF824F4A89A00D3E45D /* MLDPTerminal_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE302CF724F4A89A00D3E45D /* MLDPTerminal_iOSUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		EE302CE924F4A89A00D3E45D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EE302CCA24F4A89400D3E45D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EE302CD124F4A89400D3E45D;
+			remoteInfo = "MLDPTerminal-iOS";
+		};
+		EE302CF424F4A89A00D3E45D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EE302CCA24F4A89400D3E45D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = EE302CD124F4A89400D3E45D;
+			remoteInfo = "MLDPTerminal-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		EE302CD224F4A89400D3E45D /* MLDPTerminal-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MLDPTerminal-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE302CD524F4A89400D3E45D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		EE302CD724F4A89400D3E45D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		EE302CD924F4A89400D3E45D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EE302CDC24F4A89400D3E45D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		EE302CDE24F4A89900D3E45D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EE302CE124F4A89900D3E45D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		EE302CE324F4A89900D3E45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EE302CE824F4A89A00D3E45D /* MLDPTerminal-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MLDPTerminal-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE302CEC24F4A89A00D3E45D /* MLDPTerminal_iOSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLDPTerminal_iOSTests.swift; sourceTree = "<group>"; };
+		EE302CEE24F4A89A00D3E45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EE302CF324F4A89A00D3E45D /* MLDPTerminal-iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MLDPTerminal-iOSUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EE302CF724F4A89A00D3E45D /* MLDPTerminal_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLDPTerminal_iOSUITests.swift; sourceTree = "<group>"; };
+		EE302CF924F4A89A00D3E45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		EE302CCF24F4A89400D3E45D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE302CE524F4A89A00D3E45D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE302CF024F4A89A00D3E45D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		EE302CC924F4A89400D3E45D = {
+			isa = PBXGroup;
+			children = (
+				EE302CD424F4A89400D3E45D /* MLDPTerminal-iOS */,
+				EE302CEB24F4A89A00D3E45D /* MLDPTerminal-iOSTests */,
+				EE302CF624F4A89A00D3E45D /* MLDPTerminal-iOSUITests */,
+				EE302CD324F4A89400D3E45D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		EE302CD324F4A89400D3E45D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EE302CD224F4A89400D3E45D /* MLDPTerminal-iOS.app */,
+				EE302CE824F4A89A00D3E45D /* MLDPTerminal-iOSTests.xctest */,
+				EE302CF324F4A89A00D3E45D /* MLDPTerminal-iOSUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		EE302CD424F4A89400D3E45D /* MLDPTerminal-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				EE302CD524F4A89400D3E45D /* AppDelegate.swift */,
+				EE302CD724F4A89400D3E45D /* SceneDelegate.swift */,
+				EE302CD924F4A89400D3E45D /* ViewController.swift */,
+				EE302CDB24F4A89400D3E45D /* Main.storyboard */,
+				EE302CDE24F4A89900D3E45D /* Assets.xcassets */,
+				EE302CE024F4A89900D3E45D /* LaunchScreen.storyboard */,
+				EE302CE324F4A89900D3E45D /* Info.plist */,
+			);
+			path = "MLDPTerminal-iOS";
+			sourceTree = "<group>";
+		};
+		EE302CEB24F4A89A00D3E45D /* MLDPTerminal-iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				EE302CEC24F4A89A00D3E45D /* MLDPTerminal_iOSTests.swift */,
+				EE302CEE24F4A89A00D3E45D /* Info.plist */,
+			);
+			path = "MLDPTerminal-iOSTests";
+			sourceTree = "<group>";
+		};
+		EE302CF624F4A89A00D3E45D /* MLDPTerminal-iOSUITests */ = {
+			isa = PBXGroup;
+			children = (
+				EE302CF724F4A89A00D3E45D /* MLDPTerminal_iOSUITests.swift */,
+				EE302CF924F4A89A00D3E45D /* Info.plist */,
+			);
+			path = "MLDPTerminal-iOSUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		EE302CD124F4A89400D3E45D /* MLDPTerminal-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE302CFC24F4A89A00D3E45D /* Build configuration list for PBXNativeTarget "MLDPTerminal-iOS" */;
+			buildPhases = (
+				EE302CCE24F4A89400D3E45D /* Sources */,
+				EE302CCF24F4A89400D3E45D /* Frameworks */,
+				EE302CD024F4A89400D3E45D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MLDPTerminal-iOS";
+			productName = "MLDPTerminal-iOS";
+			productReference = EE302CD224F4A89400D3E45D /* MLDPTerminal-iOS.app */;
+			productType = "com.apple.product-type.application";
+		};
+		EE302CE724F4A89A00D3E45D /* MLDPTerminal-iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE302CFF24F4A89A00D3E45D /* Build configuration list for PBXNativeTarget "MLDPTerminal-iOSTests" */;
+			buildPhases = (
+				EE302CE424F4A89A00D3E45D /* Sources */,
+				EE302CE524F4A89A00D3E45D /* Frameworks */,
+				EE302CE624F4A89A00D3E45D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EE302CEA24F4A89A00D3E45D /* PBXTargetDependency */,
+			);
+			name = "MLDPTerminal-iOSTests";
+			productName = "MLDPTerminal-iOSTests";
+			productReference = EE302CE824F4A89A00D3E45D /* MLDPTerminal-iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		EE302CF224F4A89A00D3E45D /* MLDPTerminal-iOSUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EE302D0224F4A89A00D3E45D /* Build configuration list for PBXNativeTarget "MLDPTerminal-iOSUITests" */;
+			buildPhases = (
+				EE302CEF24F4A89A00D3E45D /* Sources */,
+				EE302CF024F4A89A00D3E45D /* Frameworks */,
+				EE302CF124F4A89A00D3E45D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				EE302CF524F4A89A00D3E45D /* PBXTargetDependency */,
+			);
+			name = "MLDPTerminal-iOSUITests";
+			productName = "MLDPTerminal-iOSUITests";
+			productReference = EE302CF324F4A89A00D3E45D /* MLDPTerminal-iOSUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		EE302CCA24F4A89400D3E45D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1160;
+				LastUpgradeCheck = 1160;
+				ORGANIZATIONNAME = yokoro;
+				TargetAttributes = {
+					EE302CD124F4A89400D3E45D = {
+						CreatedOnToolsVersion = 11.6;
+					};
+					EE302CE724F4A89A00D3E45D = {
+						CreatedOnToolsVersion = 11.6;
+						TestTargetID = EE302CD124F4A89400D3E45D;
+					};
+					EE302CF224F4A89A00D3E45D = {
+						CreatedOnToolsVersion = 11.6;
+						TestTargetID = EE302CD124F4A89400D3E45D;
+					};
+				};
+			};
+			buildConfigurationList = EE302CCD24F4A89400D3E45D /* Build configuration list for PBXProject "MLDPTerminal-iOS" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = EE302CC924F4A89400D3E45D;
+			productRefGroup = EE302CD324F4A89400D3E45D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				EE302CD124F4A89400D3E45D /* MLDPTerminal-iOS */,
+				EE302CE724F4A89A00D3E45D /* MLDPTerminal-iOSTests */,
+				EE302CF224F4A89A00D3E45D /* MLDPTerminal-iOSUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		EE302CD024F4A89400D3E45D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE302CE224F4A89900D3E45D /* LaunchScreen.storyboard in Resources */,
+				EE302CDF24F4A89900D3E45D /* Assets.xcassets in Resources */,
+				EE302CDD24F4A89400D3E45D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE302CE624F4A89A00D3E45D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE302CF124F4A89A00D3E45D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EE302CCE24F4A89400D3E45D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE302CDA24F4A89400D3E45D /* ViewController.swift in Sources */,
+				EE302CD624F4A89400D3E45D /* AppDelegate.swift in Sources */,
+				EE302CD824F4A89400D3E45D /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE302CE424F4A89A00D3E45D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE302CED24F4A89A00D3E45D /* MLDPTerminal_iOSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EE302CEF24F4A89A00D3E45D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EE302CF824F4A89A00D3E45D /* MLDPTerminal_iOSUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		EE302CEA24F4A89A00D3E45D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EE302CD124F4A89400D3E45D /* MLDPTerminal-iOS */;
+			targetProxy = EE302CE924F4A89A00D3E45D /* PBXContainerItemProxy */;
+		};
+		EE302CF524F4A89A00D3E45D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = EE302CD124F4A89400D3E45D /* MLDPTerminal-iOS */;
+			targetProxy = EE302CF424F4A89A00D3E45D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		EE302CDB24F4A89400D3E45D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EE302CDC24F4A89400D3E45D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		EE302CE024F4A89900D3E45D /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EE302CE124F4A89900D3E45D /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		EE302CFA24F4A89A00D3E45D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		EE302CFB24F4A89A00D3E45D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		EE302CFD24F4A89A00D3E45D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GSBZFJG6QB;
+				INFOPLIST_FILE = "MLDPTerminal-iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MLDPTerminal-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		EE302CFE24F4A89A00D3E45D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GSBZFJG6QB;
+				INFOPLIST_FILE = "MLDPTerminal-iOS/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MLDPTerminal-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		EE302D0024F4A89A00D3E45D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GSBZFJG6QB;
+				INFOPLIST_FILE = "MLDPTerminal-iOSTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MLDPTerminal-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MLDPTerminal-iOS.app/MLDPTerminal-iOS";
+			};
+			name = Debug;
+		};
+		EE302D0124F4A89A00D3E45D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GSBZFJG6QB;
+				INFOPLIST_FILE = "MLDPTerminal-iOSTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.6;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MLDPTerminal-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MLDPTerminal-iOS.app/MLDPTerminal-iOS";
+			};
+			name = Release;
+		};
+		EE302D0324F4A89A00D3E45D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GSBZFJG6QB;
+				INFOPLIST_FILE = "MLDPTerminal-iOSUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MLDPTerminal-iOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "MLDPTerminal-iOS";
+			};
+			name = Debug;
+		};
+		EE302D0424F4A89A00D3E45D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GSBZFJG6QB;
+				INFOPLIST_FILE = "MLDPTerminal-iOSUITests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.MLDPTerminal-iOSUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "MLDPTerminal-iOS";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		EE302CCD24F4A89400D3E45D /* Build configuration list for PBXProject "MLDPTerminal-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE302CFA24F4A89A00D3E45D /* Debug */,
+				EE302CFB24F4A89A00D3E45D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE302CFC24F4A89A00D3E45D /* Build configuration list for PBXNativeTarget "MLDPTerminal-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE302CFD24F4A89A00D3E45D /* Debug */,
+				EE302CFE24F4A89A00D3E45D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE302CFF24F4A89A00D3E45D /* Build configuration list for PBXNativeTarget "MLDPTerminal-iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE302D0024F4A89A00D3E45D /* Debug */,
+				EE302D0124F4A89A00D3E45D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		EE302D0224F4A89A00D3E45D /* Build configuration list for PBXNativeTarget "MLDPTerminal-iOSUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				EE302D0324F4A89A00D3E45D /* Debug */,
+				EE302D0424F4A89A00D3E45D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = EE302CCA24F4A89400D3E45D /* Project object */;
+}
