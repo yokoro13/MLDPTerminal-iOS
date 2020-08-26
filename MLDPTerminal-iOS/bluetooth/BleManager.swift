@@ -17,11 +17,7 @@ class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             CBUUID(string: "00035B03-58E6-07DD-021A-08123A000301")
 
     private var centralManager: CBCentralManager!
-    private var bleDevices = [CBPeripheral]()     // 発見したデバイス一覧
-    private var bleDevice: CBPeripheral?          // 選択したデバイス
     private var characteristic: CBCharacteristic?  // データの出力先
-    private var readData: Data?                    // 受信したデータ
-    private var writeData = Data()                 // 送信待ちデータ
     private var timer: Timer?                      // 接続待ちタイムアウト用
 
     enum State {
@@ -57,9 +53,10 @@ class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
                         didDiscover peripheral: CBPeripheral,
                         advertisementData: [String : Any],
                         rssi RSSI: NSNumber) {
-        if !bleDevices.contains(peripheral) {
+        // FIXME bleDevices を通知してInteractor側で追加
+        /**if !bleDevices.contains(peripheral) {
             bleDevices.append(peripheral)
-        }
+        }**/
     }
 
     // ペリフェラルへの接続が成功すると呼ばれる
@@ -126,36 +123,37 @@ class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
             state = .error
             return
         }
-        if let data = characteristic.value {
+        // FIX notify data
+        /**if let data = characteristic.value {
             if readData != nil {
                 readData!.append(data)
             } else {
                 readData = data
             }
-        }
+        }**/
     }
 
     // デバイスにデータを送信する
-    func write(_ inputString : String) {
+    func write(_ inputString : String, bleDevice: CBPeripheral) {
         if characteristic == nil {
             print("device is not ready!")
             return;
         }
 
-        // FIXME ここでControllerがViewをもつな!w
+        // FIXME Interactorで処理
         // コントロールキーを押しているとき
-        if terminalView!.ctrlKey {
+        /**if terminalView!.ctrlKey {
             terminalView?.writePeripheral(inputString)
         }
         else {
-            bleDevice?.writeValue(
+            bleDevice.writeValue(
                     inputString.data(using: String.Encoding.utf8)!,
                     for: characteristic,
                     type: CBCharacteristicWriteType.withResponse
             )
             print("inputString : \(String(describing: inputString))")  // TeCに送った文字列
             print("--- デバイスにデータを送信しました write() ---")
-        }
+        }**/
     }
 }
 

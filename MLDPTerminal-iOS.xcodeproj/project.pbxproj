@@ -11,18 +11,24 @@
 		3A506F4BECC0B0CAA7850AF9 /* libPods-MLDPTerminal-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5439906F5E68C8036ECB793D /* libPods-MLDPTerminal-iOS.a */; };
 		45B800E495DF59A889C98D4C /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80C201F997DC85CED4D55 /* RootRouter.swift */; };
 		45B80129A04FC9BD50AF3693 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B805903637DF451E61650C /* R.generated.swift */; };
+		45B80151B825ED45CE66BAE7 /* BleDevicesInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8031975AE329528750351 /* BleDevicesInteractor.swift */; };
+		45B8015915AF2AC8CAF6F350 /* BleObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8073EC5C7BD98FF215E23 /* BleObserver.swift */; };
 		45B8017E225F42B94C7FD5EF /* Terminal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B8099896AD2C14517EE60D /* Terminal.storyboard */; };
 		45B80282D2441B7D00F6C545 /* RootContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80240C3154E7387B5B331 /* RootContract.swift */; };
 		45B80287AACD9C90D0EE0B90 /* IndicatableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80AF49342B74D91136EB7 /* IndicatableView.swift */; };
+		45B8028FBD1281231B36ABF9 /* BleDevicesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B801CF4CB59C1118F4C2A0 /* BleDevicesPresenter.swift */; };
+		45B802F69643C92D414FA7B5 /* BleDevicesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B802A6554B199108EE8D93 /* BleDevicesRouter.swift */; };
 		45B803B167B39766C9A4A199 /* TerminalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B802DBB1E888FB2B2BA1F6 /* TerminalViewController.swift */; };
 		45B803EFEFB53414E71FD63A /* TerminalInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80726E7827AC685B488D3 /* TerminalInteractor.swift */; };
 		45B803FFF9630F18E0A46755 /* TerminalBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80FC97DF5B8D1DB43B216 /* TerminalBuffer.swift */; };
 		45B80485B4674D0A9BF96138 /* ViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8086A2CCFACEEC7C7FA32 /* ViewProtocols.swift */; };
+		45B80499FEBCA9440B015886 /* BleDevocesContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80C04EB91A8E0EAA535EB /* BleDevocesContract.swift */; };
 		45B80A77469021A3248451C0 /* TerminalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8073A874DF7FA0DD667C9 /* TerminalPresenter.swift */; };
 		45B80B2DAA237576D4FF7F58 /* TerminalContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8070806E612F42F177C30 /* TerminalContract.swift */; };
 		45B80BB626F1C59836982522 /* BleDevices.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B80676B90E773A94E9B127 /* BleDevices.storyboard */; };
 		45B80C8C5515EA9459691450 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45B8072512914EB157103662 /* Assets.xcassets */; };
 		45B80CBE563F3AE7C0ACE1A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B80EC187378C6521D70C9D /* LaunchScreen.storyboard */; };
+		45B80E769B7138E459C3A404 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80A6CB257A3D544CEB3B8 /* CustomTextView.swift */; };
 		45B80E91770413D0496375E7 /* TerminalRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80BC0322A8908574D2595 /* TerminalRouter.swift */; };
 		45B80FE4FBF408FB07DE6888 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80E02BB6DBF50BD347407 /* StringExtension.swift */; };
 		EA02AE281933AB81561A4F9C /* libPods-MLDPTerminal-iOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8586B99AF069D584D1E595AF /* libPods-MLDPTerminal-iOSTests.a */; };
@@ -53,8 +59,11 @@
 		062688C8260F5BCE11BBA7E6 /* Pods-MLDPTerminal-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLDPTerminal-iOS.debug.xcconfig"; path = "Target Support Files/Pods-MLDPTerminal-iOS/Pods-MLDPTerminal-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		34873277B37A781C4392ACE7 /* Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.release.xcconfig"; path = "Target Support Files/Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests/Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		420A5513819888E5FB2EBA6E /* Pods-MLDPTerminal-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLDPTerminal-iOS.release.xcconfig"; path = "Target Support Files/Pods-MLDPTerminal-iOS/Pods-MLDPTerminal-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		45B801CF4CB59C1118F4C2A0 /* BleDevicesPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleDevicesPresenter.swift; sourceTree = "<group>"; };
 		45B80240C3154E7387B5B331 /* RootContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootContract.swift; sourceTree = "<group>"; };
+		45B802A6554B199108EE8D93 /* BleDevicesRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleDevicesRouter.swift; sourceTree = "<group>"; };
 		45B802DBB1E888FB2B2BA1F6 /* TerminalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalViewController.swift; sourceTree = "<group>"; };
+		45B8031975AE329528750351 /* BleDevicesInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleDevicesInteractor.swift; sourceTree = "<group>"; };
 		45B8038468B5BADF6C998471 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		45B805903637DF451E61650C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		45B80676B90E773A94E9B127 /* BleDevices.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = BleDevices.storyboard; sourceTree = "<group>"; };
@@ -62,10 +71,13 @@
 		45B8072512914EB157103662 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45B80726E7827AC685B488D3 /* TerminalInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalInteractor.swift; sourceTree = "<group>"; };
 		45B8073A874DF7FA0DD667C9 /* TerminalPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalPresenter.swift; sourceTree = "<group>"; };
+		45B8073EC5C7BD98FF215E23 /* BleObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleObserver.swift; sourceTree = "<group>"; };
 		45B8086A2CCFACEEC7C7FA32 /* ViewProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewProtocols.swift; sourceTree = "<group>"; };
 		45B8099896AD2C14517EE60D /* Terminal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Terminal.storyboard; sourceTree = "<group>"; };
+		45B80A6CB257A3D544CEB3B8 /* CustomTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		45B80AF49342B74D91136EB7 /* IndicatableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatableView.swift; sourceTree = "<group>"; };
 		45B80BC0322A8908574D2595 /* TerminalRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalRouter.swift; sourceTree = "<group>"; };
+		45B80C04EB91A8E0EAA535EB /* BleDevocesContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleDevocesContract.swift; sourceTree = "<group>"; };
 		45B80C201F997DC85CED4D55 /* RootRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
 		45B80E02BB6DBF50BD347407 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		45B80EC187378C6521D70C9D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -147,9 +159,21 @@
 		45B801B607AA228FE6BBC656 /* BleDevices */ = {
 			isa = PBXGroup;
 			children = (
-				45B809EFC9BA83180237138A /* View */,
+				45B809EFC9BA83180237138A /* view */,
+				45B804DD8950A087A6EF0965 /* interactor */,
+				45B801CA6362B8337E9E03C5 /* router */,
+				45B8068106477AC14E7D4585 /* presenter */,
+				45B809339A854A6A6357FF21 /* contract */,
 			);
 			path = BleDevices;
+			sourceTree = "<group>";
+		};
+		45B801CA6362B8337E9E03C5 /* router */ = {
+			isa = PBXGroup;
+			children = (
+				45B802A6554B199108EE8D93 /* BleDevicesRouter.swift */,
+			);
+			path = router;
 			sourceTree = "<group>";
 		};
 		45B803AB8C4CF700D8851E51 /* router */ = {
@@ -173,8 +197,17 @@
 			children = (
 				45B802DBB1E888FB2B2BA1F6 /* TerminalViewController.swift */,
 				45B8099896AD2C14517EE60D /* Terminal.storyboard */,
+				45B80A6CB257A3D544CEB3B8 /* CustomTextView.swift */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		45B804DD8950A087A6EF0965 /* interactor */ = {
+			isa = PBXGroup;
+			children = (
+				45B8031975AE329528750351 /* BleDevicesInteractor.swift */,
+			);
+			path = interactor;
 			sourceTree = "<group>";
 		};
 		45B80635DB99EF333F83A7F1 /* Root */ = {
@@ -186,12 +219,28 @@
 			path = Root;
 			sourceTree = "<group>";
 		};
-		45B809EFC9BA83180237138A /* View */ = {
+		45B8068106477AC14E7D4585 /* presenter */ = {
+			isa = PBXGroup;
+			children = (
+				45B801CF4CB59C1118F4C2A0 /* BleDevicesPresenter.swift */,
+			);
+			path = presenter;
+			sourceTree = "<group>";
+		};
+		45B809339A854A6A6357FF21 /* contract */ = {
+			isa = PBXGroup;
+			children = (
+				45B80C04EB91A8E0EAA535EB /* BleDevocesContract.swift */,
+			);
+			path = contract;
+			sourceTree = "<group>";
+		};
+		45B809EFC9BA83180237138A /* view */ = {
 			isa = PBXGroup;
 			children = (
 				45B80676B90E773A94E9B127 /* BleDevices.storyboard */,
 			);
-			path = View;
+			path = view;
 			sourceTree = "<group>";
 		};
 		45B80A8D106D3DFE1CBC09F0 /* protocols */ = {
@@ -235,6 +284,7 @@
 			children = (
 				45B80E02BB6DBF50BD347407 /* StringExtension.swift */,
 				45B80AF49342B74D91136EB7 /* IndicatableView.swift */,
+				45B8073EC5C7BD98FF215E23 /* BleObserver.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -598,6 +648,12 @@
 				45B800E495DF59A889C98D4C /* RootRouter.swift in Sources */,
 				45B80B2DAA237576D4FF7F58 /* TerminalContract.swift in Sources */,
 				45B80A77469021A3248451C0 /* TerminalPresenter.swift in Sources */,
+				45B80E769B7138E459C3A404 /* CustomTextView.swift in Sources */,
+				45B80499FEBCA9440B015886 /* BleDevocesContract.swift in Sources */,
+				45B80151B825ED45CE66BAE7 /* BleDevicesInteractor.swift in Sources */,
+				45B8028FBD1281231B36ABF9 /* BleDevicesPresenter.swift in Sources */,
+				45B802F69643C92D414FA7B5 /* BleDevicesRouter.swift in Sources */,
+				45B8015915AF2AC8CAF6F350 /* BleObserver.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

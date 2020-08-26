@@ -7,6 +7,17 @@ import Foundation
 
 class TerminalInteractor: TerminalUseCase {
     weak var output: TerminalInteractorOutput!
+    private let bleManager = BleManager()
 
+    func addObserver() {
+        NotificationCenter.default.addObserver(self,
+                selector: #selector(updateUI),
+                name: .receivedDataNotification,
+                object: nil)
+    }
+
+    @objc func updateUI() {
+        print("")
+    }
 
 }

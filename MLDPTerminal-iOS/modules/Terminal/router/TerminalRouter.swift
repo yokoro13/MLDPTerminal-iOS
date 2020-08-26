@@ -6,9 +6,13 @@
 import UIKit
 
 class TerminalRouter: TerminalWireframe {
-    weak var ViewController: UIViewController?
+    weak var viewController: UIViewController?
 
     static func assembleModule() -> UIViewController {
         fatalError("assembleModule() has not been implemented")
+    }
+
+    func presentBleDevices() {
+        <#code#>
     }
 }

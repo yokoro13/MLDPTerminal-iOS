@@ -30,6 +30,8 @@ protocol TerminalPresentation: class {
 protocol TerminalUseCase: class {
     // Entityの操作はここに記述
     var output: TerminalInteractorOutput! { get set }
+
+    func addObserver()
 }
 
 // Entity -> Interactor -> Presenter

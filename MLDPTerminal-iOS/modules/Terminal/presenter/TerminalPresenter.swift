@@ -6,11 +6,11 @@
 import Foundation
 
 class TerminalPresenter: TerminalPresentation {
-    var view: TerminalView?
+    weak var view: TerminalView?
     var interactor: TerminalUseCase!
     var router: TerminalWireframe!
 
     func viewDidLoad() {
-        <#code#>
+        interactor.addObserver()
     }
 }
