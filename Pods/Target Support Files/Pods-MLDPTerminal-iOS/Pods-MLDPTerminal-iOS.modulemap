@@ -1,0 +1,6 @@
+module Pods_MLDPTerminal_iOS {
+  umbrella header "Pods-MLDPTerminal-iOS-umbrella.h"
+
+  export *
+  module * { export * }
+}
