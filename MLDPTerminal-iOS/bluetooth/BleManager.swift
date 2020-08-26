@@ -9,7 +9,7 @@
 import Foundation
 import CoreBluetooth
 
-class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
+final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     // MLDPのサービスのUUID
     private let target_service_uuid =              // MLDP Service
             CBUUID(string:"00035B03-58E6-07DD-021A-08123A000300")
@@ -33,7 +33,9 @@ class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     }
     var state: State = .initializing
 
-    override init() {
+    public static let sharedBleManager = BleManager()
+
+    private override init() {
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil, options: nil)
     }
