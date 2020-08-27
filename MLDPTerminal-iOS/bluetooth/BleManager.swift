@@ -11,10 +11,9 @@ import CoreBluetooth
 
 final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     // MLDPのサービスのUUID
-    private let target_service_uuid =              // MLDP Service
-            CBUUID(string:"00035B03-58E6-07DD-021A-08123A000300")
-    private let target_charactaristic_uuid =       // Read/Write/Notify 用
-            CBUUID(string: "00035B03-58E6-07DD-021A-08123A000301")
+    let MLDP_SERVICE_UUID = CBUUID(string: "00035B03-58E6-07DD-021A-08123A000300")
+    // notify-write用UUID
+    let MLDP_CHARACTERISTIC_UUID = CBUUID(string: "00035B03-58E6-07DD-021A-08123A000301")
 
     private var centralManager: CBCentralManager!
     private var characteristic: CBCharacteristic?  // データの出力先
@@ -64,7 +63,7 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     // ペリフェラルへの接続が成功すると呼ばれる
     func centralManager(_ central: CBCentralManager,
                         didConnect peripheral: CBPeripheral) {
-        peripheral.discoverServices([target_service_uuid])
+        peripheral.discoverServices([MLDP_SERVICE_UUID])
         timer?.invalidate()
     }
 
@@ -97,7 +96,7 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
             state = .error
             return
         }
-        for characteristic in service.characteristics! where characteristic.uuid.isEqual(target_charactaristic_uuid) {
+        for characteristic in service.characteristics! where characteristic.uuid.isEqual(MLDP_CHARACTERISTIC_UUID) {
             self.characteristic = characteristic
             peripheral.setNotifyValue(true, for:characteristic)
             break
@@ -135,6 +134,67 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         }**/
     }
 
+    /* Central関連メソッド */
+
+    func centralManagerDidUpdateState(_ central: CBCentralManager) {
+        print("CentralManagerState: \(central.state)")
+        switch central.state {
+        case .poweredOff:
+            print("Bluetoothの電源がOff")
+            // Indicator表示開始
+            appDelegate.indicator.show(controller: self)
+        case .poweredOn:
+            print("Bluetoothの電源はOn")
+            // Indicator表示終了
+            appDelegate.indicator.dismiss()
+        case .resetting:
+            print("レスティング状態")
+            // Indicator表示開始
+            appDelegate.indicator.show(controller: self)
+        case .unauthorized:
+            print("非認証状態")
+            // Indicator表示開始
+            appDelegate.indicator.show(controller: self)
+        case .unknown:
+            print("不明")
+            // Indicator表示開始
+            appDelegate.indicator.show(controller: self)
+        case .unsupported:
+            print("非対応")
+            // Indicator表示開始
+            appDelegate.indicator.show(controller: self)
+        }
+    }
+
+    // ペリフェラルを発見したときに呼ばれる
+    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+        // デバイス配列に追加格納
+        appDelegate.discoveredDevice.append(peripheral)
+        reload()
+    }
+
+    func scanDevice() {
+        centralManager.scanForPeripherals(withServices: [MLDP_SERVICE_UUID], options: nil)
+    }
+
+
+    // 接続を開始する関数
+    func connect(peripheral: CBPeripheral) {
+        // 省電力のために探索停止
+        centralManager?.stopScan()
+        centralManager.connect(peripheral, options: nil)
+
+        // タイマーがすでに動作しているとき
+        if appDelegate.connectTimer.isValid {
+            // 現在のタイマーを破棄する
+            appDelegate.connectTimer.invalidate()
+        }
+        // タイマーを生成する
+        appDelegate.connectTimer = Timer.scheduledTimer(timeInterval: 5, target: ViewController(), selector: #selector(ViewController().timeOut), userInfo: nil, repeats: false)
+        print("waiting for connection")
+    }
+
+
     // デバイスにデータを送信する
     func write(_ inputString : String, bleDevice: CBPeripheral) {
         if characteristic == nil {
@@ -157,5 +217,6 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
             print("--- デバイスにデータを送信しました write() ---")
         }**/
     }
+
 }
 

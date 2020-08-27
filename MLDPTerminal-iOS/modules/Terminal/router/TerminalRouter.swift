@@ -8,8 +8,12 @@ import UIKit
 class TerminalRouter: TerminalWireframe {
     weak var viewController: UIViewController?
 
-    static func assembleModule() -> UIViewController {
+    static func assembleModule(_ device: BleDevice) -> UIViewController {
         fatalError("assembleModule() has not been implemented")
+    }
+
+    static func assembleModuleNoDevice() -> UIViewController {
+        fatalError("assembleModuleNoDevice() has not been implemented")
     }
 
     func presentSelectDevice() {

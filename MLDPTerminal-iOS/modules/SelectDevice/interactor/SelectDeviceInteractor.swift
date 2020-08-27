@@ -8,7 +8,13 @@ import Foundation
 class SelectDeviceInteractor: SelectDeviceUseCase {
     weak var output: SelectDeviceInteractorOutput!
 
-    func scanDevice() {
+    var bleManager: BleManager = BleManager.sharedBleManager
 
+    func scanDevice() {
+        bleManager.scanDevice()
+    }
+
+    func connect(device: BleDevice) {
+        bleManager.connect(peripheral: device.peripheral!)
     }
 }

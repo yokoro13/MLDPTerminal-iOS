@@ -7,6 +7,8 @@ import UIKit
 
 protocol SelectDeviceView: IndicatableView {
     var presenter: SelectDevicePresentation! { get set }
+
+    func showDevices(_ devices: [BleDevice])
 }
 
 protocol SelectDevicePresentation: class {
@@ -14,22 +16,28 @@ protocol SelectDevicePresentation: class {
     var interactor: SelectDeviceUseCase! { get set }
     var router: SelectDeviceWireFrame! { get set }
 
-    func didSelectDevice()
+    func viewDidLoad()
+    func didSelectDevice(_ device: BleDevice)
+    func didClickCancelButton()
 }
 
 protocol SelectDeviceUseCase: class {
     var output : SelectDeviceInteractorOutput! { get set }
 
     func scanDevice()
+    func connect(device: BleDevice)
 }
 
 protocol SelectDeviceInteractorOutput: class {
+    func deviceDiscovered(_ device: BleDevice)
 }
 
 protocol SelectDeviceWireFrame: class {
     var viewController : UIViewController? { get set }
 
-    func presentTerminal()
+    // SelectBleDevice -> Terminal への値渡し
+    func presentTerminal(forBleDevice device: BleDevice)
+    func cancelScanDevice()
 
     static func assembleModule() -> UIViewController
 }

@@ -47,5 +47,6 @@ protocol TerminalWireframe: class {
 
     func presentSelectDevice()
 
-    static func assembleModule() -> UIViewController
+    static func assembleModule(_ device: BleDevice) -> UIViewController
+    static func assembleModuleNoDevice() -> UIViewController
 }
