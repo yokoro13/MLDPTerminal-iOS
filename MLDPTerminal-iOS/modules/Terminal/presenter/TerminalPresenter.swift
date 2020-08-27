@@ -13,4 +13,42 @@ class TerminalPresenter: TerminalPresentation {
     func viewDidLoad() {
         interactor.addObserver()
     }
+
+    func didInputText(_ text: String) {
+        interactor.writeTextToBuffer(text)
+    }
+
+    func didClickButton(_ content: ButtonContentType) {
+        switch content {
+        case .up:
+            interactor.moveUp()
+            return
+        case .down:
+            interactor.moveDown()
+            return
+        case .right:
+            interactor.moveRight()
+            return
+        case .left:
+            interactor.moveLeft()
+            return
+        case .ctrl:
+            interactor.putCtrl()
+            return
+        case .esc:
+            interactor.putEsc()
+            return
+        case .scan:
+            interactor.startScan()
+            return
+        }
+    }
+
+    func didScrollUp() {
+        interactor.scrollUp()
+    }
+
+    func didScrollDown() {
+        interactor.scrollDown()
+    }
 }

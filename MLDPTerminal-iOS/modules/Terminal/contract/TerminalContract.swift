@@ -22,6 +22,11 @@ protocol TerminalPresentation: class {
 
     // View からの操作処理
     func viewDidLoad()
+
+    func didInputText(_ text: String)
+    func didClickButton(_ content: ButtonContentType)
+    func didScrollUp()
+    func didScrollDown()
     // func doSomething()
     // didWriteText()
 }
@@ -32,6 +37,19 @@ protocol TerminalUseCase: class {
     var output: TerminalInteractorOutput! { get set }
 
     func addObserver()
+    func writeTextToBuffer(_ text: String)
+
+    func moveUp()
+    func moveDown()
+    func moveRight()
+    func moveLeft()
+
+    func startScan()
+    func putEsc()
+    func putCtrl()
+
+    func scrollUp()
+    func scrollDown()
 }
 
 // Entity -> Interactor -> Presenter

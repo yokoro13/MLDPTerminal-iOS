@@ -12,13 +12,53 @@ class TerminalInteractor: TerminalUseCase {
     func addObserver() {
         NotificationCenter.default.addObserver(
                 self,
-                selector: #selector(updateUI),
+                selector: #selector(receivedData),
                 name: .receivedDataNotification,
                 object: nil)
     }
 
-    @objc func updateUI() {
-        print("")
+    @objc func receivedData(notification: NSNotification?){
+        let text = notification?.userInfo!["text"] as! String
+        writeTextToBuffer(text)
     }
 
+    func writeTextToBuffer(_ text: String) {
+        <#code#>
+    }
+
+    func moveUp() {
+        <#code#>
+    }
+
+    func moveDown() {
+        <#code#>
+    }
+
+    func moveRight() {
+        <#code#>
+    }
+
+    func moveLeft() {
+        <#code#>
+    }
+
+    func startScan() {
+        <#code#>
+    }
+
+    func putEsc() {
+        <#code#>
+    }
+
+    func putCtrl() {
+        <#code#>
+    }
+
+    func scrollUp() {
+        <#code#>
+    }
+
+    func scrollDown() {
+        <#code#>
+    }
 }
