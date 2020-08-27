@@ -28,6 +28,7 @@
 		45B80A77469021A3248451C0 /* TerminalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8073A874DF7FA0DD667C9 /* TerminalPresenter.swift */; };
 		45B80B2DAA237576D4FF7F58 /* TerminalContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8070806E612F42F177C30 /* TerminalContract.swift */; };
 		45B80BB626F1C59836982522 /* SelectDevice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B80676B90E773A94E9B127 /* SelectDevice.storyboard */; };
+		45B80C1324679F0B41F01616 /* BleOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B808DF4BB8A49A89C6E30F /* BleOperation.swift */; };
 		45B80C8C5515EA9459691450 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45B8072512914EB157103662 /* Assets.xcassets */; };
 		45B80CBE563F3AE7C0ACE1A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B80EC187378C6521D70C9D /* LaunchScreen.storyboard */; };
 		45B80E769B7138E459C3A404 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80A6CB257A3D544CEB3B8 /* CustomTextView.swift */; };
@@ -76,6 +77,7 @@
 		45B8073A874DF7FA0DD667C9 /* TerminalPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalPresenter.swift; sourceTree = "<group>"; };
 		45B8073EC5C7BD98FF215E23 /* BleObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleObserver.swift; sourceTree = "<group>"; };
 		45B8086A2CCFACEEC7C7FA32 /* ViewProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewProtocols.swift; sourceTree = "<group>"; };
+		45B808DF4BB8A49A89C6E30F /* BleOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleOperation.swift; sourceTree = "<group>"; };
 		45B8099896AD2C14517EE60D /* Terminal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Terminal.storyboard; sourceTree = "<group>"; };
 		45B80A6CB257A3D544CEB3B8 /* CustomTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		45B80AF49342B74D91136EB7 /* IndicatableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatableView.swift; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				EE302D0C24F4AE0000D3E45D /* BleManager.swift */,
+				45B808DF4BB8A49A89C6E30F /* BleOperation.swift */,
 			);
 			path = bluetooth;
 			sourceTree = "<group>";
@@ -662,6 +665,7 @@
 				45B8015915AF2AC8CAF6F350 /* BleObserver.swift in Sources */,
 				45B807D801E9E4C40A7F89CA /* BleDevice.swift in Sources */,
 				45B805FC8453E5A8B30B8D4F /* SelectDeviceViewController.swift in Sources */,
+				45B80C1324679F0B41F01616 /* BleOperation.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

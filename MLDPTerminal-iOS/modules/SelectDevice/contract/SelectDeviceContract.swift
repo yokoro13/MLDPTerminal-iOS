@@ -24,7 +24,9 @@ protocol SelectDevicePresentation: class {
 protocol SelectDeviceUseCase: class {
     var output : SelectDeviceInteractorOutput! { get set }
 
+    func addObserver()
     func scanDevice()
+    func deviceDiscover(notification: NSNotification?)
     func connect(device: BleDevice)
 }
 

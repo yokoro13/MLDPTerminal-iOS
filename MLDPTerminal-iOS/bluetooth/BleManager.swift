@@ -54,10 +54,10 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
                         didDiscover peripheral: CBPeripheral,
                         advertisementData: [String : Any],
                         rssi RSSI: NSNumber) {
-        // FIXME bleDevices を通知してInteractor側で追加
-        /**if !bleDevices.contains(peripheral) {
-            bleDevices.append(peripheral)
-        }**/
+        NotificationCenter.default.post(
+                name: .discoveredDeviceNotification,
+                object: nil,
+                userInfo: ["device": BleDevice(name: peripheral.name, peripheral: peripheral)])
     }
 
     // ペリフェラルへの接続が成功すると呼ばれる
@@ -124,7 +124,7 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
             state = .error
             return
         }
-        // FIX notify data
+        // FIXME notify data
         /**if let data = characteristic.value {
             if readData != nil {
                 readData!.append(data)
@@ -134,88 +134,34 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         }**/
     }
 
-    /* Central関連メソッド */
-
-    func centralManagerDidUpdateState(_ central: CBCentralManager) {
-        print("CentralManagerState: \(central.state)")
-        switch central.state {
-        case .poweredOff:
-            print("Bluetoothの電源がOff")
-            // Indicator表示開始
-            appDelegate.indicator.show(controller: self)
-        case .poweredOn:
-            print("Bluetoothの電源はOn")
-            // Indicator表示終了
-            appDelegate.indicator.dismiss()
-        case .resetting:
-            print("レスティング状態")
-            // Indicator表示開始
-            appDelegate.indicator.show(controller: self)
-        case .unauthorized:
-            print("非認証状態")
-            // Indicator表示開始
-            appDelegate.indicator.show(controller: self)
-        case .unknown:
-            print("不明")
-            // Indicator表示開始
-            appDelegate.indicator.show(controller: self)
-        case .unsupported:
-            print("非対応")
-            // Indicator表示開始
-            appDelegate.indicator.show(controller: self)
-        }
-    }
-
-    // ペリフェラルを発見したときに呼ばれる
-    func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        // デバイス配列に追加格納
-        appDelegate.discoveredDevice.append(peripheral)
-        reload()
-    }
-
     func scanDevice() {
         centralManager.scanForPeripherals(withServices: [MLDP_SERVICE_UUID], options: nil)
     }
 
+    func stopScan(peripheral: CBPeripheral) {
+        centralManager.cancelPeripheralConnection(peripheral)
+    }
 
     // 接続を開始する関数
     func connect(peripheral: CBPeripheral) {
         // 省電力のために探索停止
         centralManager?.stopScan()
         centralManager.connect(peripheral, options: nil)
-
-        // タイマーがすでに動作しているとき
-        if appDelegate.connectTimer.isValid {
-            // 現在のタイマーを破棄する
-            appDelegate.connectTimer.invalidate()
-        }
-        // タイマーを生成する
-        appDelegate.connectTimer = Timer.scheduledTimer(timeInterval: 5, target: ViewController(), selector: #selector(ViewController().timeOut), userInfo: nil, repeats: false)
-        print("waiting for connection")
     }
 
 
     // デバイスにデータを送信する
-    func write(_ inputString : String, bleDevice: CBPeripheral) {
+    func write(_ data : String, peripheral: CBPeripheral) {
         if characteristic == nil {
             print("device is not ready!")
             return;
         }
 
-        // FIXME Interactorで処理
-        // コントロールキーを押しているとき
-        /**if terminalView!.ctrlKey {
-            terminalView?.writePeripheral(inputString)
-        }
-        else {
-            bleDevice.writeValue(
-                    inputString.data(using: String.Encoding.utf8)!,
-                    for: characteristic,
-                    type: CBCharacteristicWriteType.withResponse
-            )
-            print("inputString : \(String(describing: inputString))")  // TeCに送った文字列
-            print("--- デバイスにデータを送信しました write() ---")
-        }**/
+        peripheral.writeValue(
+                data.data(using: String.Encoding.utf8)!,
+                for: characteristic!,
+                type: CBCharacteristicWriteType.withResponse
+        )
     }
 
 }

@@ -10,7 +10,8 @@ class TerminalInteractor: TerminalUseCase {
     private let bleManager = BleManager.sharedBleManager
 
     func addObserver() {
-        NotificationCenter.default.addObserver(self,
+        NotificationCenter.default.addObserver(
+                self,
                 selector: #selector(updateUI),
                 name: .receivedDataNotification,
                 object: nil)

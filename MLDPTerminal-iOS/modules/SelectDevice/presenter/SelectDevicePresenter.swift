@@ -11,9 +11,10 @@ class SelectDevicePresenter: SelectDevicePresentation {
     var interactor: SelectDeviceUseCase!
     var router: SelectDeviceWireFrame!
 
-    var discoveredDevices: [BleDevice] = []
+    var devices: [BleDevice] = []
 
     func viewDidLoad(){
+        interactor.addObserver()
         interactor.scanDevice()
     }
 
@@ -29,7 +30,9 @@ class SelectDevicePresenter: SelectDevicePresentation {
 
 extension SelectDevicePresenter: SelectDeviceInteractorOutput {
     func deviceDiscovered(_ device: BleDevice) {
-        self.discoveredDevices.append(device)
-        view?.showDevices(discoveredDevices)
+        if !self.devices.contains(device) {
+            self.devices.append(device)
+            view?.showDevices(self.devices)
+        }
     }
 }

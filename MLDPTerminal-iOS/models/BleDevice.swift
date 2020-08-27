@@ -6,7 +6,12 @@
 import Foundation
 import CoreBluetooth
 
-struct BleDevice {
+struct BleDevice : Equatable {
     var name: String?
-    var peripheral: CBPeripheral?
+    var peripheral: CBPeripheral
+
+    init(name: String?, peripheral: CBPeripheral){
+        self.name = name
+        self.peripheral = peripheral
+    }
 }
