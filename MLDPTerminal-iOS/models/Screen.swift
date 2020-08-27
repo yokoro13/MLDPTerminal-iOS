@@ -18,7 +18,7 @@ struct Screen {
     var screenColumn : Int
     var screenRow : Int
 
-    var c: cursor = cursor(x: 0, y: 0){
+    var c: cursor = cursor(x: 1, y: 1){
         didSet{
             if oldValue.x > screenColumn {
                 c.x = screenColumn

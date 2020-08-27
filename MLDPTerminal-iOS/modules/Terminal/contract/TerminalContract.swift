@@ -36,6 +36,8 @@ protocol TerminalUseCase: class {
     // Entityの操作はここに記述
     var output: TerminalInteractorOutput! { get set }
 
+    func setupTerminal(screenColumn: Int, screenRow: Int)
+
     func addObserver()
     func writeTextToBuffer(_ text: String)
 

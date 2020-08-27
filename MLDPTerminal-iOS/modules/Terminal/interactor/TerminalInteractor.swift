@@ -8,6 +8,7 @@ import Foundation
 class TerminalInteractor: TerminalUseCase {
     weak var output: TerminalInteractorOutput!
     private let bleManager = BleManager.sharedBleManager
+    private var term: Terminal?
 
     func addObserver() {
         NotificationCenter.default.addObserver(
