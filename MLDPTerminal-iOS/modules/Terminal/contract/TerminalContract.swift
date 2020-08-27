@@ -45,7 +45,7 @@ protocol TerminalInteractorOutput: class {
 protocol TerminalWireframe: class {
     var viewController: UIViewController? { get set }
 
-    func presentBleDevices()
+    func presentSelectDevice()
 
     static func assembleModule() -> UIViewController
 }

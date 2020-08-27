@@ -23,6 +23,7 @@
 		45B803FFF9630F18E0A46755 /* TerminalBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80FC97DF5B8D1DB43B216 /* TerminalBuffer.swift */; };
 		45B80485B4674D0A9BF96138 /* ViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8086A2CCFACEEC7C7FA32 /* ViewProtocols.swift */; };
 		45B80499FEBCA9440B015886 /* SelectDeviceContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80C04EB91A8E0EAA535EB /* SelectDeviceContract.swift */; };
+		45B805FC8453E5A8B30B8D4F /* SelectDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80D04A0F6E64C4911B64A /* SelectDeviceViewController.swift */; };
 		45B807D801E9E4C40A7F89CA /* BleDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B802D77FE0D9229DFD9DC1 /* BleDevice.swift */; };
 		45B80A77469021A3248451C0 /* TerminalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8073A874DF7FA0DD667C9 /* TerminalPresenter.swift */; };
 		45B80B2DAA237576D4FF7F58 /* TerminalContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8070806E612F42F177C30 /* TerminalContract.swift */; };
@@ -81,6 +82,7 @@
 		45B80BC0322A8908574D2595 /* TerminalRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalRouter.swift; sourceTree = "<group>"; };
 		45B80C04EB91A8E0EAA535EB /* SelectDeviceContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDeviceContract.swift; sourceTree = "<group>"; };
 		45B80C201F997DC85CED4D55 /* RootRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
+		45B80D04A0F6E64C4911B64A /* SelectDeviceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDeviceViewController.swift; sourceTree = "<group>"; };
 		45B80E02BB6DBF50BD347407 /* StringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		45B80EC187378C6521D70C9D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		45B80FC97DF5B8D1DB43B216 /* TerminalBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalBuffer.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				45B80676B90E773A94E9B127 /* SelectDevice.storyboard */,
+				45B80D04A0F6E64C4911B64A /* SelectDeviceViewController.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -658,6 +661,7 @@
 				45B802F69643C92D414FA7B5 /* SelectDeviceRouter.swift in Sources */,
 				45B8015915AF2AC8CAF6F350 /* BleObserver.swift in Sources */,
 				45B807D801E9E4C40A7F89CA /* BleDevice.swift in Sources */,
+				45B805FC8453E5A8B30B8D4F /* SelectDeviceViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

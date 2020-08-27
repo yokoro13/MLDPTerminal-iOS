@@ -12,7 +12,7 @@ class TerminalRouter: TerminalWireframe {
         fatalError("assembleModule() has not been implemented")
     }
 
-    func presentBleDevices() {
+    func presentSelectDevice() {
         <#code#>
     }
 }

@@ -4,3 +4,13 @@
 //
 
 import Foundation
+
+class SelectDevicePresenter: SelectDevicePresentation {
+    weak var view: SelectDeviceView?
+    var interactor: SelectDeviceUseCase!
+    var router: SelectDeviceWireFrame!
+
+    func didSelectDevice() {
+
+    }
+}

@@ -4,3 +4,9 @@
 //
 
 import Foundation
+import CoreBluetooth
+
+struct BleDevice {
+    var name: String?
+    var peripheral: CBPeripheral?
+}

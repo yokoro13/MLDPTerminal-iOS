@@ -4,3 +4,11 @@
 //
 
 import Foundation
+
+class SelectDeviceInteractor: SelectDeviceUseCase {
+    weak var output: SelectDeviceInteractorOutput!
+
+    func scanDevice() {
+
+    }
+}
