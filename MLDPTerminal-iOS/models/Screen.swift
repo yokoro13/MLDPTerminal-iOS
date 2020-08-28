@@ -5,7 +5,7 @@
 
 import Foundation
 
-struct cursor {
+class cursor {
     var x : Int
     var y : Int
     init(x: Int, y: Int){
@@ -14,7 +14,7 @@ struct cursor {
     }
 }
 
-struct Screen {
+class Screen {
     var screenColumn : Int
     var screenRow : Int
 
