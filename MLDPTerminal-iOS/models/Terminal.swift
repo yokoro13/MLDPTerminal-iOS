@@ -67,14 +67,6 @@ class Terminal {
             if currentRow == textBuffer.count {            // カーソルがbufferサイズとカーソル位置が等しいとき
                 textBuffer.append([textAttr(char: " ", color: currColor)])  // 次のテキスト記憶を準備
             }
-            if curIsRowEnd() {  // カーソルが文末のとき
-                if textBuffer[currentRow].count == 1 {  // 文字がないとき
-                    textBuffer[currentRow][screen.c.x].char = " "
-                }
-                else {
-                    textBuffer[currentRow].removeLast() // カーソル文字を削除する
-                }
-            }
             currentRow += 1 // 書き込む位置をずらす
             screen.c.x = 0
             textBuffer[currentRow][screen.c.x].hasPrevious = false      // 違う行判定にする

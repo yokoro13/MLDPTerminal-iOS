@@ -4,6 +4,7 @@
 //
 
 import Foundation
+import UIKit
 
 class EscapeSequence {
     var term: Terminal
@@ -14,239 +15,182 @@ class EscapeSequence {
 
     // 上にn移動する関数
     // n : 変位
-    func escUp(n: Int, c: cursor) {
-        let column = c.y - 1
-        escUpTop(n: n, c: c)
-        escRight(n: column, c: c)
+    func moveUp(n: Int, c: cursor) {
+        term.currentRow -= (0 < c.y - n) ? n : c.y
+        moveCursorY(n: n, c: c)
     }
 
     // 下にn移動する関数
     // n : 変位
-    func escDown(n: Int, c: cursor) {
-        let column = c.y - 1
-        escDownTop(n: n, c: c)
-        escRight(n: column, c: c)
+    func moveDown(n: Int, c: cursor) {
+        term.currentRow += (c.y + n < term.screen.screenRow) ? n : term.screen.screenRow - c.y
+        moveCursorY(n: n, c: c)
+
+        if term.textBuffer.count <= term.topRow + c.y {
+            for _ in 0 ..< term.topRow + c.y - term.textBuffer.count {
+                term.textBuffer.append([textAttr(char: "", color: term.currColor, hasPrevious: false)])
+            }
+        }
     }
 
     // 右にn移動する関数
     // n : 変位
-    func escRight(n: Int, c: cursor) {
-        // 移動がないとき(n = 0)
-        if n == 0 {
-            return
-        }
-        // 何もないときはカーソル文字を追加
-        if term.getCurrChar() == "" {
-            term.textBuffer[c.x - 1].append(textAttr(char: "_", color: term.currColor, hasPrevious: false))
-        }
-        // カーソル文字を削除する
-        if term.curIsRowEnd() {
-            print("remove last")
-            term.textBuffer[c.x - 1] = Array(term.textBuffer[c.x - 1][0..<term.textBuffer[c.x - 1].count - 1])
-            if term.textBuffer[c.x - 1].count == 0 {
-                term.textBuffer[c.x - 1] = [textAttr(char: " ", color: term.currColor, hasPrevious: false)]
-            }
-        }
+    func moveRight(n: Int, c: cursor) {
         // カーソルをずらす
-        c.y = c.y + n
-        // 桁数が足りないとき
-        if c.y > term.textBuffer[c.x - 1].count {
-            print("column isn't enough")
-            print("add spaceCount : \(c.y - term.textBuffer[c.x - 1].count - 1)")
+        term.screen.c = cursor(x: c.x + n, y: c.y)
+
+        let over = c.x - term.textBuffer[c.y].count
+        if 0 < over {
             // 足りない空白を追加する
-            for _ in 0..<c.y - term.textBuffer[c.x - 1].count - 1 {
-                term.textBuffer[c.x - 1].append(textAttr(char: " ", color: term.currColor))
-                // 行頭に追加したとき
-                if term.textBuffer[c.x - 1].count == 1 {
-                    // 情報を初期化する
-                    term.textBuffer[c.x - 1][0].hasPrevious = false
+            for _ in 0 ..< over {
+                term.textBuffer[c.y].append(textAttr(char: " ", color: term.currColor))
+                if term.textBuffer[c.y].count == 1 {
+                    term.textBuffer[c.y][0].hasPrevious = false
                 }
             }
-            // カーソル文字を追加する
-            term.textBuffer[c.x - 1].append(textAttr(char: "_", color: term.currColor))
         }
     }
 
     // 左にn移動する関数
     // n : 変位
-    func escLeft(n: Int, c: cursor) {
-        print("--- escLeft ---")
-        print("n : \(n)")
-        // 移動がないとき(n = 0)
-        if n == 0 {
-            return
-        }
-        // カーソル文字を削除する
-        if term.curIsRowEnd() {
-            print("remove last")
-            term.textBuffer[c.x - 1] = Array(term.textBuffer[c.x - 1][0..<term.textBuffer[c.x - 1].count - 1])
-            if term.textBuffer[c.x - 1].count == 0 {
-                term.textBuffer[c.x - 1] = [textAttr(char: "_", color: term.currColor, hasPrevious: false)]
-            }
-        }
-        var move = n
-        // 桁数が足りないとき
-        if c.y <= move {
-            move = c.y - 1
-        }
-        // カーソルをずらす
-        c.y = c.y - move
+    func moveLeft(n: Int, c: cursor) {
+        term.screen.c = cursor(x: c.x-n, y: c.y)
     }
 
     // n行下の先頭に移動する関数
     // n : 変位
-    func escDownTop(n: Int, c: cursor) {
-        print("--- escDownTop ---")
-        print("n : \(n)")
-        // カーソル文字を削除する
-        if term.curIsRowEnd() {
-            print("remove last")
-            term.textBuffer[c.x - 1] = Array(term.textBuffer[c.x - 1][0..<term.textBuffer[c.x - 1].count - 1])
-            if term.textBuffer[c.x - 1].count == 0 {
-                term.textBuffer[c.x - 1] = [textAttr(char: "", color: term.currColor, hasPrevious: false)]
-            }
-        }
-        // 行数が足りないとき
-        if term.textBuffer.count - c.x < n {
-            print("row isn't enough : \(n - (term.textBuffer.count - c.x))")
-            // 改行を付け加える
-            print("upperLimit : \(n - (term.textBuffer.count - c.x) - 1)")
-            for _ in 0..<(n - (term.textBuffer.count - c.x) - 1) {
-                term.textBuffer.append([textAttr(char: "", color: term.currColor, hasPrevious: false)])
-            }
-            // 改行とカーソル文字を追加する
-            term.textBuffer.append([textAttr(char: "_", color: term.currColor, hasPrevious: false)])
-        }
-        // カーソルをずらす
-        c.x = c.x + n
-        c.y = 1
-        // カーソル行が空行のとき
-        if term.textBuffer[c.x - 1][0].char == "" && term.textBuffer[c.x - 1].count == 1 {
-            // カーソル文字を追加する
-            term.textBuffer[c.x - 1] = [textAttr(char: "_", color: term.currColor, hasPrevious: false)]
-        }
+    func moveDownToRowLead(n: Int, c: cursor) {
+        moveDown(n: n, c: cursor(x: 1, y: c.y))
     }
 
     // n行上の先頭に移動する関数
     // n : 変位
-    func escUpTop(n: Int, c: cursor) {
-        print("--- escUpTop ---")
-        print("n : \(n)")
-        // カーソル文字を削除する
-        if term.curIsRowEnd() {
-            print("remove last")
-            term.textBuffer[c.x - 1] = Array(term.textBuffer[c.x - 1][0..<term.textBuffer[c.x - 1].count - 1])
-            if term.textBuffer[c.x - 1].count == 0 {
-                term.textBuffer[c.x - 1] = [textAttr(char: "", color: term.currColor, hasPrevious: false)]
-            }
-        }
-        var move = n
-        // 行数が足りないとき
-        if c.x <= move {
-            // 移動範囲を制限する
-            move = c.x - 1
-        }
-        // カーソルをずらす
-        c.x = c.x - move
-        c.y = 1
-        // 空文字ならカーソル文字にする
-        if term.getCurrChar() == "" {
-            term.textBuffer[c.x - 1][c.y - 1] = textAttr(char: "_", color: term.currColor, hasPrevious: false)
-        }
-        print("c.x : \(c.x)")
+    func moveUpToRowLead(n: Int, c: cursor) {
+        moveUp(n: n, c: cursor(x: 1, y:  c.y-n))
     }
 
     // 現在位置と関係なく上からn、左からmの場所に移動する関数
     // n : 変位
     // m : 変位
-    func escRoot(n: Int, m: Int, c: cursor) {
-        print("--- escRoot ---")
-        print("n : \(n), m : \(m)")
-        // カーソルを上に移動させるとき
-        if c.x >= n {
-            // c.x - n上の先頭に移動する
-            escUpTop(n: c.x - n, c: c)
+    func moveCursor(n: Int, m: Int, c: cursor) {
+        if c.y < n {    // カーソルを下に移動させるとき
+            term.currentRow -= c.y
+            moveDown(n: n, c: cursor(x: 1, y: 1))
+        } else {        // カーソルを上に移動させるとき
+            term.currentRow -= c.y - n
+            term.screen.c = cursor(x: 1, y: n)
         }
-        // カーソルを下に移動させるとき
-        else {
-            // n - c.x下の先頭に移動する
-            escDownTop(n: n - c.x, c: c)
+
+        moveRight(n: m, c: c)
+    }
+
+    private func clearScreenFromCursor(c: cursor) {
+        clearLineFromCursor(line: c.y, from: c.x)
+        for y in c.y+1 ..< term.screen.screenRow {
+            clearLineFromCursor(line: y, from: 0)
         }
-        // 左からmの位置に移動する
-        escRight(n: m - 1, c: c)
+    }
+
+    private func clearScreenToCursor(c: cursor) {
+        clearLineToCursor(line: c.y, to: c.x)
+        for y in 0 ..< c.y {
+            clearLineFromCursor(line: y, from: 0)
+        }
     }
 
     // 画面消去関数(カーソル位置は移動しない)
     // n : 消去範囲指定
     // 0 : カーソルより後ろを消去する, 1 : カーソルより前を消去する, 2 : 画面全体を消去する
-    func escViewDelete(n: Int, c: cursor) {
+    func clearScreen(n: Int, c: cursor) {
 
         switch n {
-                // カーソルより後ろを消去する
-        case 0:
-            // カーソル行より後ろを消去する
-            term.textBuffer = Array(term.textBuffer.prefix(c.x))
-            let cursorPrev = term.textBuffer[c.x - 1][c.y - 1].hasPrevious
-            // カーソル行のカーソルより後ろを消去する
-            term.textBuffer[c.x - 1] = Array(term.textBuffer[c.x - 1].prefix(c.y - 1))
-            // カーソル文字を追加する
-            term.textBuffer[c.x - 1].append(textAttr(char: "_", color: term.currColor, hasPrevious: cursorPrev))
-                // カーソルより前を消去する
-        case 1:
-            // カーソル行より前を消去する
-            for row in term.diffScreenAndBuffSize..<c.x - 1 {
-                term.textBuffer[row] = [textAttr(char: "", color: term.currColor, hasPrevious: false)]
-            }
-            // カーソル行のカーソルより前を空白に置き換える
-            for column in 0..<c.y {
-                term.textBuffer[c.x - 1][column].char = " "
-            }
-                // 画面全体を消去する
-        case 2:
-            // カーソル行より後ろを消去する
-            term.textBuffer = Array(term.textBuffer.prefix(c.x))
-            // カーソル行のカーソルより後ろを消去する
-            term.textBuffer[c.x - 1] = Array(term.textBuffer[c.x - 1].prefix(c.y))
-            // カーソル行より前を消去する
-            for row in term.diffScreenAndBuffSize..<c.x - 1 {
-                term.textBuffer[row] = [textAttr(char: "", color: term.currColor, hasPrevious: false)]
-            }
-            // カーソル行のカーソルより前を空白に置き換える
-            for column in 0..<c.y {
-                term.textBuffer[c.x - 1][column].char = " "
-            }
-        default:
-            print("Invalid Number")
-            return
+            case 0: // カーソルより後ろを消去する
+                clearScreenFromCursor(c: c)
+            case 1: // カーソルより前を消去する
+                clearScreenToCursor(c: c)
+            case 2: // 画面全体を消去する
+                clearScreenFromCursor(c: c)
+                clearScreenToCursor(c: cursor(x: c.x-1, y: c.y))
+            default:
+                print("Invalid Number")
+                return
+        }
+    }
+
+    private func clearLineFromCursor(line: Int, from: Int){
+        term.textBuffer[line] = Array(term.textBuffer[line].prefix(from))
+        if term.textBuffer.count == 0 {
+            term.textBuffer[line].append(textAttr(char: "", color: term.currColor, hasPrevious: false))
+        }
+    }
+
+    private func clearLineToCursor(line: Int, to: Int){
+        for i in 0 ..< to {
+            term.textBuffer[line][i].char = " "
         }
     }
 
     // 行消去関数(カーソル位置は移動しない)
     // n : 消去範囲指定
     // 0 : カーソルより後ろを消去する, 1 : カーソルより前を消去する, 2 : 行全体を消去する
-    func escLineDelete(n: Int, c: cursor) {
+    func clearLine(n: Int, c: cursor) {
         switch n {
         case 0:
-            let cursorPrev = term.textBuffer[c.x - 1][c.y - 1].hasPrevious
-            // カーソルより後ろを消去する
-            term.textBuffer[c.x - 1] = Array(term.textBuffer[c.x - 1].prefix(c.y - 1))
-            // カーソル文字を追加する
-            term.textBuffer[c.x - 1].append(textAttr(char: "_", color: term.currColor, hasPrevious: cursorPrev))
+            clearLineFromCursor(line: c.y, from: c.x)
         case 1:
-            // カーソルより前を空白に置き換える
-            for column in 0..<c.y {
-                term.textBuffer[c.x - 1][column].char = " "
-            }
+            clearLineToCursor(line: c.y, to: c.x)
         case 2:
-            // カーソルより後ろを消去する
-            term.textBuffer[c.x - 1] = Array(term.textBuffer[c.x - 1].prefix(c.y))
-            // カーソル前を空白に置き換える
-            for column in 0..<c.y {
-                term.textBuffer[c.x - 1][column].char = " "
-            }
+            clearLineToCursor(line: c.y, to: c.x)
+            clearLineFromCursor(line: c.y, from: c.x+1)
         default:
             print("Invalid Number")
             return
         }
+    }
+
+    func scrollNext(n: Int) {
+        if (term.topRow + n > term.textBuffer.count){
+            return
+        }
+        term.topRow = term.topRow + n
+    }
+
+    func scrollBack(n: Int) {
+        if (term.topRow - n < 0) {
+            return
+        }
+        term.topRow = term.topRow - n
+    }
+
+    // 文字色を変更する関数
+    // color : 変更する色
+    func changeColor(color: Int) {
+        switch color {
+        case 30:
+            term.currColor = UIColor.black
+        case 31:
+            term.currColor = UIColor.red
+        case 32:
+            term.currColor = UIColor.green
+        case 33:
+            term.currColor = UIColor.yellow
+        case 34:
+            term.currColor = UIColor.blue
+        case 35:
+            term.currColor = UIColor.magenta
+        case 36:
+            term.currColor = UIColor.cyan
+        case 37:
+            term.currColor = UIColor.white
+        default: break
+        }
+    }
+
+    private func moveCursorX(n: Int, c: cursor) {
+        term.screen.c = cursor(x: c.x + n, y: c.y)
+    }
+
+    private func moveCursorY(n: Int, c: cursor) {
+        term.screen.c = cursor(x: c.x, y: c.y + n)
     }
 }
