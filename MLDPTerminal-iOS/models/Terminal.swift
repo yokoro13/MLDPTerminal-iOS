@@ -32,11 +32,11 @@ class Terminal {
             return
         }
         // カーソル位置に文字と色を書き込む
-        textBuffer[currentRow][screen.c.x - 1].char = text
-        textBuffer[currentRow][screen.c.x - 1].color = currColor
+        textBuffer[currentRow][screen.c.x].char = text
+        textBuffer[currentRow][screen.c.x].color = currColor
         if hasNext {    // 折り返しがあったとき
             hasNext = false
-            textBuffer[currentRow][screen.c.x - 1].hasPrevious = true
+            textBuffer[currentRow][screen.c.x].hasPrevious = true
         }
 
         if screen.c.x == screen.screenRow {     // 折り返すとき
@@ -44,7 +44,7 @@ class Terminal {
                 textBuffer.append([textAttr(char: " ", color: currColor)])
             }
             currentRow += 1
-            screen.c.x = 1
+            screen.c.x = 0
             hasNext = true
         } else {    // 折り返さないとき
             if screen.c.x == textBuffer[currentRow].count { // カーソルが最後桁のとき
@@ -69,25 +69,25 @@ class Terminal {
             }
             if curIsRowEnd() {  // カーソルが文末のとき
                 if textBuffer[currentRow].count == 1 {  // 文字がないとき
-                    textBuffer[currentRow][screen.c.x - 1].char = " "
+                    textBuffer[currentRow][screen.c.x].char = " "
                 }
                 else {
                     textBuffer[currentRow].removeLast() // カーソル文字を削除する
                 }
             }
             currentRow += 1 // 書き込む位置をずらす
-            screen.c.x = 1
-            textBuffer[currentRow][screen.c.x - 1].hasPrevious = false      // 違う行判定にする
+            screen.c.x = 0
+            textBuffer[currentRow][screen.c.x].hasPrevious = false      // 違う行判定にする
 
             if topRow + screen.screenColumn <= currentRow {   // カーソルが基底から数えて最大行数を超えたとき
                 topRow += 1
             }
             return
         } else if text == "\r" {      // CR(復帰)ならカーソルを行頭に移動する
-            escapeSequence.escRoot(n: currentRow, m: 1, c: screen.c)
+            escapeSequence.moveCursor(n: currentRow, m: 0, c: screen.c)
             return
         } else if text == "\n" {      // LF(改行)ならカーソルを1行下に移動する
-            escapeSequence.escDown(n: 1, c: screen.c)
+            escapeSequence.moveDown(n: 1, c: screen.c)
             if topRow + screen.screenColumn <= topRow {
                 topRow += 1
             }
@@ -99,7 +99,7 @@ class Terminal {
             }
             return
         } else if text == "\u{08}" { // BS(後退)ならカーソルを一つ左にずらす
-            escapeSequence.escLeft(n: 1, c: screen.c)
+            escapeSequence.moveLeft(n: 1, c: screen.c)
             return
         } else {  // 上記以外の制御コードのとき
             return
@@ -118,12 +118,12 @@ class Terminal {
 
     // カーソルの示す文字を取得する関数
     func getCurrChar() -> String {
-        return textBuffer[currentRow][screen.c.x - 1].char
+        return textBuffer[currentRow][screen.c.x].char
     }
 
     // カーソルの示す位置のhasPrevious属性を取得する関数
     func textHasPrevious() -> Bool {
-        return textBuffer[currentRow][screen.c.x - 1].hasPrevious
+        return textBuffer[currentRow][screen.c.x].hasPrevious
     }
 
     func makeScreenText() -> NSMutableAttributedString {
@@ -138,7 +138,7 @@ class Terminal {
             for column in 0 ..< textBuffer[row].count {
                 var backColor = UIColor.white                   // 背景色を設定する
                 var foreColor = textBuffer[row][column].color  // 前景色を設定する
-                if screen.c.y == row + 1 && screen.c.x ==  column + 1 {
+                if screen.c.y == row && screen.c.x ==  column {
                     backColor = UIColor.gray
                     foreColor = UIColor.white
                 }
