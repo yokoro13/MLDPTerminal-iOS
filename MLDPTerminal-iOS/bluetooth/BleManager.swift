@@ -34,6 +34,8 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
 
     public static let sharedBleManager = BleManager()
 
+    var currentPeripheral: CBPeripheral?
+
     private override init() {
         super.init()
         centralManager = CBCentralManager(delegate: self, queue: nil, options: nil)
@@ -158,13 +160,18 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
 
 
     // デバイスにデータを送信する
-    func write(_ data : String, peripheral: CBPeripheral) {
+    func write(_ data : String) {
+        if currentPeripheral == nil {
+            print("device is not ready!")
+            return;
+        }
+
         if characteristic == nil {
             print("device is not ready!")
             return;
         }
 
-        peripheral.writeValue(
+        currentPeripheral?.writeValue(
                 data.data(using: String.Encoding.utf8)!,
                 for: characteristic!,
                 type: CBCharacteristicWriteType.withResponse
