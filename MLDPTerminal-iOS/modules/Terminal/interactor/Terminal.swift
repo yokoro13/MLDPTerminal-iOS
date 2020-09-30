@@ -11,6 +11,10 @@ class Terminal {
     var screen: Screen
     var textBuffer = [[textAttr]]()
 
+    var escState: EscapeSequenceState
+
+    var escString: String
+
     var topRow = 0       // スクリーンのサイズとバッファサイズの差分
     var hasNext = false                 // 行が次に続くか
     var currColor = UIColor.black       // 現在の色を記憶
@@ -23,6 +27,8 @@ class Terminal {
     init(screenColumn: Int, screenRow: Int){
         self.screen = Screen(screenColumn: screenColumn, screenRow: screenRow)
         self.escapeSequence = EscapeSequence(term: self)
+        self.escState = .none
+        self.escString = ""
     }
 
     // textview内のカーソル位置に文字を書き込む関数
@@ -100,22 +106,22 @@ class Terminal {
 
     // 書き込み位置がバッファの最後か判断する関数
     func curIsEnd() -> Bool {
-        return curIsRowEnd() && currentRow == textBuffer.count
+        curIsRowEnd() && currentRow == textBuffer.count
     }
 
     // カーソルが行末か判断する関数
     func curIsRowEnd() -> Bool {
-        return screen.c.x == textBuffer[currentRow].count
+        screen.c.x == textBuffer[currentRow].count
     }
 
     // カーソルの示す文字を取得する関数
     func getCurrChar() -> String {
-        return textBuffer[currentRow][screen.c.x].char
+        textBuffer[currentRow][screen.c.x].char
     }
 
     // カーソルの示す位置のhasPrevious属性を取得する関数
     func textHasPrevious() -> Bool {
-        return textBuffer[currentRow][screen.c.x].hasPrevious
+        textBuffer[currentRow][screen.c.x].hasPrevious
     }
 
     func makeScreenText() -> NSMutableAttributedString {
@@ -128,13 +134,12 @@ class Terminal {
                 break
             }
             for column in 0 ..< textBuffer[row].count {
-                var backColor = UIColor.white                   // 背景色を設定する
-                var foreColor = textBuffer[row][column].color  // 前景色を設定する
+                // TODO カーソル表示処理を消す
+                attributes = [.backgroundColor: UIColor.white, .foregroundColor: textBuffer[row][column].color] // 文字の色を設定する
                 if screen.c.y == row && screen.c.x ==  column {
-                    backColor = UIColor.gray
-                    foreColor = UIColor.white
+                    attributes = [.backgroundColor:UIColor.gray, .foregroundColor: UIColor.white]
                 }
-                attributes = [.backgroundColor: backColor, .foregroundColor: foreColor]                // 文字の色を設定する
+
                 char = NSMutableAttributedString(string: textBuffer[row][column].char, attributes: attributes) // 文字に色を登録する
                 text.append(char)
             }
@@ -180,5 +185,121 @@ class Terminal {
         screen.c = cursor(x: newTextBuffer.count, y: newTextBuffer[newTextBuffer.count-1].count)
         topRow =  newTextBuffer.count - newScreenRow >= 0 ? newTextBuffer.count - newScreenRow : 0
         currentRow = newTextBuffer.count - 1
+    }
+
+    // ターミナルに文字を出力する
+    func writeTextToBuffer(_ string : String){
+        // 複数文字届いたときは一字ずつ処理する
+        for inputCharacter in string{
+            let text = String(inputCharacter)
+
+            // ASCIIコード外のとき
+            if !text.isAscii() {
+                return
+            }
+
+            if escState == .none && text != "\u{1b}"{
+                writeText(text)
+            } else {
+                checkEscapeSequence(text)
+            }
+        }
+    }
+
+    func checkEscapeSequence(_ text: String){
+        // エスケープシーケンス
+        switch escState {
+        case .none:            //ステート0：エスケープシーケンスかどうか
+            clearEscapeSequence()
+            escState = .esc
+        case .esc:            // ステート1：どの種類のエスケープシーケンスか
+            escString.append(text)
+            // 正しいシーケンスのとき
+            if text == "[" {
+                escState = .ansi
+            } else if text == "?" {
+                escState = .tec
+            } else {
+                // シーケンスではなかったとき
+                clearEscapeSequence()
+            }
+        case .ansi:     // ステート2: ANSIがきたら実行　違えば貯める
+            escString.append(text)
+            if escString.isANSI() {
+                print(escString)
+                identifyEscapeSequence(esStr: escString)
+                clearEscapeSequence()
+            } else {
+                if !(text.isNumeric() || text == ";") {
+                    clearEscapeSequence()
+                }
+            }
+        case .tec:    // ステート3: どのTeCエスケープシーケンスか
+            if text == "s" {
+                BleManager.sharedBleManager.write("\u{1b}?\(screen.screenRow),\(screen.screenColumn)s")
+                clearEscapeSequence()
+            } else {
+                print("NO ESC_SEQ") // シーケンスではなかったとき
+                clearEscapeSequence()
+            }
+        default:
+            print("NO STATE")
+        }
+    }
+
+    func identifyEscapeSequence(esStr: String) {
+        var n: Int = 1
+        var m: Int = 1
+
+        let length = esStr.utf8.count
+        let mode = String(esStr.suffix(1))
+
+        if length != 2 {
+            if mode != "H" {
+                n = Int(esStr.substring(from: 1, to: length-1))!
+            } else {
+                let index = esStr.firstIndex(of: ";")
+                let semicolonPos = esStr.distance(from: esStr.startIndex, to: index!)
+                if semicolonPos != 1 {
+                    n = Int(esStr.substring(from: 1, to: semicolonPos))!
+                }
+                if esStr.at(index: semicolonPos+1) != "H" {
+                    m = Int(esStr.substring(from: semicolonPos+1, to: length-1))!
+                }
+            }
+        }
+        escapeSequence(mode: mode, n: n, m: m)
+    }
+
+    func escapeSequence(mode: String, n:Int, m:Int){
+        switch mode {
+        case "A":
+            escapeSequence.moveUp(n: n, c: screen.c)                              // 上にn移動する
+        case "B":
+            escapeSequence.moveDown(n: n, c: screen.c)                            // 下にn移動する
+        case "C":
+            escapeSequence.moveRight(n: n, c: screen.c)                           // 右にn移動する
+        case "D":
+            escapeSequence.moveLeft(n: n, c: screen.c)                            // 左にn移動する
+        case "E":
+            escapeSequence.moveDownToRowLead(n: n, c: screen.c)                         // n行下の先頭に移動する
+        case "F":
+            escapeSequence.moveUpToRowLead(n: n, c: screen.c)                           // n行上の先頭に移動する
+        case "G":
+            escapeSequence.moveCursor(n: n, m: m, c: screen.c)              // 左からnの場所に移動する
+        case "J", "H", "f":
+            escapeSequence.clearScreen(n: n-1, c: screen.c)                  // 画面を消去する
+        case "K":
+            escapeSequence.clearLine(n: n-1, c: screen.c)                  // 行を消去する
+        case "m":
+            escapeSequence.changeColor(color: n)                // 文字色を変更する
+        default:
+            escState = .none
+        }
+    }
+
+    func clearEscapeSequence(){
+        escState = .none
+        escString = "";
     }
 }

@@ -10,6 +10,7 @@
 		17B20AF3324640C6F4E3C15D /* libPods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5A315DC9574BE095D101A9A /* libPods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.a */; };
 		3A506F4BECC0B0CAA7850AF9 /* libPods-MLDPTerminal-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5439906F5E68C8036ECB793D /* libPods-MLDPTerminal-iOS.a */; };
 		45B800E495DF59A889C98D4C /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80C201F997DC85CED4D55 /* RootRouter.swift */; };
+		45B8011AF8315CF1E438A47C /* Terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B806085ED788B130B27988 /* Terminal.swift */; };
 		45B80129A04FC9BD50AF3693 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B805903637DF451E61650C /* R.generated.swift */; };
 		45B80151B825ED45CE66BAE7 /* SelectDeviceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8031975AE329528750351 /* SelectDeviceInteractor.swift */; };
 		45B8015915AF2AC8CAF6F350 /* BleObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8073EC5C7BD98FF215E23 /* BleObserver.swift */; };
@@ -23,10 +24,10 @@
 		45B803FFF9630F18E0A46755 /* TextBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80FC97DF5B8D1DB43B216 /* TextBuffer.swift */; };
 		45B80485B4674D0A9BF96138 /* ViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8086A2CCFACEEC7C7FA32 /* ViewProtocols.swift */; };
 		45B80499FEBCA9440B015886 /* SelectDeviceContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80C04EB91A8E0EAA535EB /* SelectDeviceContract.swift */; };
+		45B805304926BF9D9B9DB184 /* EscapeSequenceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B800461F9A0EA7AAD0F65D /* EscapeSequenceState.swift */; };
 		45B805FC8453E5A8B30B8D4F /* SelectDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80D04A0F6E64C4911B64A /* SelectDeviceViewController.swift */; };
 		45B807157EB5AF0417ABDEF5 /* ButtonContentType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80E20463112C41A9722F8 /* ButtonContentType.swift */; };
 		45B807D801E9E4C40A7F89CA /* BleDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B802D77FE0D9229DFD9DC1 /* BleDevice.swift */; };
-		45B8091E24F197A313B0AC18 /* EscapeSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B803419911D94BEB9675B3 /* EscapeSequence.swift */; };
 		45B80A77469021A3248451C0 /* TerminalPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8073A874DF7FA0DD667C9 /* TerminalPresenter.swift */; };
 		45B80B2DAA237576D4FF7F58 /* TerminalContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8070806E612F42F177C30 /* TerminalContract.swift */; };
 		45B80BB626F1C59836982522 /* SelectDevice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B80676B90E773A94E9B127 /* SelectDevice.storyboard */; };
@@ -34,15 +35,16 @@
 		45B80C7E32AD88A02E69D4D9 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80F0C923C3197B8ECEC3F /* Screen.swift */; };
 		45B80C8C5515EA9459691450 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45B8072512914EB157103662 /* Assets.xcassets */; };
 		45B80CBE563F3AE7C0ACE1A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B80EC187378C6521D70C9D /* LaunchScreen.storyboard */; };
+		45B80E4AFAE02914B1F8BE39 /* EscapeSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B806C89F5B49069F6E2149 /* EscapeSequence.swift */; };
 		45B80E769B7138E459C3A404 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80A6CB257A3D544CEB3B8 /* CustomTextView.swift */; };
 		45B80E91770413D0496375E7 /* TerminalRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80BC0322A8908574D2595 /* TerminalRouter.swift */; };
-		45B80F8AE49389DD045FEC9E /* Terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B805A187A3DB799B29EAD2 /* Terminal.swift */; };
 		45B80FE4FBF408FB07DE6888 /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80E02BB6DBF50BD347407 /* StringExtension.swift */; };
 		EA02AE281933AB81561A4F9C /* libPods-MLDPTerminal-iOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8586B99AF069D584D1E595AF /* libPods-MLDPTerminal-iOSTests.a */; };
 		EE302CD624F4A89400D3E45D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE302CD524F4A89400D3E45D /* AppDelegate.swift */; };
 		EE302CED24F4A89A00D3E45D /* MLDPTerminal_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE302CEC24F4A89A00D3E45D /* MLDPTerminal_iOSTests.swift */; };
 		EE302CF824F4A89A00D3E45D /* MLDPTerminal_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE302CF724F4A89A00D3E45D /* MLDPTerminal_iOSUITests.swift */; };
 		EE302D0D24F4AE0000D3E45D /* BleManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE302D0C24F4AE0000D3E45D /* BleManager.swift */; };
+		EE3B265824FCD9A800E498C8 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = EE3B265724FCD9A800E498C8 /* Default-568h@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,17 +68,18 @@
 		062688C8260F5BCE11BBA7E6 /* Pods-MLDPTerminal-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLDPTerminal-iOS.debug.xcconfig"; path = "Target Support Files/Pods-MLDPTerminal-iOS/Pods-MLDPTerminal-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		34873277B37A781C4392ACE7 /* Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.release.xcconfig"; path = "Target Support Files/Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests/Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		420A5513819888E5FB2EBA6E /* Pods-MLDPTerminal-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLDPTerminal-iOS.release.xcconfig"; path = "Target Support Files/Pods-MLDPTerminal-iOS/Pods-MLDPTerminal-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		45B800461F9A0EA7AAD0F65D /* EscapeSequenceState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EscapeSequenceState.swift; sourceTree = "<group>"; };
 		45B801CF4CB59C1118F4C2A0 /* SelectDevicePresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDevicePresenter.swift; sourceTree = "<group>"; };
 		45B80240C3154E7387B5B331 /* RootContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootContract.swift; sourceTree = "<group>"; };
 		45B802A6554B199108EE8D93 /* SelectDeviceRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDeviceRouter.swift; sourceTree = "<group>"; };
 		45B802D77FE0D9229DFD9DC1 /* BleDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleDevice.swift; sourceTree = "<group>"; };
 		45B802DBB1E888FB2B2BA1F6 /* TerminalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalViewController.swift; sourceTree = "<group>"; };
 		45B8031975AE329528750351 /* SelectDeviceInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDeviceInteractor.swift; sourceTree = "<group>"; };
-		45B803419911D94BEB9675B3 /* EscapeSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EscapeSequence.swift; sourceTree = "<group>"; };
 		45B8038468B5BADF6C998471 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		45B805903637DF451E61650C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
-		45B805A187A3DB799B29EAD2 /* Terminal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Terminal.swift; sourceTree = "<group>"; };
+		45B806085ED788B130B27988 /* Terminal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Terminal.swift; sourceTree = "<group>"; };
 		45B80676B90E773A94E9B127 /* SelectDevice.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectDevice.storyboard; sourceTree = "<group>"; };
+		45B806C89F5B49069F6E2149 /* EscapeSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EscapeSequence.swift; sourceTree = "<group>"; };
 		45B8070806E612F42F177C30 /* TerminalContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalContract.swift; sourceTree = "<group>"; };
 		45B8072512914EB157103662 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		45B80726E7827AC685B488D3 /* TerminalInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalInteractor.swift; sourceTree = "<group>"; };
@@ -110,6 +113,7 @@
 		EE302CF724F4A89A00D3E45D /* MLDPTerminal_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MLDPTerminal_iOSUITests.swift; sourceTree = "<group>"; };
 		EE302CF924F4A89A00D3E45D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EE302D0C24F4AE0000D3E45D /* BleManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BleManager.swift; sourceTree = "<group>"; };
+		EE3B265724FCD9A800E498C8 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		F01E14050C2522FE5B940E4C /* Pods-MLDPTerminal-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLDPTerminal-iOSTests.release.xcconfig"; path = "Target Support Files/Pods-MLDPTerminal-iOSTests/Pods-MLDPTerminal-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -168,7 +172,6 @@
 				45B80FC97DF5B8D1DB43B216 /* TextBuffer.swift */,
 				45B802D77FE0D9229DFD9DC1 /* BleDevice.swift */,
 				45B80F0C923C3197B8ECEC3F /* Screen.swift */,
-				45B805A187A3DB799B29EAD2 /* Terminal.swift */,
 			);
 			path = models;
 			sourceTree = "<group>";
@@ -281,6 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				45B80E20463112C41A9722F8 /* ButtonContentType.swift */,
+				45B800461F9A0EA7AAD0F65D /* EscapeSequenceState.swift */,
 			);
 			path = enums;
 			sourceTree = "<group>";
@@ -289,6 +293,8 @@
 			isa = PBXGroup;
 			children = (
 				45B80726E7827AC685B488D3 /* TerminalInteractor.swift */,
+				45B806C89F5B49069F6E2149 /* EscapeSequence.swift */,
+				45B806085ED788B130B27988 /* Terminal.swift */,
 			);
 			path = interactor;
 			sourceTree = "<group>";
@@ -301,7 +307,6 @@
 				45B803AB8C4CF700D8851E51 /* router */,
 				45B80C09169CF2FFA6A46775 /* presenter */,
 				45B80CEBCBEB1D98CBAF301E /* interactor */,
-				45B803419911D94BEB9675B3 /* EscapeSequence.swift */,
 			);
 			path = Terminal;
 			sourceTree = "<group>";
@@ -342,6 +347,7 @@
 		EE302CC924F4A89400D3E45D = {
 			isa = PBXGroup;
 			children = (
+				EE3B265724FCD9A800E498C8 /* Default-568h@2x.png */,
 				EE302CD424F4A89400D3E45D /* MLDPTerminal-iOS */,
 				EE302CEB24F4A89A00D3E45D /* MLDPTerminal-iOSTests */,
 				EE302CF624F4A89A00D3E45D /* MLDPTerminal-iOSUITests */,
@@ -516,6 +522,7 @@
 				45B80C8C5515EA9459691450 /* Assets.xcassets in Resources */,
 				45B80CBE563F3AE7C0ACE1A6 /* LaunchScreen.storyboard in Resources */,
 				45B8017E225F42B94C7FD5EF /* Terminal.storyboard in Resources */,
+				EE3B265824FCD9A800E498C8 /* Default-568h@2x.png in Resources */,
 				45B80BB626F1C59836982522 /* SelectDevice.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -686,10 +693,11 @@
 				45B807D801E9E4C40A7F89CA /* BleDevice.swift in Sources */,
 				45B805FC8453E5A8B30B8D4F /* SelectDeviceViewController.swift in Sources */,
 				45B80C1324679F0B41F01616 /* BleOperation.swift in Sources */,
-				45B8091E24F197A313B0AC18 /* EscapeSequence.swift in Sources */,
 				45B807157EB5AF0417ABDEF5 /* ButtonContentType.swift in Sources */,
 				45B80C7E32AD88A02E69D4D9 /* Screen.swift in Sources */,
-				45B80F8AE49389DD045FEC9E /* Terminal.swift in Sources */,
+				45B80E4AFAE02914B1F8BE39 /* EscapeSequence.swift in Sources */,
+				45B8011AF8315CF1E438A47C /* Terminal.swift in Sources */,
+				45B805304926BF9D9B9DB184 /* EscapeSequenceState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

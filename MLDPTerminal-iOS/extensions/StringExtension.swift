@@ -4,21 +4,18 @@
 //
 
 import Foundation
+import UIKit
 
 extension String {
     // ASCII文字の判定をする関数(ASCIIコードならtrueを返す)
     // 返り値 : ASCII文字 -> true, それ以外 -> false
     func isAscii() -> Bool {
-        print("--- isAscii ---")
-        print("return : \(self <= "\u{7f}" && "\u{00}" <= self)")
         return self <= "\u{7f}" && "\u{00}" <= self
     }
 
     // 数字の判定をする関数
     // 返り値 : 数字 -> true, それ以外 -> false
     func isNumeric() -> Bool {
-        print("--- isNumeric ---")
-        print("return : \("0" <= self && self <= "9")")
         return "0" <= self && self <= "9"
     }
 
@@ -35,5 +32,19 @@ extension String {
         guard let regex = try? NSRegularExpression(pattern: pattern) else { return false }
         let matches = regex.matches(in: self, range: NSRange(location: 0, length: self.utf8.count))
         return matches.count > 0
+    }
+
+    // 文字列の高さを取得する関数
+    func getStringHeight(_ font: UIFont) -> CGFloat {
+        let attribute = [NSAttributedString.Key.font: font]
+        let size = self.size(withAttributes: attribute)
+        return size.height
+    }
+
+    // 文字列の横幅を取得する関数
+    func getStringWidth(_ font: UIFont) -> CGFloat {
+        let attribute = [NSAttributedString.Key.font: font]
+        let size = self.size(withAttributes: attribute)
+        return size.width
     }
 }

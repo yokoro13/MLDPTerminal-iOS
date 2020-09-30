@@ -109,8 +109,8 @@ class EscapeSequence {
             case 1: // カーソルより前を消去する
                 clearScreenToCursor(c: c)
             case 2: // 画面全体を消去する
-                clearScreenFromCursor(c: c)
                 clearScreenToCursor(c: cursor(x: c.x-1, y: c.y))
+                clearScreenFromCursor(c: c)
             default:
                 print("Invalid Number")
                 return
@@ -140,8 +140,8 @@ class EscapeSequence {
         case 1:
             clearLineToCursor(line: c.y, to: c.x)
         case 2:
-            clearLineToCursor(line: c.y, to: c.x)
-            clearLineFromCursor(line: c.y, from: c.x+1)
+            clearLineToCursor(line: c.y, to: c.x-1)
+            clearLineFromCursor(line: c.y, from: c.x)
         default:
             print("Invalid Number")
             return
