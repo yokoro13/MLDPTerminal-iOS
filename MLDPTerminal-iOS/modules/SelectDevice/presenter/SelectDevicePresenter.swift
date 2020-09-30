@@ -19,6 +19,7 @@ class SelectDevicePresenter: SelectDevicePresentation {
     }
 
     func didSelectDevice(_ device: BleDevice) {
+        interactor.setDevice(device: device)
         interactor.connect(device: device)
         router.presentTerminal(forBleDevice: device)
     }

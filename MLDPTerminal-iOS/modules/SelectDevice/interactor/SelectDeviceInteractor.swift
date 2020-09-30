@@ -28,7 +28,11 @@ class SelectDeviceInteractor: SelectDeviceUseCase {
         bleManager.scanDevice()
     }
 
+    func setDevice(device: BleDevice) {
+        bleManager.currentPeripheral = device.peripheral
+    }
+
     func connect(device: BleDevice) {
-        bleManager.connect(peripheral: device.peripheral!)
+        bleManager.connect(peripheral: device.peripheral)
     }
 }
