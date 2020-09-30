@@ -12,6 +12,9 @@ enum ButtonContentType {
     case left
     case ctrl
     case esc
+    case tab
     case scan
+    case connect
+    case disconnect
 }
 
