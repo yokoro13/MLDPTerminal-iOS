@@ -17,6 +17,7 @@ class TerminalRouter: TerminalWireframe {
     }
 
     func presentSelectDevice() {
-        <#code#>
+        let selectDeviceModuleViewController = SelectDeviceRouter.assembleModule()
+        viewController?.navigationController?.pushViewController(selectDeviceModuleViewController, animated: true)
     }
 }

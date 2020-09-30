@@ -9,12 +9,16 @@ import UIKit
 protocol TerminalView: IndicatableView {
     var presenter: TerminalPresentation! { get set }
 
-    // View の操作
+    func moveCursor(_ c: cursor)
+    func updateScreen(_ text: NSMutableAttributedString)
+    func hideMenu(_ duration:Float)
+    func showMenu(_ duration:Float)
     // func showSomething
 }
 
 // View <- Presenter -> Router
-//           -> Interactor　   の接続
+//            |
+//             ---> Interactor　   の接続
 protocol TerminalPresentation: class {
     var view: TerminalView? { get set }
     var interactor: TerminalUseCase! { get set }
@@ -22,13 +26,19 @@ protocol TerminalPresentation: class {
 
     // View からの操作処理
     func viewDidLoad()
+    func didChangeScreenSize(screenColumnSize: Int, screenRowSize: Int)
 
     func didInputText(_ text: String)
-    func didClickButton(_ content: ButtonContentType)
+    func didTapButton(_ type: ButtonContentType)
+
     func didScrollUp()
     func didScrollDown()
-    // func doSomething()
-    // didWriteText()
+
+    func didShowKeyboard()
+    func didHideKeyboard()
+    func didOrientationChange()
+
+    func didTapMenu()
 }
 
 // Presenter -> Interactor -> Entity
@@ -40,24 +50,37 @@ protocol TerminalUseCase: class {
 
     func addObserver()
     func writeTextToBuffer(_ text: String)
+    func writePeripheral(_ message: String)
 
-    func moveUp()
-    func moveDown()
-    func moveRight()
-    func moveLeft()
+    func tapUp()
+    func tapDown()
+    func tapRight()
+    func tapLeft()
 
-    func startScan()
-    func putEsc()
-    func putCtrl()
+    func tapScan()
+    func tapConnect()
+    func tapDisconnect()
+    func tapEsc()
+    func tapCtrl()
+    func tapTab()
 
     func scrollUp()
     func scrollDown()
+
+    func showKeyboard()
+    func hideKeyboard()
+    func onOrientationChange()
+    func changeScreenSize(screenColumnSize: Int, screenRowSize: Int)
+
+    func tapMenu()
 }
 
 // Entity -> Interactor -> Presenter
 protocol TerminalInteractorOutput: class {
     // Presenter に渡したい値はここに記述
-    // func something()
+    func cursorMoved(_ cursor: cursor)
+    func textChanged(_ text: NSMutableAttributedString)
+    func menuStatusChanged(_ isShowingMenu: Bool)
 }
 
 // Router の接続
