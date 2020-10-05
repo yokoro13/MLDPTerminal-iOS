@@ -122,14 +122,12 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
             state = .error
             return
         }
-        // FIXME notify data
-        /**if let data = characteristic.value {
-            if readData != nil {
-                readData!.append(data)
-            } else {
-                readData = data
-            }
-        }**/
+        if let data = characteristic.value {
+            NotificationCenter.default.post(
+                    name:  .receivedDataNotification,
+                    object: nil,
+                    userInfo: ["text": data])
+        }
     }
 
     func scanDevice() {
