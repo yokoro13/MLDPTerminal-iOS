@@ -69,7 +69,7 @@ class TerminalInteractor: TerminalUseCase {
     }
 
     func tapCtrl() {
-        // ctrlKey.toggle()
+        term.toggleCtrl()
     }
 
     func tapTab() {
@@ -133,7 +133,6 @@ class TerminalInteractor: TerminalUseCase {
     }
 
     func hideKeyboard(keyboardHeight: Int) {
-        print("--- keyboardWillHide ---")
 
         // キーボードの高さだけ基底位置を上げる
         term.topRow -= keyboardHeight
