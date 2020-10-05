@@ -11,9 +11,11 @@ class Terminal {
     var screen: Screen
     var textBuffer = [[textAttr]]()
 
-    var escState: EscapeSequenceState
+    private var escState: EscapeSequenceState
 
-    var escString: String
+    private var escString: String
+
+    var puttingCtrl: Bool = false
 
     var topRow = 0       // スクリーンのサイズとバッファサイズの差分
     var hasNext = false                 // 行が次に続くか
@@ -134,12 +136,7 @@ class Terminal {
                 break
             }
             for column in 0 ..< textBuffer[row].count {
-                // TODO カーソル表示処理を消す
                 attributes = [.backgroundColor: UIColor.white, .foregroundColor: textBuffer[row][column].color] // 文字の色を設定する
-                if screen.c.y == row && screen.c.x ==  column {
-                    attributes = [.backgroundColor:UIColor.gray, .foregroundColor: UIColor.white]
-                }
-
                 char = NSMutableAttributedString(string: textBuffer[row][column].char, attributes: attributes) // 文字に色を登録する
                 text.append(char)
             }
@@ -298,8 +295,12 @@ class Terminal {
         }
     }
 
-    func clearEscapeSequence(){
+    private func clearEscapeSequence(){
         escState = .none
         escString = "";
+    }
+
+    func toggleCtrl(){
+        puttingCtrl = !puttingCtrl
     }
 }

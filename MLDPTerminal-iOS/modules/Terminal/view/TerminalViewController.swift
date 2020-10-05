@@ -37,6 +37,9 @@ class TerminalViewController: UIViewController {
     let rightButton = UIButton(frame: CGRect())
     let keyDownButton = UIButton(frame: CGRect())
 
+    var textHeight: CGFloat = 0.0
+    var textWidth: CGFloat = 0.0
+
     // viewが読み込まれたときのイベント
     override func viewDidLoad() {
         print("--- viewDidLoad ---")
@@ -52,13 +55,13 @@ class TerminalViewController: UIViewController {
         textview.layer.borderWidth = 1
         textview.font = UIFont.systemFont(ofSize: 12.00)        // textviewのフォントサイズを設定する
         textview.delegate = self                                // textviewのデリゲートをセット
-        setSize()                                               // 画面サイズを設定する
         setupTextView()
         presenter.viewDidLoad()
-        // 最大行数
-        let row = Int(floor((textview.frame.height - textview.layoutMargins.top - textview.layoutMargins.bottom) / " ".getStringHeight(textview.font!)))
-        // 最大桁数
-        let column = Int(floor((textview.frame.width - textview.layoutMargins.left - textview.layoutMargins.right) / " ".getStringWidth(textview.font!)))
+        textHeight = " ".getStringHeight(textview.font!)
+        textWidth = " ".getStringWidth(textview.font!)
+
+        let column = Int(floor((textview.frame.width - textview.layoutMargins.left - textview.layoutMargins.right) / textHeight))
+        let row = Int(floor((textview.frame.height - textview.layoutMargins.top - textview.layoutMargins.bottom) / textWidth))
         presenter.setupTerminal(screenColumn: column, screenRow: row)
     }
 
@@ -194,7 +197,7 @@ class TerminalViewController: UIViewController {
         textview.frame = CGRect(origin: textview.frame.origin, size: CGSize(width: self.view.frame.width, height: self.view.frame.height - keyboardHeight - textview.frame.origin.y))
         // 画面サイズを設定する
         setSize()
-        presenter.didShowKeyboard(keyboardHeight: Int(keyboardHeight / " ".getStringHeight(textview.font!)) + 1)
+        presenter.didShowKeyboard(keyboardHeight: Int(keyboardHeight / textHeight) + 1)
     }
 
     // キーボードが消えるときに画面を戻す関数
@@ -207,12 +210,12 @@ class TerminalViewController: UIViewController {
         // キーボードの高さを取得する
         let keyboardHeight = (notification?.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.height
 
-        presenter.didHideKeyboard(keyboardHeight: Int(keyboardHeight / " ".getStringHeight(textview.font!)) + 1)
+        presenter.didHideKeyboard(keyboardHeight: Int(keyboardHeight / textHeight) + 1)
     }
 
     // 画面が回転したときに呼ばれる関数
     @objc func onOrientationChange(notification: Notification?) {
-        presenter.didOrientationChange()
+        setSize()
     }
 
     // メニューが押されたとき
@@ -245,9 +248,9 @@ class TerminalViewController: UIViewController {
     // 画面サイズを設定する関数
     func setSize() {
         // 最大行数
-        let row = Int(floor((textview.frame.height - textview.layoutMargins.top - textview.layoutMargins.bottom) / " ".getStringHeight(textview.font!)))
+        let row = Int(floor((textview.frame.height - textview.layoutMargins.top - textview.layoutMargins.bottom) / textHeight))
         // 最大桁数
-        let column = Int(floor((textview.frame.width - textview.layoutMargins.left - textview.layoutMargins.right) / " ".getStringWidth(textview.font!)))
+        let column = Int(floor((textview.frame.width - textview.layoutMargins.left - textview.layoutMargins.right) / textWidth))
         presenter.didChangeScreenSize(screenColumnSize: column, screenRowSize: row)
     }
 
@@ -325,25 +328,19 @@ class TerminalViewController: UIViewController {
 
 extension TerminalViewController: TerminalView{
     func moveCursor(_ c: cursor) {
-        /** TODO カーソルの表示処理を切り分ける
-             1．textViewの右上座標を取得
-                右端：r = view.frame.origin.x
-                上端：u = view.frame.origin.y
-             2．四角形を表示
-                rectangle = UIBezierPath
-                    (
-                         rect: CGRect(
-                             x: r+text.width*c.x,
-                             y: u+text.height*c.y,
-                             width: text.width,
-                             height: text.height
-                             )
-                     )
-                 // 内側の色
-                 UIColor.gray.setFill()
-                 // 内側を塗りつぶす
-                 rectangle.fill()
-        **/
+        let l = Int(view.frame.origin.x)
+        let u = Int(view.frame.origin.y)
+
+        let rectangle = UIBezierPath(
+                rect: CGRect(
+                        x: CGFloat(l + Int(textWidth) * c.x),
+                        y: CGFloat(u + Int(textHeight) * c.y),
+                        width: textWidth,
+                        height: textHeight
+                )
+        )
+        UIColor.gray.setFill()
+        rectangle.fill()
     }
 
     func updateScreen(_ text: NSMutableAttributedString) {
