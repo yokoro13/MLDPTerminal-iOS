@@ -54,6 +54,12 @@ class TerminalViewController: UIViewController {
         textview.delegate = self                                // textviewのデリゲートをセット
         setSize()                                               // 画面サイズを設定する
         setupTextView()
+        presenter.viewDidLoad()
+        // 最大行数
+        let row = Int(floor((textview.frame.height - textview.layoutMargins.top - textview.layoutMargins.bottom) / " ".getStringHeight(textview.font!)))
+        // 最大桁数
+        let column = Int(floor((textview.frame.width - textview.layoutMargins.left - textview.layoutMargins.right) / " ".getStringWidth(textview.font!)))
+        presenter.setupTerminal(screenColumn: column, screenRow: row)
     }
 
     // viewを表示する前のイベント
@@ -182,12 +188,26 @@ class TerminalViewController: UIViewController {
 
     // キーボードが現れるときに画面をずらす関数
     @objc func keyboardWillShow(notification: Notification?) {
-        presenter.didShowKeyboard()
+        // キーボードの高さを取得する
+        let keyboardHeight = (notification?.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.height
+        // textviewの高さを変更する
+        textview.frame = CGRect(origin: textview.frame.origin, size: CGSize(width: self.view.frame.width, height: self.view.frame.height - keyboardHeight - textview.frame.origin.y))
+        // 画面サイズを設定する
+        setSize()
+        presenter.didShowKeyboard(keyboardHeight: Int(keyboardHeight / " ".getStringHeight(textview.font!)) + 1)
     }
 
     // キーボードが消えるときに画面を戻す関数
     @objc func keyboardWillHide(notification: Notification?) {
-        presenter.didHideKeyboard()
+        textview.frame = CGRect(
+                origin: textview.frame.origin,
+                size: CGSize(width: self.view.frame.width, height: policy.frame.origin.y - textview.frame.origin.y)
+        )
+        setSize()
+        // キーボードの高さを取得する
+        let keyboardHeight = (notification?.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.height
+
+        presenter.didHideKeyboard(keyboardHeight: Int(keyboardHeight / " ".getStringHeight(textview.font!)) + 1)
     }
 
     // 画面が回転したときに呼ばれる関数

@@ -15,6 +15,10 @@ class TerminalPresenter: TerminalPresentation {
         interactor.addObserver()
     }
 
+    func setupTerminal(screenColumn: Int, screenRow: Int){
+        interactor.setupTerminal(screenColumn: screenColumn, screenRow: screenRow)
+    }
+
     func didInputText(_ text: String) {
         interactor.writePeripheral(text)
     }
@@ -62,16 +66,16 @@ class TerminalPresenter: TerminalPresentation {
         interactor.scrollDown()
     }
 
-    func didChangeScreenSize(screenWidth: Int, screenHeight: Int, textWidth: Int, textHeight: Int) {
-        interactor
+    func didChangeScreenSize(screenColumnSize: Int, screenRowSize: Int) {
+        interactor.changeScreenSize(newScreenColumnSize: screenColumnSize, newScreenRowSize: screenRowSize)
     }
 
-    func didShowKeyboard() {
-        <#code#>
+    func didShowKeyboard(keyboardHeight: Int) {
+        interactor.showKeyboard(keyboardHeight: keyboardHeight)
     }
 
-    func didHideKeyboard() {
-        <#code#>
+    func didHideKeyboard(keyboardHeight: Int) {
+        interactor.hideKeyboard(keyboardHeight: keyboardHeight)
     }
 
     func didOrientationChange() {
@@ -79,7 +83,7 @@ class TerminalPresenter: TerminalPresentation {
     }
 
     func didTapMenu() {
-        <#code#>
+        interactor.tapMenu()
     }
 }
 

@@ -19,18 +19,7 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     private var characteristic: CBCharacteristic?  // データの出力先
     private var timer: Timer?                      // 接続待ちタイムアウト用
 
-    enum State {
-        case initializing
-        case ready
-        case scanning
-        case trying
-        case busy
-        case idle
-        case canceling
-        case closed
-        case error
-    }
-    var state: State = .initializing
+    var state: BleState = .closed
 
     public static let sharedBleManager = BleManager()
 

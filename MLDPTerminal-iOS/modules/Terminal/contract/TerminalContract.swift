@@ -26,6 +26,7 @@ protocol TerminalPresentation: class {
 
     // View からの操作処理
     func viewDidLoad()
+    func setupTerminal(screenColumn: Int, screenRow: Int)
     func didChangeScreenSize(screenColumnSize: Int, screenRowSize: Int)
 
     func didInputText(_ text: String)
@@ -34,8 +35,8 @@ protocol TerminalPresentation: class {
     func didScrollUp()
     func didScrollDown()
 
-    func didShowKeyboard()
-    func didHideKeyboard()
+    func didShowKeyboard(keyboardHeight: Int)
+    func didHideKeyboard(keyboardHeight: Int)
     func didOrientationChange()
 
     func didTapMenu()
@@ -67,10 +68,10 @@ protocol TerminalUseCase: class {
     func scrollUp()
     func scrollDown()
 
-    func showKeyboard()
-    func hideKeyboard()
+    func showKeyboard(keyboardHeight: Int)
+    func hideKeyboard(keyboardHeight: Int)
     func onOrientationChange()
-    func changeScreenSize(screenColumnSize: Int, screenRowSize: Int)
+    func changeScreenSize(newScreenColumnSize: Int, newScreenRowSize: Int)
 
     func tapMenu()
 }

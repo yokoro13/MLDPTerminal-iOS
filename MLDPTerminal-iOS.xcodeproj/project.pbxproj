@@ -22,6 +22,7 @@
 		45B803B167B39766C9A4A199 /* TerminalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B802DBB1E888FB2B2BA1F6 /* TerminalViewController.swift */; };
 		45B803EFEFB53414E71FD63A /* TerminalInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80726E7827AC685B488D3 /* TerminalInteractor.swift */; };
 		45B803FFF9630F18E0A46755 /* TextBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80FC97DF5B8D1DB43B216 /* TextBuffer.swift */; };
+		45B8047CAF9CAE0D00B402AB /* BleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80B8BB9A7494DD97C5F14 /* BleState.swift */; };
 		45B80485B4674D0A9BF96138 /* ViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8086A2CCFACEEC7C7FA32 /* ViewProtocols.swift */; };
 		45B80499FEBCA9440B015886 /* SelectDeviceContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80C04EB91A8E0EAA535EB /* SelectDeviceContract.swift */; };
 		45B805304926BF9D9B9DB184 /* EscapeSequenceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B800461F9A0EA7AAD0F65D /* EscapeSequenceState.swift */; };
@@ -90,6 +91,7 @@
 		45B8099896AD2C14517EE60D /* Terminal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Terminal.storyboard; sourceTree = "<group>"; };
 		45B80A6CB257A3D544CEB3B8 /* CustomTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		45B80AF49342B74D91136EB7 /* IndicatableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatableView.swift; sourceTree = "<group>"; };
+		45B80B8BB9A7494DD97C5F14 /* BleState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleState.swift; sourceTree = "<group>"; };
 		45B80BC0322A8908574D2595 /* TerminalRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalRouter.swift; sourceTree = "<group>"; };
 		45B80C04EB91A8E0EAA535EB /* SelectDeviceContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDeviceContract.swift; sourceTree = "<group>"; };
 		45B80C201F997DC85CED4D55 /* RootRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
@@ -285,6 +287,7 @@
 			children = (
 				45B80E20463112C41A9722F8 /* ButtonContentType.swift */,
 				45B800461F9A0EA7AAD0F65D /* EscapeSequenceState.swift */,
+				45B80B8BB9A7494DD97C5F14 /* BleState.swift */,
 			);
 			path = enums;
 			sourceTree = "<group>";
@@ -698,6 +701,7 @@
 				45B80E4AFAE02914B1F8BE39 /* EscapeSequence.swift in Sources */,
 				45B8011AF8315CF1E438A47C /* Terminal.swift in Sources */,
 				45B805304926BF9D9B9DB184 /* EscapeSequenceState.swift in Sources */,
+				45B8047CAF9CAE0D00B402AB /* BleState.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
