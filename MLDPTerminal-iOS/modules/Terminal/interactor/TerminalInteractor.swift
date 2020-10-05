@@ -11,8 +11,6 @@ class TerminalInteractor: TerminalUseCase {
     private let bleManager = BleManager.sharedBleManager
     private var term: Terminal!
 
-    private var escState: EscapeSequenceState = .none
-
     func addObserver() {
         NotificationCenter.default.addObserver(
                 self,
@@ -33,10 +31,6 @@ class TerminalInteractor: TerminalUseCase {
 
     func writeTextToBuffer(_ text: String){
         term.writeTextToBuffer(text)
-    }
-
-    func onOrientationChange() {
-        <#code#>
     }
 
     func changeScreenSize(newScreenColumnSize: Int, newScreenRowSize: Int) {
@@ -67,7 +61,7 @@ class TerminalInteractor: TerminalUseCase {
     }
 
     func tapScan() {
-        <#code#>
+        // nothing
     }
 
     func tapEsc() {
@@ -171,7 +165,6 @@ class TerminalInteractor: TerminalUseCase {
 
     func tapMenu() {
         print("--- menu button tapped ---")
-        // 表示非表示を切り替える
         isShowingMenu = !isShowingMenu
         output.menuStatusChanged(isShowingMenu)
     }

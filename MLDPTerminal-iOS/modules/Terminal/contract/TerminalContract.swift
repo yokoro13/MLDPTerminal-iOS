@@ -37,7 +37,6 @@ protocol TerminalPresentation: class {
 
     func didShowKeyboard(keyboardHeight: Int)
     func didHideKeyboard(keyboardHeight: Int)
-    func didOrientationChange()
 
     func didTapMenu()
 }
@@ -70,7 +69,6 @@ protocol TerminalUseCase: class {
 
     func showKeyboard(keyboardHeight: Int)
     func hideKeyboard(keyboardHeight: Int)
-    func onOrientationChange()
     func changeScreenSize(newScreenColumnSize: Int, newScreenRowSize: Int)
 
     func tapMenu()

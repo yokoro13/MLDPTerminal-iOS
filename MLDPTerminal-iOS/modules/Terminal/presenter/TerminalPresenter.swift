@@ -78,10 +78,6 @@ class TerminalPresenter: TerminalPresentation {
         interactor.hideKeyboard(keyboardHeight: keyboardHeight)
     }
 
-    func didOrientationChange() {
-        <#code#>
-    }
-
     func didTapMenu() {
         interactor.tapMenu()
     }
