@@ -11,7 +11,6 @@
 		3A506F4BECC0B0CAA7850AF9 /* libPods-MLDPTerminal-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5439906F5E68C8036ECB793D /* libPods-MLDPTerminal-iOS.a */; };
 		45B800E495DF59A889C98D4C /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80C201F997DC85CED4D55 /* RootRouter.swift */; };
 		45B8011AF8315CF1E438A47C /* Terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B806085ED788B130B27988 /* Terminal.swift */; };
-		45B80129A04FC9BD50AF3693 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B805903637DF451E61650C /* R.generated.swift */; };
 		45B80151B825ED45CE66BAE7 /* SelectDeviceInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8031975AE329528750351 /* SelectDeviceInteractor.swift */; };
 		45B8015915AF2AC8CAF6F350 /* BleObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8073EC5C7BD98FF215E23 /* BleObserver.swift */; };
 		45B8017E225F42B94C7FD5EF /* Terminal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B8099896AD2C14517EE60D /* Terminal.storyboard */; };
@@ -35,6 +34,7 @@
 		45B80C7E32AD88A02E69D4D9 /* Screen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80F0C923C3197B8ECEC3F /* Screen.swift */; };
 		45B80C8C5515EA9459691450 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45B8072512914EB157103662 /* Assets.xcassets */; };
 		45B80CBE563F3AE7C0ACE1A6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B80EC187378C6521D70C9D /* LaunchScreen.storyboard */; };
+		45B80D3829C01EFAFA5F3484 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B808DDDDB5003D2D8652C2 /* R.generated.swift */; };
 		45B80E4AFAE02914B1F8BE39 /* EscapeSequence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B806C89F5B49069F6E2149 /* EscapeSequence.swift */; };
 		45B80E769B7138E459C3A404 /* CustomTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80A6CB257A3D544CEB3B8 /* CustomTextView.swift */; };
 		45B80E91770413D0496375E7 /* TerminalRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80BC0322A8908574D2595 /* TerminalRouter.swift */; };
@@ -75,8 +75,6 @@
 		45B802D77FE0D9229DFD9DC1 /* BleDevice.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleDevice.swift; sourceTree = "<group>"; };
 		45B802DBB1E888FB2B2BA1F6 /* TerminalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalViewController.swift; sourceTree = "<group>"; };
 		45B8031975AE329528750351 /* SelectDeviceInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDeviceInteractor.swift; sourceTree = "<group>"; };
-		45B8038468B5BADF6C998471 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
-		45B805903637DF451E61650C /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		45B806085ED788B130B27988 /* Terminal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Terminal.swift; sourceTree = "<group>"; };
 		45B80676B90E773A94E9B127 /* SelectDevice.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = SelectDevice.storyboard; sourceTree = "<group>"; };
 		45B806C89F5B49069F6E2149 /* EscapeSequence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EscapeSequence.swift; sourceTree = "<group>"; };
@@ -86,7 +84,9 @@
 		45B8073A874DF7FA0DD667C9 /* TerminalPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalPresenter.swift; sourceTree = "<group>"; };
 		45B8073EC5C7BD98FF215E23 /* BleObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleObserver.swift; sourceTree = "<group>"; };
 		45B8086A2CCFACEEC7C7FA32 /* ViewProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewProtocols.swift; sourceTree = "<group>"; };
+		45B808DDDDB5003D2D8652C2 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		45B8099896AD2C14517EE60D /* Terminal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Terminal.storyboard; sourceTree = "<group>"; };
+		45B809A1C95042AA50ABC1F0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		45B80A6CB257A3D544CEB3B8 /* CustomTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
 		45B80AF49342B74D91136EB7 /* IndicatableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatableView.swift; sourceTree = "<group>"; };
 		45B80B8BB9A7494DD97C5F14 /* BleState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleState.swift; sourceTree = "<group>"; };
@@ -149,9 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				45B8072512914EB157103662 /* Assets.xcassets */,
-				45B805903637DF451E61650C /* R.generated.swift */,
 				45B80EC187378C6521D70C9D /* LaunchScreen.storyboard */,
-				45B8038468B5BADF6C998471 /* Info.plist */,
+				45B808DDDDB5003D2D8652C2 /* R.generated.swift */,
 			);
 			path = resorce;
 			sourceTree = "<group>";
@@ -379,6 +378,7 @@
 				45B80A8D106D3DFE1CBC09F0 /* protocols */,
 				45B800320886E4975C173C57 /* resorce */,
 				45B80C4CF19BDED132390259 /* enums */,
+				45B809A1C95042AA50ABC1F0 /* Info.plist */,
 			);
 			path = "MLDPTerminal-iOS";
 			sourceTree = "<group>";
@@ -640,11 +640,11 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				$SRCROOT/R.generated.swift,
+				$SRCROOT/resorce/R.generated.swift,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/R.generated.swift\"\n";
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/resorce/R.generated.swift\"\n";
 		};
 		F2985474DEE838290970CA82 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -679,7 +679,6 @@
 				45B803B167B39766C9A4A199 /* TerminalViewController.swift in Sources */,
 				45B80E91770413D0496375E7 /* TerminalRouter.swift in Sources */,
 				45B803EFEFB53414E71FD63A /* TerminalInteractor.swift in Sources */,
-				45B80129A04FC9BD50AF3693 /* R.generated.swift in Sources */,
 				45B80282D2441B7D00F6C545 /* RootContract.swift in Sources */,
 				45B800E495DF59A889C98D4C /* RootRouter.swift in Sources */,
 				45B80B2DAA237576D4FF7F58 /* TerminalContract.swift in Sources */,
@@ -698,6 +697,7 @@
 				45B8011AF8315CF1E438A47C /* Terminal.swift in Sources */,
 				45B805304926BF9D9B9DB184 /* EscapeSequenceState.swift in Sources */,
 				45B8047CAF9CAE0D00B402AB /* BleState.swift in Sources */,
+				45B80D3829C01EFAFA5F3484 /* R.generated.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
