@@ -62,7 +62,7 @@ class TerminalInteractor: TerminalUseCase {
     }
 
     func tapScan() {
-        // nothing
+
     }
 
     func tapEsc() {

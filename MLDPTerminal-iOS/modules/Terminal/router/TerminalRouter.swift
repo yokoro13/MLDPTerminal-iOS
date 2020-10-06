@@ -35,7 +35,7 @@ class TerminalRouter: TerminalWireframe {
         let interactor = TerminalInteractor()
         let router = TerminalRouter()
         let navigation = UINavigationController(rootViewController: view!)
-
+        navigation.navigationBar.isHidden = true
         view?.presenter = presenter
 
         presenter.view = view
@@ -50,7 +50,8 @@ class TerminalRouter: TerminalWireframe {
     }
 
     func presentSelectDevice() {
+        print("--- presentSelectDevice ---")
         let selectDeviceModuleViewController = SelectDeviceRouter.assembleModule()
-        viewController?.navigationController?.pushViewController(selectDeviceModuleViewController, animated: true)
+        viewController?.present(selectDeviceModuleViewController, animated: true)
     }
 }

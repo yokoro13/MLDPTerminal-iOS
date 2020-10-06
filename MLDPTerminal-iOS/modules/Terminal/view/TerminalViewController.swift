@@ -53,10 +53,12 @@ class TerminalViewController: UIViewController {
 
         textview.layer.borderColor = UIColor.lightGray.cgColor  // textviewに枠線をつける
         textview.layer.borderWidth = 1
+        textview.font = UIFont(name: "CourierNewPSMT", size: textview.font!.pointSize)
         textview.font = UIFont.systemFont(ofSize: 12.00)        // textviewのフォントサイズを設定する
         textview.delegate = self                                // textviewのデリゲートをセット
         setupTextView()
         presenter.viewDidLoad()
+
         textHeight = " ".getStringHeight(textview.font!)
         textWidth = " ".getStringWidth(textview.font!)
 
@@ -82,7 +84,6 @@ class TerminalViewController: UIViewController {
     func setupTextView() {
         connectDevice.text = "Connection : "        // デバイスラベルを初期化する
         setupView()        // 追加キーボードボタンを初期化する
-        moveCursor(cursor(x: 0, y: 0))
     }
 
     // 追加キーボードボタンを初期化する関数
@@ -218,33 +219,6 @@ class TerminalViewController: UIViewController {
         setSize()
     }
 
-    // メニューが押されたとき
-    @IBAction func menuTap(_ sender: UIButton) {
-        presenter.didTapButton(.menu)
-    }
-
-    // scanButtonが押されたとき
-    @IBAction func scanTap(_ sender: UIButton) {
-        presenter.didTapButton(.scan)
-    }
-
-    // disconButtonが押されたとき
-    @IBAction func disconTap(_ sender: UIButton) {
-        presenter.didTapButton(.disconnect)
-    }
-
-    // プライバシーポリシー表示ボタンが押されたとき
-    @IBAction func policyTap(_ sender: UIButton) {
-        // リンク先にページが存在するとき
-        if let url = URL(string: policyLink) {
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(url)
-            }
-        }
-    }
-
     // 画面サイズを設定する関数
     func setSize() {
         // 最大行数
@@ -317,6 +291,35 @@ class TerminalViewController: UIViewController {
         tapButton(.right)
     }
 
+    // メニューが押されたとき
+    @IBAction func menuTap(_ sender: UIButton) {
+        presenter.didTapButton(.menu)
+    }
+
+    // scanButtonが押されたとき
+    @IBAction func scanTap(_ sender: UIButton) {
+        presenter.didTapButton(.scan)
+    }
+
+    // disconButtonが押されたとき
+    @IBAction func disconTap(_ sender: UIButton) {
+        presenter.didTapButton(.disconnect)
+    }
+
+    // TODO func delTapped(_ sender: UIButton)
+
+    // プライバシーポリシー表示ボタンが押されたとき
+    @IBAction func policyTap(_ sender: UIButton) {
+        // リンク先にページが存在するとき
+        if let url = URL(string: policyLink) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
+
     // キーボード追加ボタンの背景色を変更する関数
     func buttonColorChange(button: UIButton) {
         button.backgroundColor = UIColor.white
@@ -326,7 +329,7 @@ class TerminalViewController: UIViewController {
     }
 }
 
-extension TerminalViewController: TerminalView{
+extension TerminalViewController: TerminalView {
     func moveCursor(_ c: cursor) {
         let l = Int(view.frame.origin.x)
         let u = Int(view.frame.origin.y)
@@ -345,7 +348,6 @@ extension TerminalViewController: TerminalView{
 
     func updateScreen(_ text: NSMutableAttributedString) {
         textview.attributedText = text
-        textview.font = UIFont(name: "CourierNewPSMT", size: textview.font!.pointSize)
     }
 
     func hideMenu(_ duration: Float=0.7) {

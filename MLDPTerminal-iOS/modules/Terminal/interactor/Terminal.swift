@@ -7,7 +7,7 @@ import Foundation
 import UIKit
 
 class Terminal {
-    var escapeSequence: EscapeSequence = EscapeSequence(term: Terminal(screenColumn: 0, screenRow: 0))
+    var escapeSequence: EscapeSequence!
     var screen: Screen
     var textBuffer = [[textAttr]]()
 
@@ -180,9 +180,11 @@ class Terminal {
         }
 
         textBuffer = newTextBuffer
-        screen.c = cursor(x: newTextBuffer.count, y: newTextBuffer[newTextBuffer.count-1].count)
+
+        screen.c = newTextBuffer.count > 0 ? cursor(x: newTextBuffer[writeLine - 1].count, y: newTextBuffer.count) : cursor(x: 0, y: 0)
+
         topRow =  newTextBuffer.count - newScreenRow >= 0 ? newTextBuffer.count - newScreenRow : 0
-        currentRow = newTextBuffer.count - 1
+        currentRow = (newTextBuffer.count - 1) >= 0 ? newTextBuffer.count - 1 : 0
     }
 
     // ターミナルに文字を出力する
