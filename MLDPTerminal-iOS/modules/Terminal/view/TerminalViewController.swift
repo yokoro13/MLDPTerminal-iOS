@@ -349,11 +349,22 @@ extension TerminalViewController: TerminalView{
     }
 
     func hideMenu(_ duration: Float=0.7) {
-        <#code#>
+        // デバイスラベルを移動させる
+        UIView.animate(withDuration: TimeInterval(duration)) {
+            self.menuBackView.frame.origin.x = -self.menuBackView.frame.size.width
+        }
+        // メニューを移動させる
+        UIView.animate(withDuration: TimeInterval(duration), delay: TimeInterval(duration / 2), options: [], animations: {
+            self.connectDevice.center.x = self.view.center.x - self.menu.bounds.size.width
+        })
+        // メニューを隠す
+        UIView.animate(withDuration: TimeInterval(duration)) {
+            self.menuBackView.alpha = 0.0
+            self.connectDevice.alpha = 1.0
+        }
     }
 
     func showMenu(_ duration: Float=0.7) {
-        print("--- showMenu ---")
         // デバイスラベルを移動させる
         UIView.animate(withDuration: TimeInterval(duration)) {
             self.connectDevice.frame.origin.x = -self.connectDevice.frame.size.width
