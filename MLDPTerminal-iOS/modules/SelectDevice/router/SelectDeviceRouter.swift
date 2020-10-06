@@ -10,7 +10,23 @@ class SelectDeviceRouter: SelectDeviceWireFrame {
     weak var viewController: UIViewController?
 
     static func assembleModule() -> UIViewController {
-        fatalError("assembleModule() has not been implemented")
+        let view = R.storyboard.selectDevice.selectDeviceViewController()
+        let presenter = SelectDevicePresenter()
+        let interactor = SelectDeviceInteractor()
+        let router = SelectDeviceRouter()
+        let navigation = UINavigationController(rootViewController: view!)
+
+        view?.presenter = presenter
+
+        presenter.view = view
+        presenter.interactor = interactor
+        presenter.router = router
+
+        interactor.output = presenter
+
+        router.viewController = view
+
+        return navigation
     }
 
     func presentTerminal(forBleDevice device: BleDevice) {

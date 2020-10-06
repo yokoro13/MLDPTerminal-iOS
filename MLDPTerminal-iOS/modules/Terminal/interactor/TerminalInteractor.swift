@@ -100,8 +100,6 @@ class TerminalInteractor: TerminalUseCase {
     }
 
     func tapDisconnect() {
-        print("--- disconnect button tapped ---")
-
         // ペリフェラルと接続されていないとき
         if bleManager.state == .closed {
             return
@@ -109,7 +107,6 @@ class TerminalInteractor: TerminalUseCase {
     }
 
     func showKeyboard(keyboardHeight: Int) {
-
         // キーボードの高さだけ基底位置を下げる
         term.topRow += keyboardHeight
         // 基底位置を下げすぎたとき

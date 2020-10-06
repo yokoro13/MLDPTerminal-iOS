@@ -10,6 +10,7 @@ class TerminalPresenter: TerminalPresentation {
     weak var view: TerminalView?
     var interactor: TerminalUseCase!
     var router: TerminalWireframe!
+    var bleDevice: BleDevice?
 
     func viewDidLoad() {
         interactor.addObserver()

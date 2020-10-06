@@ -212,8 +212,13 @@ struct _R: Rswift.Validatable {
 
     #if os(iOS) || os(tvOS)
     struct selectDevice: Rswift.StoryboardResourceType, Rswift.Validatable {
+      let selectDeviceViewController = StoryboardViewControllerResource<SelectDeviceViewController>(identifier: "SelectDeviceViewController")
       let bundle = R.hostingBundle
       let name = "SelectDevice"
+
+      func selectDeviceViewController(_: Void = ()) -> SelectDeviceViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: selectDeviceViewController)
+      }
 
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
@@ -226,10 +231,15 @@ struct _R: Rswift.Validatable {
 
     #if os(iOS) || os(tvOS)
     struct terminal: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
-      typealias InitialController = ViewController
+      typealias InitialController = TerminalViewController
 
+      let terminalViewController = StoryboardViewControllerResource<TerminalViewController>(identifier: "TerminalViewController")
       let bundle = R.hostingBundle
       let name = "Terminal"
+
+      func terminalViewController(_: Void = ()) -> TerminalViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: terminalViewController)
+      }
 
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
