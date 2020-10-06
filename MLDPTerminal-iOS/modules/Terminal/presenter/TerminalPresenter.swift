@@ -55,6 +55,8 @@ class TerminalPresenter: TerminalPresentation {
         case .disconnect:
             interactor.tapDisconnect()
             return
+        case .menu:
+             interactor.tapMenu()
         }
     }
 
@@ -76,10 +78,6 @@ class TerminalPresenter: TerminalPresentation {
 
     func didHideKeyboard(keyboardHeight: Int) {
         interactor.hideKeyboard(keyboardHeight: keyboardHeight)
-    }
-
-    func didTapMenu() {
-        interactor.tapMenu()
     }
 }
 

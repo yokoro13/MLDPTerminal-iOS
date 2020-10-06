@@ -37,8 +37,6 @@ protocol TerminalPresentation: class {
 
     func didShowKeyboard(keyboardHeight: Int)
     func didHideKeyboard(keyboardHeight: Int)
-
-    func didTapMenu()
 }
 
 // Presenter -> Interactor -> Entity
@@ -74,9 +72,9 @@ protocol TerminalUseCase: class {
     func tapMenu()
 }
 
-// Entity -> Interactor -> Presenter
+// Entity -> Interactor -> Presenter -> View
 protocol TerminalInteractorOutput: class {
-    // Presenter に渡したい値はここに記述
+    // Presenter 経由で View に渡したい値はここに記述
     func cursorMoved(_ cursor: cursor)
     func textChanged(_ text: NSMutableAttributedString)
     func menuStatusChanged(_ isShowingMenu: Bool)

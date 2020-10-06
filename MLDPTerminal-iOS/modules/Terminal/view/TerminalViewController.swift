@@ -220,7 +220,7 @@ class TerminalViewController: UIViewController {
 
     // メニューが押されたとき
     @IBAction func menuTap(_ sender: UIButton) {
-        presenter.didTapMenu()
+        presenter.didTapButton(.menu)
     }
 
     // scanButtonが押されたとき
