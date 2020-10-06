@@ -22,6 +22,7 @@ class TerminalInteractor: TerminalUseCase {
 
     func setupTerminal(screenColumn: Int, screenRow: Int) {
         term = Terminal(screenColumn: screenColumn, screenRow: screenRow)
+        term.setupEscapeSequence()
     }
 
     @objc func receivedData(notification: NSNotification?){

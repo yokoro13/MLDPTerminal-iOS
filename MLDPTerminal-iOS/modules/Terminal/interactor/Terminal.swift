@@ -7,13 +7,13 @@ import Foundation
 import UIKit
 
 class Terminal {
-    var escapeSequence: EscapeSequence
+    var escapeSequence: EscapeSequence = EscapeSequence(term: Terminal(screenColumn: 0, screenRow: 0))
     var screen: Screen
     var textBuffer = [[textAttr]]()
 
-    private var escState: EscapeSequenceState
+    private var escState: EscapeSequenceState = .none
 
-    private var escString: String
+    private var escString: String = ""
 
     var puttingCtrl: Bool = false
 
@@ -28,9 +28,10 @@ class Terminal {
 
     init(screenColumn: Int, screenRow: Int){
         self.screen = Screen(screenColumn: screenColumn, screenRow: screenRow)
+    }
+
+    func setupEscapeSequence(){
         self.escapeSequence = EscapeSequence(term: self)
-        self.escState = .none
-        self.escString = ""
     }
 
     // textview内のカーソル位置に文字を書き込む関数
@@ -239,8 +240,6 @@ class Terminal {
                 print("NO ESC_SEQ") // シーケンスではなかったとき
                 clearEscapeSequence()
             }
-        default:
-            print("NO STATE")
         }
     }
 
