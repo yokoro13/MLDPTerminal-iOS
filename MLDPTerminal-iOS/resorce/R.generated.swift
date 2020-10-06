@@ -212,17 +212,18 @@ struct _R: Rswift.Validatable {
 
     #if os(iOS) || os(tvOS)
     struct selectDevice: Rswift.StoryboardResourceType, Rswift.Validatable {
-      let selectDeviceViewController = StoryboardViewControllerResource<SelectDeviceViewController>(identifier: "SelectDeviceViewController")
       let bundle = R.hostingBundle
       let name = "SelectDevice"
+      let selectDeviceViewController = StoryboardViewControllerResource<MLDPTerminal_iOS.SelectDeviceViewController>(identifier: "SelectDeviceViewController")
 
-      func selectDeviceViewController(_: Void = ()) -> SelectDeviceViewController? {
+      func selectDeviceViewController(_: Void = ()) -> MLDPTerminal_iOS.SelectDeviceViewController? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: selectDeviceViewController)
       }
 
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
+        if _R.storyboard.selectDevice().selectDeviceViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'selectDeviceViewController' could not be loaded from storyboard 'SelectDevice' as 'MLDPTerminal_iOS.SelectDeviceViewController'.") }
       }
 
       fileprivate init() {}
@@ -231,19 +232,20 @@ struct _R: Rswift.Validatable {
 
     #if os(iOS) || os(tvOS)
     struct terminal: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
-      typealias InitialController = TerminalViewController
+      typealias InitialController = MLDPTerminal_iOS.TerminalViewController
 
-      let terminalViewController = StoryboardViewControllerResource<TerminalViewController>(identifier: "TerminalViewController")
       let bundle = R.hostingBundle
       let name = "Terminal"
+      let terminalViewController = StoryboardViewControllerResource<MLDPTerminal_iOS.TerminalViewController>(identifier: "TerminalViewController")
 
-      func terminalViewController(_: Void = ()) -> TerminalViewController? {
+      func terminalViewController(_: Void = ()) -> MLDPTerminal_iOS.TerminalViewController? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: terminalViewController)
       }
 
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
         }
+        if _R.storyboard.terminal().terminalViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'terminalViewController' could not be loaded from storyboard 'Terminal' as 'MLDPTerminal_iOS.TerminalViewController'.") }
       }
 
       fileprivate init() {}
