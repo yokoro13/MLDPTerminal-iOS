@@ -13,7 +13,24 @@ class TerminalRouter: TerminalWireframe {
     }
 
     static func assembleModuleNoDevice() -> UIViewController {
-        fatalError("assembleModuleNoDevice() has not been implemented")
+        let view = R.storyboard.terminal.instantiateInitialViewController()
+        let presenter = TerminalPresenter()
+        let interactor = TerminalInteractor()
+        let router = TerminalRouter()
+
+        let navigation = UINavigationController(rootViewController: view!)
+
+        view?.presenter = presenter
+
+        presenter.view = view
+        presenter.interactor = interactor
+        presenter.router = router
+
+        interactor.output = presenter
+
+        router.viewController = view
+
+        return navigation
     }
 
     func presentSelectDevice() {

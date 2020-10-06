@@ -89,12 +89,14 @@ struct R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  /// This `R.storyboard` struct is generated, and contains static references to 2 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 3 storyboards.
   struct storyboard {
     /// Storyboard `LaunchScreen`.
     static let launchScreen = _R.storyboard.launchScreen()
-    /// Storyboard `Main`.
-    static let main = _R.storyboard.main()
+    /// Storyboard `SelectDevice`.
+    static let selectDevice = _R.storyboard.selectDevice()
+    /// Storyboard `Terminal`.
+    static let terminal = _R.storyboard.terminal()
 
     #if os(iOS) || os(tvOS)
     /// `UIStoryboard(name: "LaunchScreen", bundle: ...)`
@@ -104,9 +106,16 @@ struct R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
-    /// `UIStoryboard(name: "Main", bundle: ...)`
-    static func main(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.main)
+    /// `UIStoryboard(name: "SelectDevice", bundle: ...)`
+    static func selectDevice(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.selectDevice)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "Terminal", bundle: ...)`
+    static func terminal(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.terminal)
     }
     #endif
 
@@ -114,22 +123,31 @@ struct R: Rswift.Validatable {
   }
   #endif
 
-  /// This `R.nib` struct is generated, and contains static references to 1 nibs.
-  struct nib {
-    /// Nib `BusyIndicator`.
-    static let busyIndicator = _R.nib._BusyIndicator()
+  /// This `R.file` struct is generated, and contains static references to 1 files.
+  struct file {
+    /// Resource file `Default-568h@2x.png`.
+    static let default568h2xPng = Rswift.FileResource(bundle: R.hostingBundle, name: "Default-568h@2x", pathExtension: "png")
+
+    /// `bundle.url(forResource: "Default-568h@2x", withExtension: "png")`
+    static func default568h2xPng(_: Void = ()) -> Foundation.URL? {
+      let fileResource = R.file.default568h2xPng
+      return fileResource.bundle.url(forResource: fileResource)
+    }
+
+    fileprivate init() {}
+  }
+
+  /// This `R.image` struct is generated, and contains static references to 1 images.
+  struct image {
+    /// Image `Default-568h`.
+    static let default568h = Rswift.ImageResource(bundle: R.hostingBundle, name: "Default-568h")
 
     #if os(iOS) || os(tvOS)
-    /// `UINib(name: "BusyIndicator", in: bundle)`
-    @available(*, deprecated, message: "Use UINib(resource: R.nib.busyIndicator) instead")
-    static func busyIndicator(_: Void = ()) -> UIKit.UINib {
-      return UIKit.UINib(resource: R.nib.busyIndicator)
+    /// `UIImage(named: "Default-568h", bundle: ..., traitCollection: ...)`
+    static func default568h(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+      return UIKit.UIImage(resource: R.image.default568h, compatibleWith: traitCollection)
     }
     #endif
-
-    static func busyIndicator(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
-      return R.nib.busyIndicator.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
-    }
 
     fileprivate init() {}
   }
@@ -163,30 +181,16 @@ struct _R: Rswift.Validatable {
   }
 
   #if os(iOS) || os(tvOS)
-  struct nib {
-    struct _BusyIndicator: Rswift.NibResourceType {
-      let bundle = R.hostingBundle
-      let name = "BusyIndicator"
-
-      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
-        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
-      }
-
-      fileprivate init() {}
-    }
-
-    fileprivate init() {}
-  }
-  #endif
-
-  #if os(iOS) || os(tvOS)
   struct storyboard: Rswift.Validatable {
     static func validate() throws {
       #if os(iOS) || os(tvOS)
       try launchScreen.validate()
       #endif
       #if os(iOS) || os(tvOS)
-      try main.validate()
+      try selectDevice.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
+      try terminal.validate()
       #endif
     }
 
@@ -207,11 +211,25 @@ struct _R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
-    struct main: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+    struct selectDevice: Rswift.StoryboardResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "SelectDevice"
+
+      static func validate() throws {
+        if #available(iOS 11.0, tvOS 11.0, *) {
+        }
+      }
+
+      fileprivate init() {}
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    struct terminal: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
       typealias InitialController = ViewController
 
       let bundle = R.hostingBundle
-      let name = "Main"
+      let name = "Terminal"
 
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {

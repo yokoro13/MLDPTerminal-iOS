@@ -8,6 +8,6 @@ import UIKit
 class RootRouter: RootWireframe {
     func presentTerminalScreen(in window: UIWindow) {
         window.makeKeyAndVisible()
-        window.rootViewController = TerminalRouter.assembleModule()
+        window.rootViewController = TerminalRouter.assembleModuleNoDevice()
     }
 }
