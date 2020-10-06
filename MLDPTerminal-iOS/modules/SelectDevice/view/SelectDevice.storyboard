@@ -10,7 +10,7 @@
         <!--Select Device View Controller-->
         <scene sceneID="nxq-pp-Fu5">
             <objects>
-                <viewController storyboardIdentifier="SelectDeviceViewController" id="Sh8-ms-VnO" customClass="SelectDeviceViewController" customModule="MLDPTerminal_iOS" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SelectDeviceViewController" id="Sh8-ms-VnO" customClass="SelectDeviceViewController" customModule="MLDPTerminal_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="e1h-n3-uBH"/>
                         <viewControllerLayoutGuide type="bottom" id="iPw-Ym-lfz"/>

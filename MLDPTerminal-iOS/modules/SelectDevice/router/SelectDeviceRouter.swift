@@ -15,7 +15,7 @@ class SelectDeviceRouter: SelectDeviceWireFrame {
         let interactor = SelectDeviceInteractor()
         let router = SelectDeviceRouter()
         let navigation = UINavigationController(rootViewController: view!)
-
+        navigation.navigationBar.isHidden = false
         view?.presenter = presenter
 
         presenter.view = view
@@ -25,17 +25,17 @@ class SelectDeviceRouter: SelectDeviceWireFrame {
         interactor.output = presenter
 
         router.viewController = view
-
         return navigation
     }
 
     func presentTerminal(forBleDevice device: BleDevice) {
         let terminalViewController = TerminalRouter.assembleModule(device)
-        viewController?.navigationController?.pushViewController(terminalViewController, animated: true)
+        //viewController?.present(terminalViewController, animated: true)
+        viewController?.dismiss(animated: true)
     }
 
     func cancelScanDevice() {
-        let terminalViewController = TerminalRouter.assembleModuleNoDevice()
-        viewController?.navigationController?.pushViewController(terminalViewController, animated: true)
+        //let terminalViewController = TerminalRouter.assembleModuleNoDevice()
+        viewController?.dismiss(animated: true)
     }
 }
