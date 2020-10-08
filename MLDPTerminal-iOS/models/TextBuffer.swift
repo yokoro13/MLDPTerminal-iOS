@@ -13,7 +13,7 @@ struct textAttr {
     var hasPrevious: Bool      // 前に続く文字の有無(同一行内か)を表す変数
 
     // 初期化関数
-    init(char: String, color: UIColor, hasPrevious: Bool = true) {
+    init(char: String, color: UIColor, hasPrevious: Bool = false) {
         self.char = char
         self.color = color
         self.hasPrevious = hasPrevious
