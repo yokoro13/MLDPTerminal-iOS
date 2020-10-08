@@ -26,7 +26,8 @@ class TerminalInteractor: TerminalUseCase {
     }
 
     @objc func receivedData(notification: NSNotification?){
-        let text = notification?.userInfo!["text"] as! String
+        let text = String(data: notification?.userInfo!["text"] as! Data, encoding: .utf8) ?? "?"
+        print(text)
         writeTextToBuffer(text)
     }
 
