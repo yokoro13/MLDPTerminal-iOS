@@ -20,16 +20,13 @@ class SelectDeviceInteractor: SelectDeviceUseCase {
     }
 
     @objc func deviceDiscover(notification: NSNotification?) {
+        print("deviceDiscover")
         let device = notification?.userInfo!["device"] as! BleDevice
         self.output.deviceDiscovered(device)
     }
 
     func scanDevice() {
         bleManager.scanDevice()
-    }
-
-    func setDevice(device: BleDevice) {
-        bleManager.currentPeripheral = device.peripheral
     }
 
     func connect(device: BleDevice) {

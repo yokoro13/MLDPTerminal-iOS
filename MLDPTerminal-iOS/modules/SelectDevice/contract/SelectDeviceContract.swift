@@ -28,7 +28,6 @@ protocol SelectDeviceUseCase: class {
     func scanDevice()
     func deviceDiscover(notification: NSNotification?)
     func connect(device: BleDevice)
-    func setDevice(device: BleDevice)
 }
 
 protocol SelectDeviceInteractorOutput: class {
