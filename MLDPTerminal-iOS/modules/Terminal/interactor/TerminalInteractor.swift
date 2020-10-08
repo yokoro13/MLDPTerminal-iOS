@@ -33,6 +33,7 @@ class TerminalInteractor: TerminalUseCase {
 
     func writeTextToBuffer(_ text: String){
         term.writeTextToBuffer(text)
+        output.textChanged(term.makeScreenText())
     }
 
     func changeScreenSize(newScreenColumnSize: Int, newScreenRowSize: Int) {
@@ -40,6 +41,7 @@ class TerminalInteractor: TerminalUseCase {
         term.resizeTextBuffer(newScreenRow: newScreenRowSize, newScreenColumn: newScreenColumnSize)
         term.screen.screenColumn = newScreenColumnSize
         term.screen.screenRow = newScreenRowSize
+        output.textChanged(term.makeScreenText())
     }
 
     func writePeripheral(_ message: String) {
@@ -132,7 +134,6 @@ class TerminalInteractor: TerminalUseCase {
     }
 
     func hideKeyboard(keyboardHeight: Int) {
-
         // キーボードの高さだけ基底位置を上げる
         term.topRow -= keyboardHeight
         // 基底位置の上限を定める
@@ -165,5 +166,6 @@ class TerminalInteractor: TerminalUseCase {
         print("--- menu button tapped ---")
         isShowingMenu = !isShowingMenu
         output.menuStatusChanged(isShowingMenu)
+        output.deviceNameChanged("")
     }
 }
