@@ -28,7 +28,7 @@ class EscapeSequence {
 
         if term.textBuffer.count <= term.topRow + c.y {
             for _ in 0 ..< term.topRow + c.y - term.textBuffer.count {
-                term.textBuffer.append([textAttr(char: "", color: term.currColor, hasPrevious: false)])
+                term.textBuffer.append([textAttr(char: " ", color: term.currColor, hasPrevious: false)])
             }
         }
     }
@@ -39,13 +39,13 @@ class EscapeSequence {
         // カーソルをずらす
         term.screen.c = cursor(x: c.x + n, y: c.y)
 
-        let over = c.x - term.textBuffer[c.y].count
+        let over = c.x - term.textBuffer[term.currentRow].count
         if 0 < over {
             // 足りない空白を追加する
             for _ in 0 ..< over {
-                term.textBuffer[c.y].append(textAttr(char: " ", color: term.currColor))
-                if term.textBuffer[c.y].count == 1 {
-                    term.textBuffer[c.y][0].hasPrevious = false
+                term.textBuffer[term.currentRow].append(textAttr(char: " ", color: term.currColor))
+                if term.textBuffer[term.currentRow].count == 1 {
+                    term.textBuffer[term.currentRow][0].hasPrevious = false
                 }
             }
         }
@@ -60,13 +60,13 @@ class EscapeSequence {
     // n行下の先頭に移動する関数
     // n : 変位
     func moveDownToRowLead(n: Int, c: cursor) {
-        moveDown(n: n, c: cursor(x: 1, y: c.y))
+        moveDown(n: n, c: cursor(x: 0, y: c.y))
     }
 
     // n行上の先頭に移動する関数
     // n : 変位
     func moveUpToRowLead(n: Int, c: cursor) {
-        moveUp(n: n, c: cursor(x: 1, y:  c.y-n))
+        moveUp(n: n, c: cursor(x: 0, y:  c.y-n))
     }
 
     // 現在位置と関係なく上からn、左からmの場所に移動する関数
@@ -75,10 +75,10 @@ class EscapeSequence {
     func moveCursor(n: Int, m: Int, c: cursor) {
         if c.y < n {    // カーソルを下に移動させるとき
             term.currentRow -= c.y
-            moveDown(n: n, c: cursor(x: 1, y: 1))
+            moveDown(n: n, c: cursor(x: 0, y: 0))
         } else {        // カーソルを上に移動させるとき
             term.currentRow -= c.y - n
-            term.screen.c = cursor(x: 1, y: n)
+            term.screen.c = cursor(x: 0, y: n)
         }
 
         moveRight(n: m, c: c)
