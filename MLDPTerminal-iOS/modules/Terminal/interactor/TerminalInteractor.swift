@@ -120,14 +120,14 @@ class TerminalInteractor: TerminalUseCase {
         }
         // カーソルが表示範囲から外れたとき
         if term.screen.c.y < term.topRow + 1 {
-            term.topRow = term.screen.c.y  - 1
+            term.topRow = term.screen.c.y
         } else if term.screen.c.y > term.topRow + term.screen.screenColumn {
             term.topRow = term.screen.c.y - term.screen.screenColumn
         }
         // 書き込み位置を表示する
         output.textChanged(term.makeScreenText())
         // スクロール基底を初期化する
-        term.topRow = -1
+        term.topRow = 0
     }
 
     func hideKeyboard(keyboardHeight: Int) {
@@ -140,13 +140,13 @@ class TerminalInteractor: TerminalUseCase {
         }
         // カーソルが表示範囲から外れたとき
         if term.screen.c.y < term.topRow + 1 {
-            term.topRow = term.screen.c.y - 1
+            term.topRow = term.screen.c.y
         } else if term.screen.c.y > term.topRow + term.screen.screenColumn {
             term.topRow = term.screen.c.y - term.screen.screenColumn
         }
         // 書き込み位置を表示する(キーボードが消えることで下に余白ができるのを防ぐための場合分け)
         // スクロールしていたとき
-        if term.topRow > -1 && term.textBuffer.count - term.topRow > term.screen.screenColumn {
+        if term.topRow > 0 && term.textBuffer.count - term.topRow > term.screen.screenColumn {
             output.textChanged(term.makeScreenText())
         }
         // スクロールしていないとき
@@ -154,7 +154,7 @@ class TerminalInteractor: TerminalUseCase {
             // 表示する
             output.textChanged(term.makeScreenText())
             // スクロール基底を初期化する
-            term.topRow = -1
+            term.topRow = 0
         }
     }
 
