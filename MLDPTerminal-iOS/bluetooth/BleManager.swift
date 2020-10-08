@@ -17,7 +17,6 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
 
     private var centralManager: CBCentralManager!
     private var characteristic: CBCharacteristic?  // データの出力先
-    private var timer: Timer?                      // 接続待ちタイムアウト用
 
     var state: BleState = .closed
 
@@ -55,7 +54,6 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     func centralManager(_ central: CBCentralManager,
                         didConnect peripheral: CBPeripheral) {
         peripheral.discoverServices([MLDP_SERVICE_UUID])
-        timer?.invalidate()
     }
 
     // ペリフェラルとの接続が切断されると呼ばれる
@@ -74,6 +72,8 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
             return
         }
         for service in peripheral.services! {
+            print("didDiscoverServices")
+            print(service)
             peripheral.discoverCharacteristics(nil, for:service)
         }
     }
@@ -87,6 +87,7 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
             state = .error
             return
         }
+        print("didDiscoverCharacteristicsFor")
         for characteristic in service.characteristics! where characteristic.uuid.isEqual(MLDP_CHARACTERISTIC_UUID) {
             self.characteristic = characteristic
             peripheral.setNotifyValue(true, for:characteristic)
@@ -141,20 +142,45 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     // 接続を開始する関数
     func connect(peripheral: CBPeripheral) {
         // 省電力のために探索停止
+        self.currentPeripheral = peripheral
         centralManager?.stopScan()
         centralManager.connect(peripheral, options: nil)
+        currentPeripheral?.delegate = self
+    }
+
+    func disconnect() {
+        if currentPeripheral == nil {
+            print("not set currentPeripheral")
+            return;
+        }
+
+        if characteristic == nil {
+            print("not set characteristic")
+            return;
+        }
+
+        state = .closed
+        let str = "ERR\r\nERR\r\n"                          // TeCが切断したと認識する文字列
+        let data = str.data(using: String.Encoding.utf8)
+        currentPeripheral?.writeValue(data!, for: characteristic!, type: CBCharacteristicWriteType.withResponse)
+        currentPeripheral?.setNotifyValue(false, for: characteristic!)
+        centralManager.cancelPeripheralConnection(currentPeripheral!)
+
+        centralManager = CBCentralManager(delegate: self, queue: nil)
+        currentPeripheral?.delegate = self
+        currentPeripheral = nil
     }
 
 
     // デバイスにデータを送信する
     func write(_ data : String) {
         if currentPeripheral == nil {
-            print("device is not ready!")
+            print("not set currentPeripheral")
             return;
         }
 
         if characteristic == nil {
-            print("device is not ready!")
+            print("not set characteristic")
             return;
         }
 
