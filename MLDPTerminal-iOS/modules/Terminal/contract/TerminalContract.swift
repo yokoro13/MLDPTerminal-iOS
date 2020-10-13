@@ -62,6 +62,7 @@ protocol TerminalUseCase: class {
     func tapEsc()
     func tapCtrl()
     func tapTab()
+    func tapDel()
 
     func scrollUp()
     func scrollDown()

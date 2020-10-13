@@ -17,5 +17,6 @@ enum ButtonContentType {
     case connect
     case disconnect
     case menu
+    case del
 }
 

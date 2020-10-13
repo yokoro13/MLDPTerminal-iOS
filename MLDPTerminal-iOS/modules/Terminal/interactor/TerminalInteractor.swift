@@ -80,6 +80,10 @@ class TerminalInteractor: TerminalUseCase {
         writePeripheral("\t")
     }
 
+    func tapDel() {
+        bleManager.disconnect()
+    }
+
     func scrollUp() {
         // 下にスクロールできるとき
         if term.topRow < term.textBuffer.count - term.screen.screenColumn && term.topRow > -1 {

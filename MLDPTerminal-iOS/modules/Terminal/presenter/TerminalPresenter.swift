@@ -56,7 +56,9 @@ class TerminalPresenter: TerminalPresentation {
             interactor.tapDisconnect()
             return
         case .menu:
-             interactor.tapMenu()
+            interactor.tapMenu()
+        case .del:
+            interactor.tapDel()
         }
     }
 

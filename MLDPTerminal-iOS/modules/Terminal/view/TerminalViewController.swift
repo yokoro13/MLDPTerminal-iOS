@@ -306,7 +306,9 @@ class TerminalViewController: UIViewController {
         presenter.didTapButton(.disconnect)
     }
 
-    // TODO func delTapped(_ sender: UIButton)
+    @IBAction func delTapped(_ sender: UIButton) {
+        presenter.didTapButton(.del)
+    }
 
     // プライバシーポリシー表示ボタンが押されたとき
     @IBAction func policyTap(_ sender: UIButton) {
