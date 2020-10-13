@@ -124,7 +124,7 @@ class TerminalViewController: UIViewController {
         textview.inputAccessoryView = buttonBackView
     }
 
-    func setButtonOption(button: UIButton, title: String, action: Selector){
+    func setButtonOption(button: UIButton, title: String, action: Selector) {
         button.backgroundColor = UIColor.lightGray
         button.setTitle(title, for: UIControl.State.normal)
         button.addTarget(self, action: action, for: UIControl.Event.touchUpInside)
@@ -139,9 +139,9 @@ class TerminalViewController: UIViewController {
     @objc func pan(sender: UIPanGestureRecognizer) {
         // 移動後の相対位置を取得する
         let location = sender.translation(in: self.view)
-        if prevScroll.y - location.y > 2 {      // 画面を上にスワイプしたとき
+        if prevScroll.y - location.y > 2 {          // 画面を上にスワイプしたとき
             presenter.didScrollUp()
-        } else if location.y - prevScroll.y > 2 { // 画面を下にスワイプしたとき
+        } else if location.y - prevScroll.y > 2 {   // 画面を下にスワイプしたとき
             presenter.didScrollDown()
         }
         prevScroll = location   // 位置を変更する
@@ -228,7 +228,7 @@ class TerminalViewController: UIViewController {
         presenter.didChangeScreenSize(screenColumnSize: column, screenRowSize: row)
     }
 
-    func tapButton(_ type: ButtonContentType){
+    func tapButton(_ type: ButtonContentType) {
         switch type {
         case .esc:
             buttonColorChange(button: escButton)
@@ -330,6 +330,10 @@ class TerminalViewController: UIViewController {
 }
 
 extension TerminalViewController: TerminalView {
+    func updateConnectDeviceName(_ name: String) {
+        connectDevice.text = "Connection : " + name      // デバイスラベルを初期化する
+    }
+
     func moveCursor(_ c: cursor) {
         let l = Int(view.frame.origin.x)
         let u = Int(view.frame.origin.y)
@@ -383,7 +387,7 @@ extension TerminalViewController: TerminalView {
     }
 }
 
-extension TerminalViewController: UITextViewDelegate{
+extension TerminalViewController: UITextViewDelegate {
 
 }
 

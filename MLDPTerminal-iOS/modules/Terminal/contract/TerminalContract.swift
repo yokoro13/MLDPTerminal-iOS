@@ -11,6 +11,7 @@ protocol TerminalView: IndicatableView {
 
     func moveCursor(_ c: cursor)
     func updateScreen(_ text: NSMutableAttributedString)
+    func updateConnectDeviceName(_ name: String)
     func hideMenu(_ duration:Float)
     func showMenu(_ duration:Float)
     // func showSomething
@@ -78,6 +79,7 @@ protocol TerminalInteractorOutput: class {
     func cursorMoved(_ cursor: cursor)
     func textChanged(_ text: NSMutableAttributedString)
     func menuStatusChanged(_ isShowingMenu: Bool)
+    func deviceNameChanged(_ name: String)
 }
 
 // Router の接続

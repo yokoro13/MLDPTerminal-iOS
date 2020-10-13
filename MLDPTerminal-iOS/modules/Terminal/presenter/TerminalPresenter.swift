@@ -6,7 +6,6 @@
 import Foundation
 
 class TerminalPresenter: TerminalPresentation {
-
     weak var view: TerminalView?
     var interactor: TerminalUseCase!
     var router: TerminalWireframe!
@@ -97,5 +96,9 @@ extension TerminalPresenter: TerminalInteractorOutput {
         } else {
             view?.showMenu(0.7)
         }
+    }
+
+    func deviceNameChanged(_ name: String) {
+        view?.updateConnectDeviceName(bleDevice?.name ?? "")
     }
 }

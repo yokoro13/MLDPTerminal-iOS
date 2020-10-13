@@ -29,13 +29,13 @@ class SelectDeviceRouter: SelectDeviceWireFrame {
     }
 
     func presentTerminal(forBleDevice device: BleDevice) {
-        let terminalViewController = TerminalRouter.assembleModule(device)
-        //viewController?.present(terminalViewController, animated: true)
+        // _ = TerminalRouter.assembleModule(device)
+        // viewController?.present(terminalViewController, animated: true)
         viewController?.dismiss(animated: true)
     }
 
     func cancelScanDevice() {
-        //let terminalViewController = TerminalRouter.assembleModuleNoDevice()
+        // let terminalViewController = TerminalRouter.assembleModuleNoDevice()
         viewController?.dismiss(animated: true)
     }
 }

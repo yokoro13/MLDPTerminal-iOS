@@ -21,9 +21,7 @@ class TerminalRouter: TerminalWireframe {
         presenter.interactor = interactor
         presenter.router = router
         presenter.bleDevice = device
-
         interactor.output = presenter
-
         router.viewController = view
 
         return navigation

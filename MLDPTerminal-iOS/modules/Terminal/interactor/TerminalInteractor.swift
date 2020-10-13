@@ -166,6 +166,6 @@ class TerminalInteractor: TerminalUseCase {
         print("--- menu button tapped ---")
         isShowingMenu = !isShowingMenu
         output.menuStatusChanged(isShowingMenu)
-        output.deviceNameChanged("")
+        output.deviceNameChanged(bleManager.currentPeripheral?.name ?? "")
     }
 }
