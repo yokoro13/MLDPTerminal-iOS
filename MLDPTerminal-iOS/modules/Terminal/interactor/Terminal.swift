@@ -28,7 +28,7 @@ class Terminal {
 
     init(screenColumn: Int, screenRow: Int) {
         self.screen = Screen(screenColumn: screenColumn, screenRow: screenRow)
-        // textBuffer.append([textAttr(char: " ", color: currColor)])
+        textBuffer.append([textAttr(char: "", color: currColor)])
     }
 
     func setupEscapeSequence() {
@@ -72,28 +72,16 @@ class Terminal {
 
     func writeOperationCode(text: String) {
         switch text {
-        case "\r\n" :
-            if textHasPrevious() && textBuffer[currentRow].count == 1 { // 行の1文字目のとき
-                textBuffer[currentRow][0].hasPrevious = false           // 違う行判定にする
-                return
-            }
-            if currentRow == textBuffer.count {            // カーソルがbufferサイズとカーソル位置が等しいとき
-                textBuffer.append([textAttr(char: " ", color: currColor)])  // 次のテキスト記憶を準備
-            }
-            currentRow += 1 // 書き込む位置をずらす
-            screen.c.x = 0
-            textBuffer[currentRow][screen.c.x].hasPrevious = false      // 違う行判定にする
-
-            if topRow + screen.screenColumn <= currentRow {   // カーソルが基底から数えて最大行数を超えたとき
-                topRow += 1
-            }
-            return
         case "\r":      // CR(復帰)ならカーソルを行頭に移動する
             escapeSequence.moveDownToRowLead(n: 1, c: screen.c)
             return
         case "\n":       // LF(改行)ならカーソルを1行下に移動する
             escapeSequence.moveDown(n: 1, c: screen.c)
-            if topRow + screen.screenColumn <= topRow {
+            textBuffer[currentRow][screen.c.x].hasPrevious = false      // 違う行判定にする
+            if currentRow == textBuffer.count {            // カーソルがbufferサイズとカーソル位置が等しいとき
+                textBuffer.append([textAttr(char: " ", color: currColor)])  // 次のテキスト記憶を準備
+            }
+            if screen.screenColumn <= currentRow {
                 topRow += 1
             }
             return
@@ -119,6 +107,14 @@ class Terminal {
     // カーソルが行末か判断する関数
     func curIsRowEnd() -> Bool {
         screen.c.x == textBuffer[currentRow].count
+    }
+
+    func getCurrLineText() -> String {
+        var lineText: String = ""
+        for x in 0 ..< textBuffer[currentRow].count {
+            lineText.append(textBuffer[currentRow][x].char)
+        }
+        return lineText
     }
 
     // カーソルの示す文字を取得する関数
