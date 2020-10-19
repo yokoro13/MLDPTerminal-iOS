@@ -10,10 +10,15 @@ target 'MLDPTerminal-iOS' do
 
   target 'MLDPTerminal-iOSTests' do
     inherit! :search_paths
+    pod 'R.swift'
+    pod 'PKHUD', '~> 5.0'
     # Pods for testing
   end
 
   target 'MLDPTerminal-iOSUITests' do
+    inherit! :search_paths
+    pod 'R.swift'
+    pod 'PKHUD', '~> 5.0'
     # Pods for testing
   end
 
