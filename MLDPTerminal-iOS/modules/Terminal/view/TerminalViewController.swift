@@ -19,7 +19,6 @@ class TerminalViewController: UIViewController {
     var presenter: TerminalPresentation!
 
     let notification = NotificationCenter.default    // 通知変数
-    var receiveTimer = Timer()    // 受信タイマー
     let policyLink = "https://tctsigemura.github.io/MLDPTerminal/privacy.html"    // プライバシーポリシーURL
 
     var prevScroll = CGPoint(x: 0, y: 0)    // 画面スクロール制御変数
@@ -49,7 +48,6 @@ class TerminalViewController: UIViewController {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(self.pan(sender:)))
         self.view.addGestureRecognizer(pan)
         textview.isScrollEnabled = false        // textviewのスクロール機能を停止
-        hideMenu(0.0)                            // メニューを隠す
 
         textview.layer.borderColor = UIColor.lightGray.cgColor  // textviewに枠線をつける
         textview.layer.borderWidth = 1
@@ -306,7 +304,7 @@ class TerminalViewController: UIViewController {
         presenter.didTapButton(.disconnect)
     }
 
-    @IBAction func delTapped(_ sender: UIButton) {
+    @IBAction func delTap(_ sender: UIButton) {
         presenter.didTapButton(.del)
     }
 
