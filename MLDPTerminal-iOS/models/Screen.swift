@@ -26,14 +26,14 @@ class Screen {
 
     var c: cursor = cursor(x: 0, y: 0){
         didSet{
-            if oldValue.x > screenColumn {
-                c.x = screenColumn
+            if oldValue.x >= screenColumn {
+                c.x = screenColumn - 1
             }
             if oldValue.x < 0 {
                 c.x = 0
             }
-            if oldValue.y > screenRow {
-                c.y = screenRow
+            if oldValue.y >= screenRow {
+                c.y = screenRow - 1
             }
             if oldValue.y < 0 {
                 c.y = 0
