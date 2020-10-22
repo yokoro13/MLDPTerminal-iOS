@@ -20,6 +20,6 @@ struct textAttr {
     }
 }
 
-extension textAttr{
+extension textAttr {
 
 }
