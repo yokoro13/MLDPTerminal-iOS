@@ -17,7 +17,7 @@ class EscapeSequence {
     // n : 変位
     func moveUp(n: Int, c: cursor) {
         term.currentRow -= (0 < c.y - n) ? n : c.y
-        moveCursorY(n: n, c: c)
+        moveCursorY(n: -n, c: c)
     }
 
     // 下にn移動する関数
@@ -26,8 +26,8 @@ class EscapeSequence {
         term.currentRow += (c.y + n < term.screen.screenRow) ? n : term.screen.screenRow - c.y
         moveCursorY(n: n, c: c)
 
-        if term.textBuffer.count <= term.topRow + c.y {
-            for _ in 0 ..< term.topRow + c.y - term.textBuffer.count {
+        if term.textBuffer.count <= term.topRow + term.screen.c.y {
+            for _ in 0 ... term.topRow + term.screen.c.y - term.textBuffer.count {
                 term.textBuffer.append([textAttr(char: " ", color: term.currColor, hasPrevious: false)])
             }
         }
@@ -37,9 +37,9 @@ class EscapeSequence {
     // n : 変位
     func moveRight(n: Int, c: cursor) {
         // カーソルをずらす
-        term.screen.c = cursor(x: c.x + n, y: c.y)
+        moveCursorX(n: n, c: c)
 
-        let over = c.x - term.textBuffer[term.currentRow].count
+        let over = term.screen.c.x - term.textBuffer[term.currentRow].count
         if 0 < over {
             // 足りない空白を追加する
             for _ in 0 ..< over {
@@ -54,7 +54,7 @@ class EscapeSequence {
     // 左にn移動する関数
     // n : 変位
     func moveLeft(n: Int, c: cursor) {
-        term.screen.c = cursor(x: c.x-n, y: c.y)
+        moveCursorX(n: -n, c: c)
     }
 
     // n行下の先頭に移動する関数
@@ -66,7 +66,7 @@ class EscapeSequence {
     // n行上の先頭に移動する関数
     // n : 変位
     func moveUpToRowLead(n: Int, c: cursor) {
-        moveUp(n: n, c: cursor(x: 0, y:  c.y-n))
+        moveUp(n: n, c: cursor(x: 0, y:  c.y))
     }
 
     // 現在位置と関係なく上からn、左からmの場所に移動する関数
