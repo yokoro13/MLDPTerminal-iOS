@@ -285,8 +285,10 @@ class Terminal {
         case "F":
             escapeSequence.moveUpToRowLead(n: n, c: screen.c)       // n行上の先頭に移動する
         case "G":
+            escapeSequence.moveCursor(n: n, c: screen.c)      // 左からnの場所に移動する
+        case "H", "f":
             escapeSequence.moveCursor(n: n, m: m, c: screen.c)      // 左からnの場所に移動する
-        case "J", "H", "f":
+        case "J":
             escapeSequence.clearScreen(n: n-1, c: screen.c)         // 画面を消去する
         case "K":
             escapeSequence.clearLine(n: n-1, c: screen.c)           // 行を消去する

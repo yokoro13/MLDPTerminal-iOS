@@ -131,6 +131,8 @@ class MLDPTerminal_iOSTests: XCTestCase {
         terminal.writeTextToBuffer(ESC_HEAD + "A")
         XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 0))
 
+        terminal.writeTextToBuffer(ESC_HEAD + "9;4H")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 3, y: 8))
 
     }
 }

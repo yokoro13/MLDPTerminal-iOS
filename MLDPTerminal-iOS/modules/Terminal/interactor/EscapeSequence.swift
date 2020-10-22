@@ -72,16 +72,25 @@ class EscapeSequence {
     // 現在位置と関係なく上からn、左からmの場所に移動する関数
     // n : 変位
     // m : 変位
+    func moveCursor(n: Int, c: cursor) {
+        moveRight(n: n, c: cursor(x: 0, y: c.y))
+    }
+
+    // 現在位置と関係なく上からn、左からmの場所に移動する関数
+    // n : 変位
+    // m : 変位
     func moveCursor(n: Int, m: Int, c: cursor) {
+        let _n = n < term.screen.screenRow ? n-1 : term.screen.screenRow - 1
+        let _m = m < term.screen.screenColumn ? m-1 : term.screen.screenColumn - 1
         if c.y < n {    // カーソルを下に移動させるとき
             term.currentRow -= c.y
-            moveDown(n: n, c: cursor(x: 0, y: 0))
+            moveDown(n: _n, c: cursor(x: 0, y: 0))
         } else {        // カーソルを上に移動させるとき
-            term.currentRow -= c.y - n
-            term.screen.c = cursor(x: 0, y: n)
+            term.currentRow -= c.y - _n
+            term.screen.c = cursor(x: 0, y: _n)
         }
 
-        moveRight(n: m, c: c)
+        moveRight(n: _m, c: term.screen.c)
     }
 
     private func clearScreenFromCursor(c: cursor) {
