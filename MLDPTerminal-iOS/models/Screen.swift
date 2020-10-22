@@ -1,4 +1,4 @@
-//
+//c
 // Created by 横路海斗 on 2020/08/27.
 // Copyright (c) 2020 yokoro. All rights reserved.
 //
@@ -11,6 +11,12 @@ struct cursor {
     init(x: Int, y: Int){
         self.x = x
         self.y = y
+    }
+}
+
+extension cursor: Equatable {
+    static func ==(lhs: cursor, rhs: cursor) -> Bool {
+        lhs.x == rhs.x && lhs.y == rhs.y
     }
 }
 
