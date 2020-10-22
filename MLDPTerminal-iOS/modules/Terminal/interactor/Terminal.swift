@@ -270,25 +270,25 @@ class Terminal {
     private func escapeSequence(mode: String, n:Int, m:Int) {
         switch mode {
         case "A":
-            escapeSequence.moveUp(n: n, c: screen.c)                              // 上にn移動する
+            escapeSequence.moveUp(n: n, c: screen.c)                // 上にn移動する
         case "B":
-            escapeSequence.moveDown(n: n, c: screen.c)                            // 下にn移動する
+            escapeSequence.moveDown(n: n, c: screen.c)              // 下にn移動する
         case "C":
-            escapeSequence.moveRight(n: n, c: screen.c)                           // 右にn移動する
+            escapeSequence.moveRight(n: n, c: screen.c)             // 右にn移動する
         case "D":
-            escapeSequence.moveLeft(n: n, c: screen.c)                            // 左にn移動する
+            escapeSequence.moveLeft(n: n, c: screen.c)              // 左にn移動する
         case "E":
-            escapeSequence.moveDownToRowLead(n: n, c: screen.c)                         // n行下の先頭に移動する
+            escapeSequence.moveDownToRowLead(n: n, c: screen.c)     // n行下の先頭に移動する
         case "F":
-            escapeSequence.moveUpToRowLead(n: n, c: screen.c)                           // n行上の先頭に移動する
+            escapeSequence.moveUpToRowLead(n: n, c: screen.c)       // n行上の先頭に移動する
         case "G":
-            escapeSequence.moveCursor(n: n, m: m, c: screen.c)              // 左からnの場所に移動する
+            escapeSequence.moveCursor(n: n, m: m, c: screen.c)      // 左からnの場所に移動する
         case "J", "H", "f":
-            escapeSequence.clearScreen(n: n-1, c: screen.c)                  // 画面を消去する
+            escapeSequence.clearScreen(n: n-1, c: screen.c)         // 画面を消去する
         case "K":
-            escapeSequence.clearLine(n: n-1, c: screen.c)                  // 行を消去する
+            escapeSequence.clearLine(n: n-1, c: screen.c)           // 行を消去する
         case "m":
-            escapeSequence.changeColor(color: n)                // 文字色を変更する
+            escapeSequence.changeColor(color: n)                    // 文字色を変更する
         default:
             escState = .none
         }
