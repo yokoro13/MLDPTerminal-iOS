@@ -45,6 +45,20 @@
 			<key>orderHint</key>
 			<integer>13</integer>
 		</dict>
+		<key>MLDPTerminal_iOSTests.testWriteTextLF.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>14</integer>
+		</dict>
+		<key>MLDPTerminal_iOSTests.testWriteTextWarp.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>15</integer>
+		</dict>
 	</dict>
 </dict>
 </plist>

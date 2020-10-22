@@ -91,6 +91,9 @@ class Terminal {
             if screen.screenRow <= currentRow {
                 topRow += 1
             }
+            if textBuffer.count <= currentRow {
+                textBuffer.append([textAttr(char: " ", color: currColor, hasPrevious: false)])
+            }
             return
         case "\r":      // CR(復帰)ならカーソルを行頭に移動する
             // escapeSequence.moveDownToRowLead(n: 1, c: screen.c)
