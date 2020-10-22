@@ -10,7 +10,6 @@ import XCTest
 @testable import MLDPTerminal_iOS
 
 class MLDPTerminal_iOSTests: XCTestCase {
-    let terminal: Terminal = Terminal(screenColumn: 48, screenRow: 20)
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -33,10 +32,12 @@ class MLDPTerminal_iOSTests: XCTestCase {
     }
 
     func testTerminalInit(){
+        let terminal: Terminal = Terminal(screenColumn: 48, screenRow: 20)
         XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 0))
     }
 
     func testWriteText(){
+        let terminal: Terminal = Terminal(screenColumn: 48, screenRow: 20)
         // input text
         terminal.writeTextToBuffer("aaaa")
         let currLineText = terminal.getCurrLineText()
@@ -44,7 +45,8 @@ class MLDPTerminal_iOSTests: XCTestCase {
         XCTAssertEqual(terminal.screen.c, cursor(x: 4, y: 0))
     }
 
-    func testWriteLF(){
+    func testWriteTextLF(){
+        let terminal: Terminal = Terminal(screenColumn: 48, screenRow: 20)
         // input LF
         terminal.setupEscapeSequence()
 
@@ -57,8 +59,78 @@ class MLDPTerminal_iOSTests: XCTestCase {
         XCTAssertEqual(currLineText, "a")
     }
 
-    func testWarp(){
-        let term = Terminal(screenColumn: 2, screenRow: 10)
-        term.writeTextToBuffer(<#T##string: String##Swift.String#>)
+    func testWriteTextWarp(){
+        let terminal: Terminal = Terminal(screenColumn: 2, screenRow: 20)
+        terminal.setupEscapeSequence()
+        terminal.writeTextToBuffer("a")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 1, y: 0))
+        var currLineText = terminal.getCurrLineText()
+        XCTAssertEqual(currLineText, "a")
+
+        terminal.writeTextToBuffer("aa")
+
+        XCTAssertEqual(terminal.screen.c, cursor(x: 1, y: 1))
+        currLineText = terminal.getCurrLineText()
+        XCTAssertEqual(currLineText, "a")
+    }
+
+    func testWriteTextTopRow(){
+        let terminal: Terminal = Terminal(screenColumn: 2, screenRow: 3)
+        terminal.setupEscapeSequence()
+        terminal.writeTextToBuffer("\r\n")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 1))
+
+        terminal.writeTextToBuffer("\r\n")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 2))
+
+        terminal.writeTextToBuffer("\r\n")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 2))
+
+        var currRow = terminal.currentRow
+        var topRow = terminal.topRow
+
+        XCTAssertEqual(currRow, 3)
+        XCTAssertEqual(topRow, 1)
+
+
+        terminal.writeTextToBuffer("a")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 1, y: 2))
+        var currLineText = terminal.getCurrLineText()
+        XCTAssertEqual(currLineText, "a")
+
+        terminal.writeTextToBuffer("a")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 2))
+        currLineText = terminal.getCurrLineText()
+        XCTAssertEqual(currLineText, " ")
+
+        currRow = terminal.currentRow
+        topRow = terminal.topRow
+
+        XCTAssertEqual(currRow, 4)
+        XCTAssertEqual(topRow, 2)
+    }
+
+    func testEscapeSequence(){
+        let terminal: Terminal = Terminal(screenColumn: 48, screenRow: 20)
+        terminal.setupEscapeSequence()
+        let ESC_HEAD = "\u{1b}["
+
+        // right
+        terminal.writeTextToBuffer(ESC_HEAD + "C")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 1, y: 0))
+
+        // down
+        terminal.writeTextToBuffer(ESC_HEAD + "B")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 1, y: 1))
+
+        // left
+        terminal.writeTextToBuffer(ESC_HEAD + "D")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 1))
+
+        // up
+        terminal.writeTextToBuffer(ESC_HEAD + "A")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 0))
+
+
     }
 }
