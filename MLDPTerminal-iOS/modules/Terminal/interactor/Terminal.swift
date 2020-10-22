@@ -22,7 +22,7 @@ class Terminal {
     var currColor = UIColor.black       // 現在の色を記憶
     var currentRow = 0 {                 // 現在書き込み中のバッファの行
         didSet {
-            screen.c.y = currentRow - topRow + 1
+            screen.c.y = currentRow - topRow
         }
     }
 
@@ -56,26 +56,21 @@ class Terminal {
 
     // textview内のカーソル位置に文字を書き込む関数
     private func writeText(_ text: String) {
-        if  "\u{00}" <= text  && text <= "\u{1f}"{
+        if  "\u{00}" <= text && text <= "\u{1f}"{
             writeOperationCode(text: text)
             return
         }
 
-        if hasNext {    // 折り返しがあったとき
-            hasNext = false
-            textBuffer[currentRow][screen.c.x].hasPrevious = true
-        }
-
-        if screen.c.x == screen.screenColumn {     // 折り返すとき
-            if currentRow == textBuffer.count { // カーソルが最後行のとき
-                textBuffer.append([textAttr(char: " ", color: currColor)])
+        if screen.c.x == screen.screenColumn - 1 {     // 折り返すとき
+            textBuffer[currentRow].append(textAttr(char: text, color: currColor))
+            if currentRow == textBuffer.count - 1 { // カーソルが最後行のとき
+                textBuffer.append([textAttr(char: " ", color: currColor, hasPrevious: true)])
             }
             currentRow += 1
             screen.c.x = 0
-            hasNext = true
         } else {    // 折り返さないとき
             if screen.c.x == textBuffer[currentRow].count { // カーソルが行の最後
-                textBuffer[currentRow].append(textAttr(char: text, color: currColor))
+                textBuffer[currentRow].append(textAttr(char: text, color: currColor, hasPrevious: false))
             } else {
                 // カーソル位置に文字と色を書き込む
                 textBuffer[currentRow][screen.c.x].char = text
