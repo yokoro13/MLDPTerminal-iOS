@@ -35,8 +35,27 @@ class Terminal {
         self.escapeSequence = EscapeSequence(term: self)
     }
 
+    // ターミナルに文字を出力する
+    func writeTextToBuffer(_ string : String) {
+        // 複数文字届いたときは一字ずつ処理する
+        for inputCharacter in string {
+            let text = String(inputCharacter)
+
+            // ASCIIコード外のとき
+            if !text.isAscii() {
+                return
+            }
+
+            if escState == .none && text != "\u{1b}"{
+                writeText(text)
+            } else {
+                checkEscapeSequence(text)
+            }
+        }
+    }
+
     // textview内のカーソル位置に文字を書き込む関数
-    func writeText(_ text: String) {
+    private func writeText(_ text: String) {
         if  "\u{00}" <= text  && text <= "\u{1f}"{
             writeOperationCode(text: text)
             return
@@ -47,7 +66,7 @@ class Terminal {
             textBuffer[currentRow][screen.c.x].hasPrevious = true
         }
 
-        if screen.c.x == screen.screenRow {     // 折り返すとき
+        if screen.c.x == screen.screenColumn {     // 折り返すとき
             if currentRow == textBuffer.count { // カーソルが最後行のとき
                 textBuffer.append([textAttr(char: " ", color: currColor)])
             }
@@ -65,28 +84,31 @@ class Terminal {
             screen.c.x += 1
         }
 
-        if topRow + screen.screenColumn <= currentRow {
+        if topRow + screen.screenRow <= currentRow {
             topRow += 1
         }
     }
 
-    func writeOperationCode(text: String) {
+    private func writeOperationCode(text: String) {
         switch text {
-        case "\r":      // CR(復帰)ならカーソルを行頭に移動する
+        case "\r\n":
             escapeSequence.moveDownToRowLead(n: 1, c: screen.c)
+            if screen.screenRow <= currentRow {
+                topRow += 1
+            }
+            return
+        case "\r":      // CR(復帰)ならカーソルを行頭に移動する
+            // escapeSequence.moveDownToRowLead(n: 1, c: screen.c)
+            screen.c.x = 0
             return
         case "\n":       // LF(改行)ならカーソルを1行下に移動する
             escapeSequence.moveDown(n: 1, c: screen.c)
-            textBuffer[currentRow][screen.c.x].hasPrevious = false      // 違う行判定にする
-            if currentRow == textBuffer.count {            // カーソルがbufferサイズとカーソル位置が等しいとき
-                textBuffer.append([textAttr(char: " ", color: currColor)])  // 次のテキスト記憶を準備
-            }
-            if screen.screenColumn <= currentRow {
+            if screen.screenRow <= currentRow {
                 topRow += 1
             }
             return
         case "\t":  // HT(水平タブ)ならカーソルを4文字ごとに飛ばす
-            let count = ((screen.c.x / 4 + 1) * 4) - screen.c.x
+            let count = 4 - 4 % screen.c.x
             for _ in 0 ..< count {
                 writeText(" ")
             }
@@ -100,12 +122,12 @@ class Terminal {
     }
 
     // 書き込み位置がバッファの最後か判断する関数
-    func curIsEnd() -> Bool {
+    private func curIsEnd() -> Bool {
         curIsRowEnd() && currentRow == textBuffer.count
     }
 
     // カーソルが行末か判断する関数
-    func curIsRowEnd() -> Bool {
+    private func curIsRowEnd() -> Bool {
         screen.c.x == textBuffer[currentRow].count
     }
 
@@ -187,26 +209,7 @@ class Terminal {
         currentRow = (newTextBuffer.count - 1) >= 0 ? newTextBuffer.count - 1 : 0
     }
 
-    // ターミナルに文字を出力する
-    func writeTextToBuffer(_ string : String) {
-        // 複数文字届いたときは一字ずつ処理する
-        for inputCharacter in string{
-            let text = String(inputCharacter)
-
-            // ASCIIコード外のとき
-            if !text.isAscii() {
-                return
-            }
-
-            if escState == .none && text != "\u{1b}"{
-                writeText(text)
-            } else {
-                checkEscapeSequence(text)
-            }
-        }
-    }
-
-    func checkEscapeSequence(_ text: String) {
+    private func checkEscapeSequence(_ text: String) {
         // エスケープシーケンス
         switch escState {
         case .none:            //ステート0：エスケープシーケンスかどうか
@@ -245,7 +248,7 @@ class Terminal {
         }
     }
 
-    func identifyEscapeSequence(esStr: String) {
+    private func identifyEscapeSequence(esStr: String) {
         var n: Int = 1
         var m: Int = 1
 
@@ -269,7 +272,7 @@ class Terminal {
         escapeSequence(mode: mode, n: n, m: m)
     }
 
-    func escapeSequence(mode: String, n:Int, m:Int) {
+    private func escapeSequence(mode: String, n:Int, m:Int) {
         switch mode {
         case "A":
             escapeSequence.moveUp(n: n, c: screen.c)                              // 上にn移動する
