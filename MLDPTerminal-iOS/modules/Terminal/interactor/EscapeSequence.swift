@@ -69,11 +69,10 @@ class EscapeSequence {
         moveUp(n: n, c: cursor(x: 0, y:  c.y))
     }
 
-    // 現在位置と関係なく上からn、左からmの場所に移動する関数
+    // 左からnの場所に移動する関数
     // n : 変位
-    // m : 変位
     func moveCursor(n: Int, c: cursor) {
-        moveRight(n: n, c: cursor(x: 0, y: c.y))
+        moveRight(n: n-1, c: cursor(x: 0, y: c.y))
     }
 
     // 現在位置と関係なく上からn、左からmの場所に移動する関数
@@ -128,7 +127,7 @@ class EscapeSequence {
 
     private func clearLineFromCursor(line: Int, from: Int){
         term.textBuffer[line] = Array(term.textBuffer[line].prefix(from))
-        if term.textBuffer.count == 0 {
+        if term.textBuffer[line].count == 0 {
             term.textBuffer[line].append(textAttr(char: "", color: term.currColor, hasPrevious: false))
         }
     }

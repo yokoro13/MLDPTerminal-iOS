@@ -12,24 +12,22 @@
 		<key>MLDPTerminal_iOSTests.testWriteText.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>9</integer>
 		</dict>
 		<key>MLDPTerminal_iOSTests.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>10</integer>
 		</dict>
 		<key>MLDPTerminal_iOSTests.testWriteLF.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>11</integer>
 		</dict>
 		<key>MLDPTerminal_iOSTests.testWriteTextTopRow.xcscheme</key>
 		<dict>
-			<key>isShown</key>
-			<false />
 			<key>orderHint</key>
-			<integer>11</integer>
+			<integer>8</integer>
 		</dict>
 		<key>MLDPTerminal_iOSTests.testEscapeSequence.xcscheme</key>
 		<dict>
@@ -37,13 +35,6 @@
 			<false />
 			<key>orderHint</key>
 			<integer>12</integer>
-		</dict>
-		<key>MLDPTerminal_iOSTests.testWriteTextLF.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false />
-			<key>orderHint</key>
-			<integer>13</integer>
 		</dict>
 		<key>MLDPTerminal_iOSTests.testWriteTextWarp.xcscheme</key>
 		<dict>
@@ -57,7 +48,21 @@
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
+			<integer>13</integer>
+		</dict>
+		<key>MLDPTerminal_iOSTests.testAddManyText.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
 			<integer>15</integer>
+		</dict>
+		<key>MLDPTerminal_iOSTests.testAddLF.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false />
+			<key>orderHint</key>
+			<integer>16</integer>
 		</dict>
 	</dict>
 </dict>

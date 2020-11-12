@@ -31,12 +31,12 @@ class MLDPTerminal_iOSTests: XCTestCase {
         }
     }
 
-    func testTerminalInit(){
+    func testTerminalInit() {
         let terminal: Terminal = Terminal(screenColumn: 48, screenRow: 20)
         XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 0))
     }
 
-    func testWriteText(){
+    func testWriteText() {
         let terminal: Terminal = Terminal(screenColumn: 48, screenRow: 20)
         // input text
         terminal.writeTextToBuffer("aaaa")
@@ -45,7 +45,7 @@ class MLDPTerminal_iOSTests: XCTestCase {
         XCTAssertEqual(terminal.screen.c, cursor(x: 4, y: 0))
     }
 
-    func testWriteTextLF(){
+    func testWriteTextLF() {
         let terminal: Terminal = Terminal(screenColumn: 48, screenRow: 20)
         // input LF
         terminal.setupEscapeSequence()
@@ -59,7 +59,7 @@ class MLDPTerminal_iOSTests: XCTestCase {
         XCTAssertEqual(currLineText, "a")
     }
 
-    func testWriteTextWarp(){
+    func testWriteTextWarp() {
         let terminal: Terminal = Terminal(screenColumn: 2, screenRow: 20)
         terminal.setupEscapeSequence()
         terminal.writeTextToBuffer("a")
@@ -74,7 +74,7 @@ class MLDPTerminal_iOSTests: XCTestCase {
         XCTAssertEqual(currLineText, "a")
     }
 
-    func testWriteTextTopRow(){
+    func testWriteTextTopRow() {
         let terminal: Terminal = Terminal(screenColumn: 2, screenRow: 3)
         terminal.setupEscapeSequence()
         terminal.writeTextToBuffer("\r\n")
@@ -110,7 +110,7 @@ class MLDPTerminal_iOSTests: XCTestCase {
         XCTAssertEqual(topRow, 2)
     }
 
-    func testEscapeSequence(){
+    func testEscapeSequence() {
         let terminal: Terminal = Terminal(screenColumn: 48, screenRow: 20)
         terminal.setupEscapeSequence()
         let ESC_HEAD = "\u{1b}["
@@ -133,6 +133,22 @@ class MLDPTerminal_iOSTests: XCTestCase {
 
         terminal.writeTextToBuffer(ESC_HEAD + "9;4H")
         XCTAssertEqual(terminal.screen.c, cursor(x: 3, y: 8))
+    }
 
+    func testAddManyText() {
+        let terminal: Terminal = Terminal(screenColumn: 48, screenRow: 20)
+        terminal.setupEscapeSequence()
+        for _ in 0 ..< 100 {
+            terminal.writeTextToBuffer("aaaaaa")
+        }
+    }
+
+    func testAddLF() {
+        let terminal: Terminal = Terminal(screenColumn: 1, screenRow: 20)
+        terminal.setupEscapeSequence()
+        for _ in 0 ..< 100 {
+            terminal.writeTextToBuffer("aaaaaa")
+        }
+        terminal.writeTextToBuffer("\r\n")
     }
 }
