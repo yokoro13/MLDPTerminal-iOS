@@ -12,6 +12,7 @@ class Terminal {
     var textBuffer = [[textAttr]]()
 
     private var escState: EscapeSequenceState = .none
+    private var font: UIFont = UIFont(name: "Courier", size: 12.0)!
 
     private var escString: String = ""
 
@@ -61,6 +62,9 @@ class Terminal {
             return
         }
 
+        print("cursor: (\(screen.c.x), \(screen.c.y))")
+        print("topRow: \(topRow)")
+
         if screen.c.x == screen.screenColumn - 1 {     // 折り返すとき
             textBuffer[currentRow].append(textAttr(char: text, color: currColor))
             if currentRow == textBuffer.count - 1 { // カーソルが最後行のとき
@@ -100,7 +104,9 @@ class Terminal {
             screen.c.x = 0
             return
         case "\n":       // LF(改行)ならカーソルを1行下に移動する
+            print("********LF*******")
             escapeSequence.moveDown(n: 1, c: screen.c)
+            // screen.c.x = 0
             if screen.screenRow <= currentRow {
                 topRow += 1
             }
@@ -137,16 +143,6 @@ class Terminal {
         return lineText
     }
 
-    // カーソルの示す文字を取得する関数
-    func getCurrChar() -> String {
-        textBuffer[currentRow][screen.c.x].char
-    }
-
-    // カーソルの示す位置のhasPrevious属性を取得する関数
-    func textHasPrevious() -> Bool {
-        textBuffer[currentRow][screen.c.x].hasPrevious
-    }
-
     func makeScreenText() -> NSMutableAttributedString {
         let text: NSMutableAttributedString = NSMutableAttributedString()
         var attributes: [NSAttributedString.Key: Any]
@@ -157,11 +153,14 @@ class Terminal {
                 break
             }
             for column in 0 ..< textBuffer[row].count {
-                attributes = [.backgroundColor: UIColor.white, .foregroundColor: textBuffer[row][column].color] // 文字の色を設定する
+                attributes = [.backgroundColor: UIColor.white, .foregroundColor: textBuffer[row][column].color, .font: font] // 文字の色を設定する
+                if topRow + screen.c.y == row && screen.c.x ==  column {
+                    attributes = [.backgroundColor:UIColor.gray, .foregroundColor: UIColor.white, .font: font]
+                }
                 char = NSMutableAttributedString(string: textBuffer[row][column].char, attributes: attributes) // 文字に色を登録する
                 text.append(char)
             }
-            attributes = [.backgroundColor: UIColor.white, .foregroundColor: UIColor.white]            // 改行を追加する
+            attributes = [.backgroundColor: UIColor.white, .foregroundColor: UIColor.white, .font: font]            // 改行を追加する
             char = NSMutableAttributedString(string: "\n", attributes: attributes)
             text.append(char)
         }

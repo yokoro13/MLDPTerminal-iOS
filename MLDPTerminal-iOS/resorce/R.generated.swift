@@ -231,7 +231,9 @@ struct _R: Rswift.Validatable {
     #endif
 
     #if os(iOS) || os(tvOS)
-    struct terminal: Rswift.StoryboardResourceType, Rswift.Validatable {
+    struct terminal: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = TerminalViewController
+
       let bundle = R.hostingBundle
       let name = "Terminal"
       let terminalViewController = StoryboardViewControllerResource<TerminalViewController>(identifier: "TerminalViewController")
@@ -242,6 +244,7 @@ struct _R: Rswift.Validatable {
 
       static func validate() throws {
         if #available(iOS 11.0, tvOS 11.0, *) {
+          if UIKit.UIColor(named: "textColor", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Color named 'textColor' is used in storyboard 'Terminal', but couldn't be loaded.") }
         }
         if _R.storyboard.terminal().terminalViewController() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'terminalViewController' could not be loaded from storyboard 'Terminal' as 'TerminalViewController'.") }
       }

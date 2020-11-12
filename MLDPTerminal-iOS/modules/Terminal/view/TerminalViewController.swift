@@ -51,8 +51,8 @@ class TerminalViewController: UIViewController {
 
         textview.layer.borderColor = UIColor.lightGray.cgColor  // textviewに枠線をつける
         textview.layer.borderWidth = 1
-        textview.font = UIFont(name: "CourierNewPSMT", size: textview.font!.pointSize)
-        textview.font = UIFont.systemFont(ofSize: 12.00)        // textviewのフォントサイズを設定する
+        textview.font = UIFont(name: "Courier", size: 12.0)
+        // textview.font = UIFont.monospacedDigitSystemFont(ofSize: 12.00, weight: .medium)
         textview.delegate = self                                // textviewのデリゲートをセット
         setupTextView()
         presenter.viewDidLoad()
@@ -63,6 +63,9 @@ class TerminalViewController: UIViewController {
         let column = Int(floor((textview.frame.width - textview.layoutMargins.left - textview.layoutMargins.right) / textHeight))
         let row = Int(floor((textview.frame.height - textview.layoutMargins.top - textview.layoutMargins.bottom) / textWidth))
         presenter.setupTerminal(screenColumn: column, screenRow: row)
+
+        print("*****font name*****")
+        print(textview.font?.fontName)
     }
 
     // viewを表示する前のイベント

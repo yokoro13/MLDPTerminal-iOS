@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   version = "1.3">
+   <BuildAction>
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EE302CE724F4A89A00D3E45D"
+               BuildableName = "MLDPTerminal-iOSTests.xctest"
+               BlueprintName = "MLDPTerminal-iOSTests"
+               ReferencedContainer = "container:MLDPTerminal-iOS.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Release">
+      <Testables>
+         <TestableReference>
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "EE302CE724F4A89A00D3E45D"
+               BuildableName = "MLDPTerminal-iOSTests.xctest"
+               BlueprintName = "MLDPTerminal-iOSTests"
+               ReferencedContainer = "container:MLDPTerminal-iOS.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+   </TestAction>
+   <LaunchAction
+      useCustomWorkingDirectory = "NO"
+      allowLocationSimulation = "YES">
+   </LaunchAction>
+</Scheme>
