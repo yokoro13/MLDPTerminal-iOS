@@ -338,19 +338,8 @@ extension TerminalViewController: TerminalView {
     }
 
     func moveCursor(_ c: cursor) {
-        let l = Int(view.frame.origin.x)
-        let u = Int(view.frame.origin.y)
-
-        let rectangle = UIBezierPath(
-                rect: CGRect(
-                        x: CGFloat(l + Int(textWidth) * c.x),
-                        y: CGFloat(u + Int(textHeight) * c.y),
-                        width: textWidth,
-                        height: textHeight
-                )
-        )
-        UIColor.gray.setFill()
-        rectangle.fill()
+        textview.showingCursor = c
+        textview.setNeedsDisplay()
     }
 
     func updateScreen(_ text: NSMutableAttributedString) {

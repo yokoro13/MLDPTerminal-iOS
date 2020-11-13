@@ -34,6 +34,7 @@ class TerminalInteractor: TerminalUseCase {
     func writeTextToBuffer(_ text: String){
         term.writeTextToBuffer(text)
         output.textChanged(term.makeScreenText())
+        output.cursorMoved(term.screen.c)
     }
 
     func changeScreenSize(newScreenColumnSize: Int, newScreenRowSize: Int) {
@@ -42,6 +43,7 @@ class TerminalInteractor: TerminalUseCase {
         term.screen.screenColumn = newScreenColumnSize
         term.screen.screenRow = newScreenRowSize
         output.textChanged(term.makeScreenText())
+        output.cursorMoved(term.screen.c)
     }
 
     func writePeripheral(_ message: String) {

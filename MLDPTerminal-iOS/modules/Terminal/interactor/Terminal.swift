@@ -75,10 +75,6 @@ class Terminal {
         } else {    // 折り返さないとき
             if screen.c.x == textBuffer[currentRow].count { // カーソルが行の最後
                 textBuffer[currentRow].append(textAttr(char: text, color: currColor, hasPrevious: false))
-            } else {
-                // カーソル位置に文字と色を書き込む
-                textBuffer[currentRow][screen.c.x].char = text
-                textBuffer[currentRow][screen.c.x].color = currColor
             }
             screen.c.x += 1
         }
