@@ -91,13 +91,6 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         for characteristic in service.characteristics! where characteristic.uuid.isEqual(MLDP_CHARACTERISTIC_UUID) {
             self.characteristic = characteristic
             peripheral.setNotifyValue(true, for:characteristic)
-
-            // 書き込みデータの準備(文字を文字コードに変換?)
-            let str = "App:on\r\n"
-            let data = str.data(using: String.Encoding.utf8)
-
-            // ペリフェラルにデータを書き込む
-            peripheral.writeValue(data!, for: characteristic, type: CBCharacteristicWriteType.withResponse)
             break
         }
         state = .idle
@@ -107,10 +100,13 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     func peripheral(_ peripheral: CBPeripheral,
                     didUpdateNotificationStateFor characteristic: CBCharacteristic,
                     error: Error?) {
-        guard error == nil else {
+        if error != nil {
             NSLog("BleManager: %@", error.debugDescription)
             state = .error
             return
+        } else {
+            write("\r\nMLDP\r\nApp:on\r\n") // Tecに接続
+            print("TeCに接続")
         }
     }
 
