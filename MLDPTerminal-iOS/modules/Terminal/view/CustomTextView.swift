@@ -14,9 +14,6 @@ class CustomTextView: UITextView {
     }
 
     override func draw(_ rect: CGRect) {
-        let l = Int(frame.origin.x)
-        let u = Int(frame.origin.y)
-
         let textHeight = " ".getStringHeight(font!)
         let textWidth = " ".getStringWidth(font!)
 
