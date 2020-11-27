@@ -26,9 +26,9 @@ class EscapeSequence {
         term.currentRow += (c.y + n < term.screen.screenRow) ? n : term.screen.screenRow - c.y
         moveCursorY(n: n, c: c)
 
-        if term.textBuffer.count <= term.topRow + term.screen.c.y {
-            for _ in 0 ... term.topRow + term.screen.c.y - term.textBuffer.count {
-                term.textBuffer.append([textAttr(char: " ", color: term.currColor, hasPrevious: false)])
+        if term.getTotalLineCount() <= term.topRow + term.screen.c.y {
+            for _ in 0 ... term.topRow + term.screen.c.y - term.getTotalLineCount() {
+                term.addNewLine()
             }
         }
     }
@@ -39,14 +39,11 @@ class EscapeSequence {
         // カーソルをずらす
         moveCursorX(n: n, c: c)
 
-        let over = term.screen.c.x - term.textBuffer[term.currentRow].count
+        let over = term.screen.c.x - term.getLineTextCount(line: term.currentRow)
         if 0 < over {
             // 足りない空白を追加する
             for _ in 0 ..< over {
-                term.textBuffer[term.currentRow].append(textAttr(char: " ", color: term.currColor))
-                if term.textBuffer[term.currentRow].count == 1 {
-                    term.textBuffer[term.currentRow][0].hasPrevious = false
-                }
+                term.addSpace(line: term.currentRow)
             }
         }
     }
@@ -126,15 +123,15 @@ class EscapeSequence {
     }
 
     private func clearLineFromCursor(line: Int, from: Int){
-        term.textBuffer[line] = Array(term.textBuffer[line].prefix(from))
-        if term.textBuffer[line].count == 0 {
-            term.textBuffer[line].append(textAttr(char: "", color: term.currColor, hasPrevious: false))
+        let to: Int = term.getLineTextCount(line: line)
+        for x in from ..< to {
+            term.writeOneCharToBuffer(" ", x: x, y: line)
         }
     }
 
     private func clearLineToCursor(line: Int, to: Int){
         for i in 0 ..< to {
-            term.textBuffer[line][i].char = " "
+            term.writeOneCharToBuffer(" ", x: i, y: line)
         }
     }
 
@@ -157,7 +154,7 @@ class EscapeSequence {
     }
 
     func scrollNext(n: Int) {
-        if (term.topRow + n > term.textBuffer.count){
+        if (term.topRow + n > term.getTotalLineCount()){
             return
         }
         term.topRow = term.topRow + n

@@ -9,7 +9,7 @@ import UIKit
 class Terminal {
     var escapeSequence: EscapeSequence!
     var screen: Screen
-    var textBuffer = [[textAttr]]()
+    private var textBuffer = [[textAttr]]()
 
     private var escState: EscapeSequenceState = .none
     private var font: UIFont = UIFont(name: "Courier", size: 12.0)!
@@ -34,6 +34,18 @@ class Terminal {
 
     func setupEscapeSequence() {
         self.escapeSequence = EscapeSequence(term: self)
+    }
+
+    func writeOneCharToBuffer(_ char: String, x: Int, y: Int) {
+        textBuffer[y][x].char = char
+    }
+
+    func addSpace(line: Int) {
+        textBuffer[line].append(textAttr(char: " ", color: currColor))
+    }
+
+    func addNewLine() {
+        textBuffer.append([textAttr(char: " ", color: currColor, hasPrevious: false)])
     }
 
     // ターミナルに文字を出力する
@@ -121,14 +133,8 @@ class Terminal {
         }
     }
 
-    // 書き込み位置がバッファの最後か判断する関数
-    private func curIsEnd() -> Bool {
-        curIsRowEnd() && currentRow == textBuffer.count
-    }
-
-    // カーソルが行末か判断する関数
-    private func curIsRowEnd() -> Bool {
-        screen.c.x == textBuffer[currentRow].count
+    func getLineText(line: Int) -> [textAttr] {
+        return textBuffer[line]
     }
 
     func getCurrLineText() -> String {
@@ -292,6 +298,14 @@ class Terminal {
         default:
             escState = .none
         }
+    }
+
+    func getTotalLineCount() -> Int {
+        return textBuffer.count
+    }
+
+    func getLineTextCount(line: Int) -> Int {
+        return textBuffer[line].count
     }
 
     private func clearEscapeSequence() {
