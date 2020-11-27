@@ -37,7 +37,7 @@ class Terminal {
     }
 
     // ターミナルに文字を出力する
-    func writeTextToBuffer(_ string : String) {
+    func writeTextToBufferAtCursor(_ string : String) {
         // 複数文字届いたときは一字ずつ処理する
         for inputCharacter in string {
             let text = String(inputCharacter)
@@ -48,7 +48,7 @@ class Terminal {
             }
 
             if escState == .none && text != "\u{1b}"{
-                writeText(text)
+                writeTextAtCursor(text)
             } else {
                 checkEscapeSequence(text)
             }
@@ -56,7 +56,7 @@ class Terminal {
     }
 
     // textview内のカーソル位置に文字を書き込む関数
-    private func writeText(_ text: String) {
+    private func writeTextAtCursor(_ text: String) {
         if  "\u{00}" <= text && text <= "\u{1f}"{
             writeOperationCode(text: text)
             return
@@ -110,7 +110,7 @@ class Terminal {
         case "\t":  // HT(水平タブ)ならカーソルを4文字ごとに飛ばす
             let count = 4 - 4 % screen.c.x
             for _ in 0 ..< count {
-                writeText(" ")
+                writeTextAtCursor(" ")
             }
             return
         case "\u{08}":  // BS(後退)ならカーソルを一つ左にずらす
