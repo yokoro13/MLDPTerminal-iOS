@@ -31,8 +31,21 @@ class TerminalInteractor: TerminalUseCase {
         writeTextToBuffer(text)
     }
 
+    var receiveTimer = Timer()
+
     func writeTextToBuffer(_ text: String){
-        term.writeTextToBuffer(text)
+        receiveTimer.invalidate()
+        term.writeTextToBufferAtCursor(text)
+        receiveTimer = Timer.scheduledTimer(
+                timeInterval: 0.01,
+                target: self,
+                selector: #selector(updateScreen),
+                userInfo: nil,
+                repeats: false
+        )
+    }
+
+    @objc private func updateScreen(){
         output.textChanged(term.makeScreenText())
         output.cursorMoved(term.screen.c)
     }
@@ -88,7 +101,7 @@ class TerminalInteractor: TerminalUseCase {
 
     func scrollUp() {
         // 下にスクロールできるとき
-        if term.topRow < term.textBuffer.count - term.screen.screenColumn && term.topRow > -1 {
+        if term.topRow < term.getTotalLineCount() - term.screen.screenColumn && term.topRow > -1 {
             // 基底位置を下げる
             term.topRow += 1
             output.textChanged(term.makeScreenText())
@@ -119,9 +132,9 @@ class TerminalInteractor: TerminalUseCase {
         // キーボードの高さだけ基底位置を下げる
         term.topRow += keyboardHeight
         // 基底位置を下げすぎたとき
-        if term.topRow > term.textBuffer.count - term.screen.screenColumn {
+        if term.topRow > term.getTotalLineCount() - term.screen.screenColumn {
             // 基底位置を上げる
-            term.topRow = term.textBuffer.count - term.screen.screenColumn
+            term.topRow = term.getTotalLineCount() - term.screen.screenColumn
             // 基底位置の上限を定める
             if term.topRow < 0 {
                 term.topRow = 0
@@ -154,7 +167,7 @@ class TerminalInteractor: TerminalUseCase {
         }
         // 書き込み位置を表示する(キーボードが消えることで下に余白ができるのを防ぐための場合分け)
         // スクロールしていたとき
-        if term.topRow > 0 && term.textBuffer.count - term.topRow > term.screen.screenColumn {
+        if term.topRow > 0 && term.getTotalLineCount() - term.topRow > term.screen.screenColumn {
             output.textChanged(term.makeScreenText())
         }
         // スクロールしていないとき
