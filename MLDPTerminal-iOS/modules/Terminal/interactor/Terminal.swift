@@ -12,8 +12,6 @@ class Terminal {
     private var textBuffer = [[textAttr]]()
 
     private var escState: EscapeSequenceState = .none
-    private var font: UIFont = UIFont(name: "Courier", size: 12.0)!
-
     private var escString: String = ""
 
     var puttingCtrl: Bool = false
@@ -74,8 +72,9 @@ class Terminal {
             return
         }
 
-        print("cursor: (\(screen.c.x), \(screen.c.y))")
-        print("topRow: \(topRow)")
+        //print("cursor: (\(screen.c.x), \(screen.c.y))")
+        //print("topRow: \(topRow)")
+        //print("currentRow: \(currentRow)")
 
         if screen.c.x == screen.screenColumn - 1 {     // 折り返すとき
             textBuffer[currentRow].append(textAttr(char: text, color: currColor))
@@ -99,6 +98,7 @@ class Terminal {
     private func writeOperationCode(text: String) {
         switch text {
         case "\r\n":
+            print("********CRLF*******")
             escapeSequence.moveDownToRowLead(n: 1, c: screen.c)
             if screen.screenRow <= currentRow {
                 topRow += 1

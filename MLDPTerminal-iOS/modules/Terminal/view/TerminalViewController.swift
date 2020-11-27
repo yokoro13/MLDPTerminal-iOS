@@ -63,9 +63,6 @@ class TerminalViewController: UIViewController {
         let column = Int(floor((textview.frame.width - textview.layoutMargins.left - textview.layoutMargins.right) / textHeight))
         let row = Int(floor((textview.frame.height - textview.layoutMargins.top - textview.layoutMargins.bottom) / textWidth))
         presenter.setupTerminal(screenColumn: column, screenRow: row)
-
-        print("*****font name*****")
-        print(textview.font?.fontName)
     }
 
     // viewを表示する前のイベント
