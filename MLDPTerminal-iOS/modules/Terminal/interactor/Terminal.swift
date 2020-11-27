@@ -86,10 +86,11 @@ class Terminal {
         } else {    // 折り返さないとき
             if screen.c.x == textBuffer[currentRow].count { // カーソルが行の最後
                 textBuffer[currentRow].append(textAttr(char: text, color: currColor, hasPrevious: false))
+            } else {
+                textBuffer[currentRow][screen.c.x] = textAttr(char: text, color: currColor, hasPrevious: false)
             }
             screen.c.x += 1
         }
-
         if topRow + screen.screenRow <= currentRow {
             topRow += 1
         }
@@ -104,7 +105,7 @@ class Terminal {
                 topRow += 1
             }
             if textBuffer.count <= currentRow {
-                textBuffer.append([textAttr(char: " ", color: currColor, hasPrevious: false)])
+                textBuffer.append([textAttr(char: "", color: currColor, hasPrevious: false)])
             }
             return
         case "\r":      // CR(復帰)ならカーソルを行頭に移動する
@@ -113,11 +114,17 @@ class Terminal {
             return
         case "\n":       // LF(改行)ならカーソルを1行下に移動する
             print("********LF*******")
-            escapeSequence.moveDown(n: 1, c: screen.c)
-            // screen.c.x = 0
+
+            currentRow += 1
+            screen.c = cursor(x: screen.c.x, y: screen.c.y + 1)
             if screen.screenRow <= currentRow {
                 topRow += 1
             }
+            if textBuffer.count <= topRow + screen.c.y {
+                textBuffer.append([textAttr(char: " ", color: currColor, hasPrevious: false)])
+            }
+            screen.c.x = 0
+
             return
         case "\t":  // HT(水平タブ)ならカーソルを4文字ごとに飛ばす
             let count = 4 - 4 % screen.c.x
@@ -145,31 +152,28 @@ class Terminal {
         return lineText
     }
 
-    func makeScreenText() -> NSMutableAttributedString {
-        let text: NSMutableAttributedString = NSMutableAttributedString()
-        var attributes: [NSAttributedString.Key: Any]
-        var char: NSMutableAttributedString
+    var attributes: [NSAttributedString.Key: Any] = [.backgroundColor: UIColor.white, .font: UIFont(name: "Courier", size: 12.0)!]
+    var text: NSMutableAttributedString = NSMutableAttributedString()
 
+    func makeScreenText() -> NSMutableAttributedString {
+        text = NSMutableAttributedString()
         for row in topRow ..< topRow + screen.screenRow {
             if textBuffer.count <= row {
                 break
             }
             for column in 0 ..< textBuffer[row].count {
-                attributes = [.backgroundColor: UIColor.white, .foregroundColor: textBuffer[row][column].color, .font: font] // 文字の色を設定する
-                if topRow + screen.c.y == row && screen.c.x ==  column {
-                    attributes = [.backgroundColor:UIColor.gray, .foregroundColor: UIColor.white, .font: font]
-                }
-                char = NSMutableAttributedString(string: textBuffer[row][column].char, attributes: attributes) // 文字に色を登録する
-                text.append(char)
+                attributes[.foregroundColor] = textBuffer[row][column].color
+                text.append(NSMutableAttributedString(string: textBuffer[row][column].char, attributes: attributes))
             }
-            attributes = [.backgroundColor: UIColor.white, .foregroundColor: UIColor.white, .font: font]            // 改行を追加する
-            char = NSMutableAttributedString(string: "\n", attributes: attributes)
-            text.append(char)
+            text.append(NSMutableAttributedString(string: "\n", attributes: attributes))
         }
+
         return text
     }
 
     func resizeTextBuffer(newScreenRow: Int, newScreenColumn: Int) {
+        print("newScreenSize: (\(newScreenRow), \(newScreenColumn))")
+
         var newTextBuffer = [[textAttr]]()
         var writeLine = 0   // 書き込み行
 
@@ -202,10 +206,10 @@ class Terminal {
 
         textBuffer = newTextBuffer
 
-        screen.c = newTextBuffer.count > 0 ? cursor(x: newTextBuffer[writeLine - 1].count, y: newTextBuffer.count) : cursor(x: 0, y: 0)
+        screen.c = newTextBuffer.count > 0 ? cursor(x: newTextBuffer[writeLine - 1].count-1, y: newTextBuffer.count-1) : cursor(x: 0, y: 0)
 
-        topRow =  newTextBuffer.count - newScreenRow >= 0 ? newTextBuffer.count - newScreenRow : 0
-        currentRow = (newTextBuffer.count - 1) >= 0 ? newTextBuffer.count - 1 : 0
+        topRow =  newTextBuffer.count - newScreenRow > 0 ? newTextBuffer.count - newScreenRow : 0
+        currentRow = newTextBuffer.count > 0 ? newTextBuffer.count - 1 : 0
     }
 
     private func checkEscapeSequence(_ text: String) {
