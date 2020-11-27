@@ -26,9 +26,38 @@ class MLDPTerminal_iOSTests: XCTestCase {
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
+
         self.measure {
             // Put the code you want to measure the time of here.
+            let terminal: Terminal = Terminal(screenColumn: 41, screenRow: 49)
+            terminal.setupEscapeSequence()
+
+            let dispatchGroup = DispatchGroup()
+
+            let queue = DispatchQueue(label: "queue", qos: .userInteractive)
+
+            var workItem : DispatchWorkItem?
+            let semaphore = DispatchSemaphore(value:1)
+
+            var timer = Timer()
+            for _ in 0 ..< 1000 {
+                // timer.invalidate()
+
+                terminal.writeTextToBufferAtCursor("a")
+                timer = Timer.scheduledTimer(
+                        timeInterval: 0.01,
+                        target: self,
+                        selector: #selector(test),
+                        userInfo: nil,
+                        repeats: false
+                )
+                // terminal.asyncMakeScreen()
+            }
         }
+    }
+
+    @objc func test(){
+        print("tset")
     }
 
     func testTerminalInit() {
@@ -39,7 +68,7 @@ class MLDPTerminal_iOSTests: XCTestCase {
     func testWriteText() {
         let terminal: Terminal = Terminal(screenColumn: 48, screenRow: 20)
         // input text
-        terminal.writeTextToBuffer("aaaa")
+        terminal.writeTextToBufferAtCursor("aaaa")
         let currLineText = terminal.getCurrLineText()
         XCTAssertEqual(currLineText, "aaaa")
         XCTAssertEqual(terminal.screen.c, cursor(x: 4, y: 0))
@@ -50,10 +79,10 @@ class MLDPTerminal_iOSTests: XCTestCase {
         // input LF
         terminal.setupEscapeSequence()
 
-        terminal.writeTextToBuffer("\r\n")
+        terminal.writeTextToBufferAtCursor("\r\n")
         XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 1))
 
-        terminal.writeTextToBuffer("a")
+        terminal.writeTextToBufferAtCursor("a")
         XCTAssertEqual(terminal.screen.c, cursor(x: 1, y: 1))
         let currLineText = terminal.getCurrLineText()
         XCTAssertEqual(currLineText, "a")
@@ -62,12 +91,12 @@ class MLDPTerminal_iOSTests: XCTestCase {
     func testWriteTextWarp() {
         let terminal: Terminal = Terminal(screenColumn: 2, screenRow: 20)
         terminal.setupEscapeSequence()
-        terminal.writeTextToBuffer("a")
+        terminal.writeTextToBufferAtCursor("a")
         XCTAssertEqual(terminal.screen.c, cursor(x: 1, y: 0))
         var currLineText = terminal.getCurrLineText()
         XCTAssertEqual(currLineText, "a")
 
-        terminal.writeTextToBuffer("aa")
+        terminal.writeTextToBufferAtCursor("aa")
 
         XCTAssertEqual(terminal.screen.c, cursor(x: 1, y: 1))
         currLineText = terminal.getCurrLineText()
@@ -77,13 +106,13 @@ class MLDPTerminal_iOSTests: XCTestCase {
     func testWriteTextTopRow() {
         let terminal: Terminal = Terminal(screenColumn: 2, screenRow: 3)
         terminal.setupEscapeSequence()
-        terminal.writeTextToBuffer("\r\n")
+        terminal.writeTextToBufferAtCursor("\r\n")
         XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 1))
 
-        terminal.writeTextToBuffer("\r\n")
+        terminal.writeTextToBufferAtCursor("\r\n")
         XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 2))
 
-        terminal.writeTextToBuffer("\r\n")
+        terminal.writeTextToBufferAtCursor("\r\n")
         XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 2))
 
         var currRow = terminal.currentRow
@@ -93,15 +122,15 @@ class MLDPTerminal_iOSTests: XCTestCase {
         XCTAssertEqual(topRow, 1)
 
 
-        terminal.writeTextToBuffer("a")
+        terminal.writeTextToBufferAtCursor("a")
         XCTAssertEqual(terminal.screen.c, cursor(x: 1, y: 2))
         var currLineText = terminal.getCurrLineText()
         XCTAssertEqual(currLineText, "a")
 
-        terminal.writeTextToBuffer("a")
+        terminal.writeTextToBufferAtCursor("a")
         XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 2))
         currLineText = terminal.getCurrLineText()
-        XCTAssertEqual(currLineText, " ")
+        XCTAssertEqual(currLineText, "")
 
         currRow = terminal.currentRow
         topRow = terminal.topRow
@@ -116,22 +145,22 @@ class MLDPTerminal_iOSTests: XCTestCase {
         let ESC_HEAD = "\u{1b}["
 
         // right
-        terminal.writeTextToBuffer(ESC_HEAD + "C")
+        terminal.writeTextToBufferAtCursor(ESC_HEAD + "C")
         XCTAssertEqual(terminal.screen.c, cursor(x: 1, y: 0))
 
         // down
-        terminal.writeTextToBuffer(ESC_HEAD + "B")
+        terminal.writeTextToBufferAtCursor(ESC_HEAD + "B")
         XCTAssertEqual(terminal.screen.c, cursor(x: 1, y: 1))
 
         // left
-        terminal.writeTextToBuffer(ESC_HEAD + "D")
+        terminal.writeTextToBufferAtCursor(ESC_HEAD + "D")
         XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 1))
 
         // up
-        terminal.writeTextToBuffer(ESC_HEAD + "A")
+        terminal.writeTextToBufferAtCursor(ESC_HEAD + "A")
         XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 0))
 
-        terminal.writeTextToBuffer(ESC_HEAD + "9;4H")
+        terminal.writeTextToBufferAtCursor(ESC_HEAD + "9;4H")
         XCTAssertEqual(terminal.screen.c, cursor(x: 3, y: 8))
     }
 
@@ -139,7 +168,7 @@ class MLDPTerminal_iOSTests: XCTestCase {
         let terminal: Terminal = Terminal(screenColumn: 48, screenRow: 20)
         terminal.setupEscapeSequence()
         for _ in 0 ..< 100 {
-            terminal.writeTextToBuffer("aaaaaa")
+            terminal.writeTextToBufferAtCursor("aaaaaa")
         }
     }
 
@@ -147,8 +176,32 @@ class MLDPTerminal_iOSTests: XCTestCase {
         let terminal: Terminal = Terminal(screenColumn: 1, screenRow: 20)
         terminal.setupEscapeSequence()
         for _ in 0 ..< 100 {
-            terminal.writeTextToBuffer("aaaaaa")
+            terminal.writeTextToBufferAtCursor("aaaaaa")
         }
-        terminal.writeTextToBuffer("\r\n")
+        terminal.writeTextToBufferAtCursor("\r\n")
+    }
+
+    func testAsync() {
+        let terminal: Terminal = Terminal(screenColumn: 41, screenRow: 49)
+        terminal.setupEscapeSequence()
+
+        var timer = Timer()
+
+        for _ in 0 ..< 3000 {
+            timer.invalidate()
+
+            terminal.writeTextToBufferAtCursor("a")
+            timer = Timer.scheduledTimer(
+                    timeInterval: 0.01,
+                    target: self,
+                    selector: #selector(test),
+                    userInfo: nil,
+                    repeats: false
+            )
+            timer.fire()
+
+        }
+
+        sleep(1)
     }
 }
