@@ -332,6 +332,10 @@ class TerminalViewController: UIViewController {
     }
 }
 
+let semaphore = DispatchSemaphore(value:1)
+let queue = DispatchQueue(label: "view", qos:.userInteractive)
+var workItem : DispatchWorkItem?
+
 extension TerminalViewController: TerminalView {
     func updateConnectDeviceName(_ name: String) {
         connectDevice.text = "Connection : " + name      // デバイスラベルを初期化する
@@ -342,8 +346,22 @@ extension TerminalViewController: TerminalView {
         textview.setNeedsDisplay()
     }
 
+    @objc
     func updateScreen(_ text: NSMutableAttributedString) {
-        textview.attributedText = text
+        workItem?.cancel()
+
+        workItem = DispatchWorkItem {
+            // 処理中のタスクがある場合は待つ
+            semaphore.wait()
+            // プレビューへの反映はメインスレッドで
+            DispatchQueue.main.async { [self] in
+                textview.attributedText = text
+                // プレビューへの反映が終わってからセマフォを解放
+                semaphore.signal()
+            }
+        }
+        // キューに追加
+        queue.async(execute: workItem!)
     }
 
     func hideMenu(_ duration: Float=0.7) {
