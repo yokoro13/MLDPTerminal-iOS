@@ -174,7 +174,6 @@ class Terminal {
 
         var newTextBuffer = [[textAttr]]()
         var writeLine = 0   // 書き込み行
-        var hasPrevious = false
 
         // 整形前の状態を生成
         for row in 0 ..< textBuffer.count {
@@ -182,7 +181,6 @@ class Terminal {
             if textBuffer[row][0].hasPrevious { // 前の行に追加
                 textBuffer[row][0].hasPrevious = false
                 newTextBuffer[writeLine] += textBuffer[row]
-                hasPrevious = true
             } else {    // 新しく追加
                 newTextBuffer.append(textBuffer[row])
             }
@@ -202,8 +200,6 @@ class Terminal {
             }
 
             writeLine = newTextBuffer.count - 1
-
-            hasPrevious = false
         }
 
         textBuffer = newTextBuffer

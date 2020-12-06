@@ -28,6 +28,9 @@ class TerminalInteractor: TerminalUseCase {
     @objc func receivedData(notification: NSNotification?){
         let text = String(data: notification?.userInfo!["text"] as! Data, encoding: .utf8) ?? "?"
         print(text)
+        //if (term.topRow < term.currentRow - term.screen.c.y) {
+        moveToInputRange()
+        //}
         writeTextToBuffer(text)
     }
 
@@ -101,7 +104,7 @@ class TerminalInteractor: TerminalUseCase {
 
     func scrollUp() {
         // 下にスクロールできるとき
-        if term.topRow < term.getTotalLineCount() - term.screen.screenColumn && term.topRow > -1 {
+        if term.topRow <= term.getTotalLineCount() - term.screen.screenRow {
             // 基底位置を下げる
             term.topRow += 1
             output.textChanged(term.makeScreenText())
@@ -128,55 +131,27 @@ class TerminalInteractor: TerminalUseCase {
         }
     }
 
+    private func moveToInputRange(){
+        term.topRow = term.currentRow - term.screen.screenColumn + 1
+
+        if (term.topRow < 0) {
+            term.topRow = 0
+        }
+
+        term.screen.c.x = term.getLineTextCount(line: term.currentRow)
+        term.screen.c.y = term.currentRow - term.topRow
+    }
+
     func showKeyboard(keyboardHeight: Int) {
-        // キーボードの高さだけ基底位置を下げる
-        term.topRow += keyboardHeight
-        // 基底位置を下げすぎたとき
-        if term.topRow > term.getTotalLineCount() - term.screen.screenColumn {
-            // 基底位置を上げる
-            term.topRow = term.getTotalLineCount() - term.screen.screenColumn
-            // 基底位置の上限を定める
-            if term.topRow < 0 {
-                term.topRow = 0
-            }
-        }
-        // カーソルが表示範囲から外れたとき
-        if term.screen.c.y < term.topRow + 1 {
-            term.topRow = term.screen.c.y
-        } else if term.screen.c.y > term.topRow + term.screen.screenColumn {
-            term.topRow = term.screen.c.y - term.screen.screenColumn
-        }
-        // 書き込み位置を表示する
+        moveToInputRange()
         output.textChanged(term.makeScreenText())
         // スクロール基底を初期化する
         term.topRow = 0
     }
 
     func hideKeyboard(keyboardHeight: Int) {
-        // キーボードの高さだけ基底位置を上げる
-        term.topRow -= keyboardHeight
-        // 基底位置の上限を定める
-        if term.topRow < 0 {
-            term.topRow = 0
-        }
-        // カーソルが表示範囲から外れたとき
-        if term.screen.c.y < term.topRow + 1 {
-            term.topRow = term.screen.c.y
-        } else if term.screen.c.y > term.topRow + term.screen.screenColumn {
-            term.topRow = term.screen.c.y - term.screen.screenColumn
-        }
-        // 書き込み位置を表示する(キーボードが消えることで下に余白ができるのを防ぐための場合分け)
-        // スクロールしていたとき
-        if term.topRow > 0 && term.getTotalLineCount() - term.topRow > term.screen.screenColumn {
-            output.textChanged(term.makeScreenText())
-        }
-        // スクロールしていないとき
-        else {
-            // 表示する
-            output.textChanged(term.makeScreenText())
-            // スクロール基底を初期化する
-            term.topRow = 0
-        }
+        moveToInputRange()
+        output.textChanged(term.makeScreenText())
     }
 
     private var isShowingMenu: Bool = false
