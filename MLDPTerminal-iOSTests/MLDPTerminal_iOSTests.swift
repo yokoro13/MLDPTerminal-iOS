@@ -183,20 +183,26 @@ class MLDPTerminal_iOSTests: XCTestCase {
     func testResizeTextBuffer() {
         let terminal: Terminal = Terminal(screenColumn: 20, screenRow: 20)
         terminal.setupEscapeSequence()
-
         terminal.writeTextToBufferAtCursor("aaaaaa")
+
 
         terminal.resizeTextBuffer(newScreenRow: 1, newScreenColumn: 1)
         var currLineText = terminal.getCurrLineText()
         XCTAssertEqual(currLineText, "a")
-
         XCTAssertEqual(terminal.topRow, 5)
         XCTAssertEqual(terminal.currentRow, 5)
+
+
+        terminal.resizeTextBuffer(newScreenRow: 1, newScreenColumn: 5)
+        currLineText = terminal.getCurrLineText()
+        XCTAssertEqual(currLineText, "a")
+        XCTAssertEqual(terminal.topRow, 1)
+        XCTAssertEqual(terminal.currentRow, 1)
+
 
         terminal.resizeTextBuffer(newScreenRow: 20, newScreenColumn: 20)
         currLineText = terminal.getCurrLineText()
         XCTAssertEqual(currLineText, "aaaaaa")
-
         XCTAssertEqual(terminal.topRow, 0)
         XCTAssertEqual(terminal.currentRow, 0)
     }
