@@ -172,40 +172,43 @@ class Terminal {
 
         var newTextBuffer = [[textAttr]]()
         var writeLine = 0   // 書き込み行
+        var hasPrevious = false
 
         // 整形前の状態を生成
         for row in 0 ..< textBuffer.count {
 
             if textBuffer[row][0].hasPrevious { // 前の行に追加
                 textBuffer[row][0].hasPrevious = false
-                newTextBuffer[writeLine - 1] += textBuffer[row]
+                newTextBuffer[writeLine] += textBuffer[row]
+                hasPrevious = true
             } else {    // 新しく追加
                 newTextBuffer.append(textBuffer[row])
             }
 
             let overed = newTextBuffer[writeLine].count - newScreenColumn // オーバーする文字数
             if 0 < overed {
-                let usedLines = overed % newScreenColumn    // 使う行数-1
-                var pos1 = newScreenColumn
+                let usedLines = Int(overed / newScreenColumn)   // 使う行数
 
-                for line in 0 ... usedLines {
+                for line in 0 ..< usedLines {
+                    let to = overed - line * newScreenColumn + 1
+                    let overedParts = newTextBuffer[writeLine][newScreenColumn ..< to]
+                    newTextBuffer[writeLine].removeSubrange(newScreenColumn ..< to)
+                    newTextBuffer.append(Array(overedParts))
                     writeLine += 1
-                    let pos2 = overed - (usedLines - line) * newScreenColumn
-                    let overedParts = newTextBuffer[pos1 ..< pos2]
-                    newTextBuffer.append(contentsOf: overedParts)
                     newTextBuffer[writeLine][0].hasPrevious = true
-                    pos1 = pos2
                 }
             }
-            writeLine += 1
+
+            writeLine = newTextBuffer.count - 1
+
+            hasPrevious = false
         }
 
         textBuffer = newTextBuffer
 
-        screen.c = newTextBuffer.count > 0 ? cursor(x: newTextBuffer[writeLine - 1].count-1, y: newTextBuffer.count-1) : cursor(x: 0, y: 0)
-
-        topRow =  newTextBuffer.count - newScreenRow > 0 ? newTextBuffer.count - newScreenRow : 0
+        screen.c = newTextBuffer.count > 0 ? cursor(x: newTextBuffer[writeLine].count-1, y: newTextBuffer.count-1) : cursor(x: 0, y: 0)
         currentRow = newTextBuffer.count > 0 ? newTextBuffer.count - 1 : 0
+        topRow =   currentRow - newScreenRow > 0 ? currentRow - newScreenRow + 1 : 0
     }
 
     private func checkEscapeSequence(_ text: String) {
