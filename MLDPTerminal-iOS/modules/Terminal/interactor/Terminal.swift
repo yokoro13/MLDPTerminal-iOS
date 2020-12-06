@@ -172,6 +172,14 @@ class Terminal {
     func resizeTextBuffer(newScreenRow: Int, newScreenColumn: Int) {
         print("newScreenSize: (\(newScreenRow), \(newScreenColumn))")
 
+        if screen.screenColumn == newScreenColumn {
+            screen.screenRow = newScreenRow
+            currentRow = textBuffer.count > 0 ? textBuffer.count - 1 : 0
+            topRow = currentRow - newScreenRow > 0 ? currentRow - newScreenRow + 1 : 0
+            screen.c = cursor(x: screen.c.x, y: currentRow - topRow)
+            return
+        }
+
         var newTextBuffer = [[textAttr]]()
         var writeLine = 0   // 書き込み行
 
@@ -185,17 +193,20 @@ class Terminal {
                 newTextBuffer.append(textBuffer[row])
             }
 
-            let overed = newTextBuffer[writeLine].count - newScreenColumn // オーバーする文字数
+            var overed = newTextBuffer[writeLine].count - newScreenColumn // オーバーする文字数
             if 0 < overed {
-                let usedLines = Int(overed / newScreenColumn)   // 使う行数
+                let usedLines = Int(overed / newScreenColumn) + 1  // 使う行数
 
-                for line in 0 ..< usedLines {
-                    let to = overed - line * newScreenColumn + 1
-                    let overedParts = newTextBuffer[writeLine][newScreenColumn ..< to]
-                    newTextBuffer[writeLine].removeSubrange(newScreenColumn ..< to)
+                for _ in 0 ..< usedLines {
+                    let overedParts = newTextBuffer[writeLine][newScreenColumn ..< newScreenColumn + overed]
+                    if overedParts.count == 0 {
+                        break
+                    }
+                    newTextBuffer[writeLine].removeSubrange(newScreenColumn ..< newScreenColumn + overed)
                     newTextBuffer.append(Array(overedParts))
                     writeLine += 1
                     newTextBuffer[writeLine][0].hasPrevious = true
+                    overed = newTextBuffer[writeLine].count - newScreenColumn
                 }
             }
 
@@ -204,9 +215,12 @@ class Terminal {
 
         textBuffer = newTextBuffer
 
-        screen.c = newTextBuffer.count > 0 ? cursor(x: newTextBuffer[writeLine].count-1, y: newTextBuffer.count-1) : cursor(x: 0, y: 0)
+        screen.screenRow = newScreenRow
+        screen.screenColumn = newScreenColumn
+
         currentRow = newTextBuffer.count > 0 ? newTextBuffer.count - 1 : 0
-        topRow =   currentRow - newScreenRow > 0 ? currentRow - newScreenRow + 1 : 0
+        topRow = currentRow - newScreenRow >= 0 ? currentRow - newScreenRow + 1 : 0
+        screen.c = cursor(x: newTextBuffer[writeLine].count-1, y: currentRow - topRow)
     }
 
     private func checkEscapeSequence(_ text: String) {
