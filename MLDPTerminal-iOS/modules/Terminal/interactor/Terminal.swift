@@ -19,11 +19,7 @@ class Terminal {
     var topRow = 0       // スクリーンのサイズとバッファサイズの差分
     var hasNext = false                 // 行が次に続くか
     var currColor = UIColor.black       // 現在の色を記憶
-    var currentRow = 0 {                 // 現在書き込み中のバッファの行
-        didSet {
-            screen.c.y = currentRow - topRow
-        }
-    }
+    var currentRow = 0
 
     init(screenColumn: Int, screenRow: Int) {
         self.screen = Screen(screenColumn: screenColumn, screenRow: screenRow)
