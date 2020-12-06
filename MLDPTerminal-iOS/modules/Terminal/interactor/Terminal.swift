@@ -96,13 +96,15 @@ class Terminal {
         switch text {
         case "\r\n":
             print("********CRLF*******")
-            escapeSequence.moveDownToRowLead(n: 1, c: screen.c)
+            currentRow += 1
+            screen.c = cursor(x: screen.c.x, y: screen.c.y + 1)
             if screen.screenRow <= currentRow {
                 topRow += 1
             }
             if textBuffer.count <= currentRow {
-                textBuffer.append([textAttr(char: "", color: currColor, hasPrevious: false)])
+                addNewLine()
             }
+            screen.c.x = 0
             return
         case "\r":      // CR(復帰)ならカーソルを行頭に移動する
             // escapeSequence.moveDownToRowLead(n: 1, c: screen.c)
@@ -117,7 +119,7 @@ class Terminal {
                 topRow += 1
             }
             if textBuffer.count <= topRow + screen.c.y {
-                textBuffer.append([textAttr(char: " ", color: currColor, hasPrevious: false)])
+                addNewLine()
             }
             screen.c.x = 0
 
