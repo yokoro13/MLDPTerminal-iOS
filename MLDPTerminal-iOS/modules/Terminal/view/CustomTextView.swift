@@ -13,6 +13,11 @@ class CustomTextView: UITextView {
         return CGRect.zero
     }
 
+    // タッチ開始時のイベント
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.endEditing(true) // キーボードを閉じる
+    }
+
     override func draw(_ rect: CGRect) {
         let textHeight = " ".getStringHeight(font!)
         let textWidth = " ".getStringWidth(font!)

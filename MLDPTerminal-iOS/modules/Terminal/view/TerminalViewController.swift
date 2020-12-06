@@ -128,11 +128,6 @@ class TerminalViewController: UIViewController {
         button.addTarget(self, action: action, for: UIControl.Event.touchUpInside)
     }
 
-    // タッチ開始時のイベント
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true) // キーボードを閉じる
-    }
-
     // 画面をスクロールさせる関数
     @objc func pan(sender: UIPanGestureRecognizer) {
         // 移動後の相対位置を取得する
