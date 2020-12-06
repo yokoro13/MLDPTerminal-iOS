@@ -78,6 +78,7 @@ class Terminal {
                 textBuffer.append([textAttr(char: " ", color: currColor, hasPrevious: true)])
             }
             currentRow += 1
+            screen.c.y += 1
             screen.c.x = 0
         } else {    // 折り返さないとき
             if screen.c.x == textBuffer[currentRow].count { // カーソルが行の最後
