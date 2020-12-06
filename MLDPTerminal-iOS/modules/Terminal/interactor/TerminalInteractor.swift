@@ -28,10 +28,8 @@ class TerminalInteractor: TerminalUseCase {
     @objc func receivedData(notification: NSNotification?){
         let text = String(data: notification?.userInfo!["text"] as! Data, encoding: .utf8) ?? "?"
         print(text)
-        //if (term.topRow < term.currentRow - term.screen.c.y) {
-        moveToInputRange()
-        //}
         writeTextToBuffer(text)
+        moveToInputRange()
     }
 
     var receiveTimer = Timer()
@@ -56,14 +54,14 @@ class TerminalInteractor: TerminalUseCase {
     func changeScreenSize(newScreenColumnSize: Int, newScreenRowSize: Int) {
         print("--- onOrientationChange ---")
         term.resizeTextBuffer(newScreenRow: newScreenRowSize, newScreenColumn: newScreenColumnSize)
-        term.screen.screenColumn = newScreenColumnSize
-        term.screen.screenRow = newScreenRowSize
         output.textChanged(term.makeScreenText())
         output.cursorMoved(term.screen.c)
+        moveToInputRange()
     }
 
     func writePeripheral(_ message: String) {
-        bleManager.write(message)
+        //bleManager.write(message)
+        bleManager.receivedDummyData(data: message.data(using: .utf8)!)
     }
 
     func tapUp() {
@@ -132,21 +130,18 @@ class TerminalInteractor: TerminalUseCase {
     }
 
     private func moveToInputRange(){
-        term.topRow = term.currentRow - term.screen.screenColumn + 1
+        term.topRow = term.currentRow - term.screen.c.y
 
         if (term.topRow < 0) {
             term.topRow = 0
         }
 
-        term.screen.c.x = term.getLineTextCount(line: term.currentRow)
         term.screen.c.y = term.currentRow - term.topRow
     }
 
     func showKeyboard(keyboardHeight: Int) {
         moveToInputRange()
         output.textChanged(term.makeScreenText())
-        // スクロール基底を初期化する
-        term.topRow = 0
     }
 
     func hideKeyboard(keyboardHeight: Int) {

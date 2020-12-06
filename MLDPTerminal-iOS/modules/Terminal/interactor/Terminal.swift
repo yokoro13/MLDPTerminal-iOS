@@ -19,7 +19,16 @@ class Terminal {
     var topRow = 0       // スクリーンのサイズとバッファサイズの差分
     var hasNext = false                 // 行が次に続くか
     var currColor = UIColor.black       // 現在の色を記憶
-    var currentRow = 0
+    var currentRow: Int = 0 {
+        didSet {
+            if oldValue < 0 {
+                currentRow = 0
+            }
+            if oldValue >= textBuffer.count {
+                currentRow = textBuffer.count - 1
+            }
+        }
+    }
 
     init(screenColumn: Int, screenRow: Int) {
         self.screen = Screen(screenColumn: screenColumn, screenRow: screenRow)
@@ -68,9 +77,9 @@ class Terminal {
             return
         }
 
-        //print("cursor: (\(screen.c.x), \(screen.c.y))")
-        //print("topRow: \(topRow)")
-        //print("currentRow: \(currentRow)")
+        print("cursor: (\(screen.c.x), \(screen.c.y))")
+        print("topRow: \(topRow)")
+        print("currentRow: \(currentRow)")
 
         if screen.c.x == screen.screenColumn - 1 {     // 折り返すとき
             textBuffer[currentRow].append(textAttr(char: text, color: currColor))
