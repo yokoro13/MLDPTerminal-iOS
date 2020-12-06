@@ -118,7 +118,7 @@ class Terminal {
             if screen.screenRow <= currentRow {
                 topRow += 1
             }
-            if textBuffer.count <= topRow + screen.c.y {
+            if textBuffer.count <= currentRow {
                 addNewLine()
             }
             screen.c.x = 0
