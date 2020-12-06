@@ -16,7 +16,7 @@
       </BuildActionEntries>
    </BuildAction>
    <TestAction
-      buildConfiguration = "Release">
+      buildConfiguration = "Debug">
       <Testables>
          <TestableReference>
             <BuildableReference

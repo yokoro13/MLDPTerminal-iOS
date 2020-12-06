@@ -10,7 +10,6 @@ import XCTest
 @testable import MLDPTerminal_iOS
 
 class MLDPTerminal_iOSTests: XCTestCase {
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -130,7 +129,7 @@ class MLDPTerminal_iOSTests: XCTestCase {
         terminal.writeTextToBufferAtCursor("a")
         XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 2))
         currLineText = terminal.getCurrLineText()
-        XCTAssertEqual(currLineText, "")
+        XCTAssertEqual(currLineText, " ")
 
         currRow = terminal.currentRow
         topRow = terminal.topRow
@@ -181,27 +180,24 @@ class MLDPTerminal_iOSTests: XCTestCase {
         terminal.writeTextToBufferAtCursor("\r\n")
     }
 
-    func testAsync() {
-        let terminal: Terminal = Terminal(screenColumn: 41, screenRow: 49)
+    func testResizeTextBuffer() {
+        let terminal: Terminal = Terminal(screenColumn: 20, screenRow: 20)
         terminal.setupEscapeSequence()
 
-        var timer = Timer()
+        terminal.writeTextToBufferAtCursor("aaaaaa")
 
-        for _ in 0 ..< 3000 {
-            timer.invalidate()
+        terminal.resizeTextBuffer(newScreenRow: 1, newScreenColumn: 1)
+        var currLineText = terminal.getCurrLineText()
+        XCTAssertEqual(currLineText, "a")
 
-            terminal.writeTextToBufferAtCursor("a")
-            timer = Timer.scheduledTimer(
-                    timeInterval: 0.01,
-                    target: self,
-                    selector: #selector(test),
-                    userInfo: nil,
-                    repeats: false
-            )
-            timer.fire()
+        XCTAssertEqual(terminal.topRow, 5)
+        XCTAssertEqual(terminal.currentRow, 5)
 
-        }
+        terminal.resizeTextBuffer(newScreenRow: 20, newScreenColumn: 20)
+        currLineText = terminal.getCurrLineText()
+        XCTAssertEqual(currLineText, "aaaaaa")
 
-        sleep(1)
+        XCTAssertEqual(terminal.topRow, 0)
+        XCTAssertEqual(terminal.currentRow, 0)
     }
 }
