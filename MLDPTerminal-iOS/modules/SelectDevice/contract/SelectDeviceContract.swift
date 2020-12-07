@@ -5,7 +5,7 @@
 
 import UIKit
 
-protocol SelectDeviceView: IndicatableView {
+protocol SelectDeviceView: class {
     var presenter: SelectDevicePresentation! { get set }
 
     func showDevices(_ devices: [BleDevice])

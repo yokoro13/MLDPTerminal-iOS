@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		17B20AF3324640C6F4E3C15D /* libPods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E5A315DC9574BE095D101A9A /* libPods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.a */; };
+		00F7C7AA0629D0D1B44766C6 /* libPods-MLDPTerminal-iOSUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0970343195FBBA06DBD52CF0 /* libPods-MLDPTerminal-iOSUITests.a */; };
 		3A506F4BECC0B0CAA7850AF9 /* libPods-MLDPTerminal-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5439906F5E68C8036ECB793D /* libPods-MLDPTerminal-iOS.a */; };
 		45B800E495DF59A889C98D4C /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80C201F997DC85CED4D55 /* RootRouter.swift */; };
 		45B8011AF8315CF1E438A47C /* Terminal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B806085ED788B130B27988 /* Terminal.swift */; };
@@ -15,14 +15,12 @@
 		45B8015915AF2AC8CAF6F350 /* BleObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8073EC5C7BD98FF215E23 /* BleObserver.swift */; };
 		45B8017E225F42B94C7FD5EF /* Terminal.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45B8099896AD2C14517EE60D /* Terminal.storyboard */; };
 		45B80282D2441B7D00F6C545 /* RootContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80240C3154E7387B5B331 /* RootContract.swift */; };
-		45B80287AACD9C90D0EE0B90 /* IndicatableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80AF49342B74D91136EB7 /* IndicatableView.swift */; };
 		45B8028FBD1281231B36ABF9 /* SelectDevicePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B801CF4CB59C1118F4C2A0 /* SelectDevicePresenter.swift */; };
 		45B802F69643C92D414FA7B5 /* SelectDeviceRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B802A6554B199108EE8D93 /* SelectDeviceRouter.swift */; };
 		45B803B167B39766C9A4A199 /* TerminalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B802DBB1E888FB2B2BA1F6 /* TerminalViewController.swift */; };
 		45B803EFEFB53414E71FD63A /* TerminalInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80726E7827AC685B488D3 /* TerminalInteractor.swift */; };
 		45B803FFF9630F18E0A46755 /* TextBuffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80FC97DF5B8D1DB43B216 /* TextBuffer.swift */; };
 		45B8047CAF9CAE0D00B402AB /* BleState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80B8BB9A7494DD97C5F14 /* BleState.swift */; };
-		45B80485B4674D0A9BF96138 /* ViewProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B8086A2CCFACEEC7C7FA32 /* ViewProtocols.swift */; };
 		45B80499FEBCA9440B015886 /* SelectDeviceContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80C04EB91A8E0EAA535EB /* SelectDeviceContract.swift */; };
 		45B805304926BF9D9B9DB184 /* EscapeSequenceState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B800461F9A0EA7AAD0F65D /* EscapeSequenceState.swift */; };
 		45B805FC8453E5A8B30B8D4F /* SelectDeviceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45B80D04A0F6E64C4911B64A /* SelectDeviceViewController.swift */; };
@@ -67,6 +65,7 @@
 
 /* Begin PBXFileReference section */
 		062688C8260F5BCE11BBA7E6 /* Pods-MLDPTerminal-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLDPTerminal-iOS.debug.xcconfig"; path = "Target Support Files/Pods-MLDPTerminal-iOS/Pods-MLDPTerminal-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		0970343195FBBA06DBD52CF0 /* libPods-MLDPTerminal-iOSUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MLDPTerminal-iOSUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		34873277B37A781C4392ACE7 /* Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.release.xcconfig"; path = "Target Support Files/Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests/Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		420A5513819888E5FB2EBA6E /* Pods-MLDPTerminal-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLDPTerminal-iOS.release.xcconfig"; path = "Target Support Files/Pods-MLDPTerminal-iOS/Pods-MLDPTerminal-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		45B800461F9A0EA7AAD0F65D /* EscapeSequenceState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EscapeSequenceState.swift; sourceTree = "<group>"; };
@@ -84,12 +83,10 @@
 		45B80726E7827AC685B488D3 /* TerminalInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalInteractor.swift; sourceTree = "<group>"; };
 		45B8073A874DF7FA0DD667C9 /* TerminalPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalPresenter.swift; sourceTree = "<group>"; };
 		45B8073EC5C7BD98FF215E23 /* BleObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleObserver.swift; sourceTree = "<group>"; };
-		45B8086A2CCFACEEC7C7FA32 /* ViewProtocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewProtocols.swift; sourceTree = "<group>"; };
 		45B808DDDDB5003D2D8652C2 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		45B8099896AD2C14517EE60D /* Terminal.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Terminal.storyboard; sourceTree = "<group>"; };
 		45B809A1C95042AA50ABC1F0 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.info; path = Info.plist; sourceTree = "<group>"; };
 		45B80A6CB257A3D544CEB3B8 /* CustomTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextView.swift; sourceTree = "<group>"; };
-		45B80AF49342B74D91136EB7 /* IndicatableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IndicatableView.swift; sourceTree = "<group>"; };
 		45B80B8BB9A7494DD97C5F14 /* BleState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BleState.swift; sourceTree = "<group>"; };
 		45B80BC0322A8908574D2595 /* TerminalRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TerminalRouter.swift; sourceTree = "<group>"; };
 		45B80C04EB91A8E0EAA535EB /* SelectDeviceContract.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectDeviceContract.swift; sourceTree = "<group>"; };
@@ -102,9 +99,10 @@
 		45B80FC97DF5B8D1DB43B216 /* TextBuffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextBuffer.swift; sourceTree = "<group>"; };
 		4C0A195DA36D163C92C30589 /* Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests/Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5439906F5E68C8036ECB793D /* libPods-MLDPTerminal-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MLDPTerminal-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		61F107C5E9B13A2F90B59480 /* Pods-MLDPTerminal-iOSUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLDPTerminal-iOSUITests.release.xcconfig"; path = "Target Support Files/Pods-MLDPTerminal-iOSUITests/Pods-MLDPTerminal-iOSUITests.release.xcconfig"; sourceTree = "<group>"; };
 		8586B99AF069D584D1E595AF /* libPods-MLDPTerminal-iOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MLDPTerminal-iOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3341F0840A4923C9148B7C5 /* Pods-MLDPTerminal-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLDPTerminal-iOSTests.debug.xcconfig"; path = "Target Support Files/Pods-MLDPTerminal-iOSTests/Pods-MLDPTerminal-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		E5A315DC9574BE095D101A9A /* libPods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B205AC9828C6A226D8032EC1 /* Pods-MLDPTerminal-iOSUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MLDPTerminal-iOSUITests.debug.xcconfig"; path = "Target Support Files/Pods-MLDPTerminal-iOSUITests/Pods-MLDPTerminal-iOSUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		EE302CD224F4A89400D3E45D /* MLDPTerminal-iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MLDPTerminal-iOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE302CD524F4A89400D3E45D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EE302CE824F4A89A00D3E45D /* MLDPTerminal-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MLDPTerminal-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -142,7 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				17B20AF3324640C6F4E3C15D /* libPods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.a in Frameworks */,
+				00F7C7AA0629D0D1B44766C6 /* libPods-MLDPTerminal-iOSUITests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,14 +265,6 @@
 			path = view;
 			sourceTree = "<group>";
 		};
-		45B80A8D106D3DFE1CBC09F0 /* protocols */ = {
-			isa = PBXGroup;
-			children = (
-				45B8086A2CCFACEEC7C7FA32 /* ViewProtocols.swift */,
-			);
-			path = protocols;
-			sourceTree = "<group>";
-		};
 		45B80C09169CF2FFA6A46775 /* presenter */ = {
 			isa = PBXGroup;
 			children = (
@@ -319,7 +309,6 @@
 			isa = PBXGroup;
 			children = (
 				45B80E02BB6DBF50BD347407 /* StringExtension.swift */,
-				45B80AF49342B74D91136EB7 /* IndicatableView.swift */,
 				45B8073EC5C7BD98FF215E23 /* BleObserver.swift */,
 			);
 			path = extensions;
@@ -330,8 +319,8 @@
 			children = (
 				EEFFBB82252C189D0028E307 /* HomeKit.framework */,
 				5439906F5E68C8036ECB793D /* libPods-MLDPTerminal-iOS.a */,
-				E5A315DC9574BE095D101A9A /* libPods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.a */,
 				8586B99AF069D584D1E595AF /* libPods-MLDPTerminal-iOSTests.a */,
+				0970343195FBBA06DBD52CF0 /* libPods-MLDPTerminal-iOSUITests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -345,6 +334,8 @@
 				34873277B37A781C4392ACE7 /* Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.release.xcconfig */,
 				A3341F0840A4923C9148B7C5 /* Pods-MLDPTerminal-iOSTests.debug.xcconfig */,
 				F01E14050C2522FE5B940E4C /* Pods-MLDPTerminal-iOSTests.release.xcconfig */,
+				B205AC9828C6A226D8032EC1 /* Pods-MLDPTerminal-iOSUITests.debug.xcconfig */,
+				61F107C5E9B13A2F90B59480 /* Pods-MLDPTerminal-iOSUITests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -381,7 +372,6 @@
 				45B80F49134F34153087CB1D /* extensions */,
 				45B800BE3CBC434703A5BCA6 /* modules */,
 				45B801682996BF98C8DEBD8C /* models */,
-				45B80A8D106D3DFE1CBC09F0 /* protocols */,
 				45B800320886E4975C173C57 /* resorce */,
 				45B80C4CF19BDED132390259 /* enums */,
 				45B809A1C95042AA50ABC1F0 /* Info.plist */,
@@ -427,7 +417,6 @@
 				EE302CCE24F4A89400D3E45D /* Sources */,
 				EE302CCF24F4A89400D3E45D /* Frameworks */,
 				EE302CD024F4A89400D3E45D /* Resources */,
-				A963D367A4D5880C8F25D941 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -465,7 +454,6 @@
 				EE302CEF24F4A89A00D3E45D /* Sources */,
 				EE302CF024F4A89A00D3E45D /* Frameworks */,
 				EE302CF124F4A89A00D3E45D /* Resources */,
-				F2985474DEE838290970CA82 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -594,23 +582,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A963D367A4D5880C8F25D941 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MLDPTerminal-iOS/Pods-MLDPTerminal-iOS-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MLDPTerminal-iOS/Pods-MLDPTerminal-iOS-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MLDPTerminal-iOS/Pods-MLDPTerminal-iOS-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		C5AC6F60EFEB767BF8518951 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -626,7 +597,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-MLDPTerminal-iOSUITests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -652,23 +623,6 @@
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/MLDPTerminal-iOS/resorce/R.generated.swift\"\n";
 		};
-		F2985474DEE838290970CA82 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests/Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests/Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests/Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -680,8 +634,6 @@
 				EE302D0D24F4AE0000D3E45D /* BleManager.swift in Sources */,
 				45B80FE4FBF408FB07DE6888 /* StringExtension.swift in Sources */,
 				45B803FFF9630F18E0A46755 /* TextBuffer.swift in Sources */,
-				45B80287AACD9C90D0EE0B90 /* IndicatableView.swift in Sources */,
-				45B80485B4674D0A9BF96138 /* ViewProtocols.swift in Sources */,
 				45B803B167B39766C9A4A199 /* TerminalViewController.swift in Sources */,
 				45B80E91770413D0496375E7 /* TerminalRouter.swift in Sources */,
 				45B803EFEFB53414E71FD63A /* TerminalInteractor.swift in Sources */,
@@ -945,7 +897,7 @@
 		};
 		EE302D0324F4A89A00D3E45D /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4C0A195DA36D163C92C30589 /* Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.debug.xcconfig */;
+			baseConfigurationReference = B205AC9828C6A226D8032EC1 /* Pods-MLDPTerminal-iOSUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -966,7 +918,7 @@
 		};
 		EE302D0424F4A89A00D3E45D /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 34873277B37A781C4392ACE7 /* Pods-MLDPTerminal-iOS-MLDPTerminal-iOSUITests.release.xcconfig */;
+			baseConfigurationReference = 61F107C5E9B13A2F90B59480 /* Pods-MLDPTerminal-iOSUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

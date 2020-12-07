@@ -6,7 +6,7 @@
 import UIKit
 
 // View -> Presenter
-protocol TerminalView: IndicatableView {
+protocol TerminalView: class {
     var presenter: TerminalPresentation! { get set }
 
     func moveCursor(_ c: cursor)
