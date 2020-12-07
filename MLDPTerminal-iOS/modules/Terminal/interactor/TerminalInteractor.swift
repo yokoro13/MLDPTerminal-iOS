@@ -48,14 +48,14 @@ class TerminalInteractor: TerminalUseCase {
 
     @objc private func updateScreen(){
         output.textChanged(term.makeScreenText())
-        output.cursorMoved(term.screen.c)
+        // output.cursorMoved(term.screen.c)
     }
 
     func changeScreenSize(newScreenColumnSize: Int, newScreenRowSize: Int) {
         print("--- onOrientationChange ---")
         term.resizeTextBuffer(newScreenRow: newScreenRowSize, newScreenColumn: newScreenColumnSize)
         output.textChanged(term.makeScreenText())
-        output.cursorMoved(term.screen.c)
+        // output.cursorMoved(term.screen.c)
         moveToInputRange()
     }
 
