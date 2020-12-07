@@ -18,7 +18,10 @@ class CustomTextView: UITextView {
         self.endEditing(true) // キーボードを閉じる
     }
 
+
+    // FIXME textviewのしたに表示される
     override func draw(_ rect: CGRect) {
+        /**
         let textHeight = " ".getStringHeight(font!)
         let textWidth = " ".getStringWidth(font!)
 
@@ -33,5 +36,6 @@ class CustomTextView: UITextView {
 
         UIColor.gray.setFill()
         rectangle.fill()
+        **/
     }
 }
