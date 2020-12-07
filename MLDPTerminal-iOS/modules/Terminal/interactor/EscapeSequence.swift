@@ -17,6 +17,11 @@ class EscapeSequence {
     // n : 変位
     func moveUp(n: Int, c: cursor) {
         term.currentRow -= (0 < c.y - n) ? n : c.y
+        if term.getLineTextCount(line: term.currentRow) < c.x {
+            for _ in 0 ..< c.x - term.getLineTextCount(line: term.currentRow) {
+                term.addSpace(line: term.currentRow)
+            }
+        }
         moveCursorY(n: -n, c: c)
     }
 
@@ -31,6 +36,13 @@ class EscapeSequence {
                 term.addNewLine()
             }
         }
+
+        if term.getLineTextCount(line: term.currentRow) < c.x {
+            for _ in 0 ..< c.x - term.getLineTextCount(line: term.currentRow) {
+                term.addSpace(line: term.currentRow)
+            }
+        }
+
     }
 
     // 右にn移動する関数

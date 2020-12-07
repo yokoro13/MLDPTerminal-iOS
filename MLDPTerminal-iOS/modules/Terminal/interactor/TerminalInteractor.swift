@@ -60,7 +60,7 @@ class TerminalInteractor: TerminalUseCase {
     }
 
     func writePeripheral(_ message: String) {
-        //bleManager.write(message)
+        // bleManager.write(message)
         bleManager.receivedDummyData(data: message.data(using: .utf8)!)
     }
 

@@ -206,4 +206,39 @@ class MLDPTerminal_iOSTests: XCTestCase {
         XCTAssertEqual(terminal.topRow, 0)
         XCTAssertEqual(terminal.currentRow, 0)
     }
+
+    func testEscapeSequenceWithInput() {
+        let terminal: Terminal = Terminal(screenColumn: 48, screenRow: 20)
+        terminal.setupEscapeSequence()
+        let ESC_HEAD = "\u{1b}["
+
+        // right
+        terminal.writeTextToBufferAtCursor(ESC_HEAD + "8C")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 8, y: 0))
+
+        terminal.writeTextToBufferAtCursor("a")
+        var currLineText = terminal.getCurrLineText()
+        XCTAssertEqual(currLineText, "       a")
+
+        // down
+        terminal.writeTextToBufferAtCursor(ESC_HEAD + "B")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 9, y: 1))
+
+        // left
+        terminal.writeTextToBufferAtCursor(ESC_HEAD + "D")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 8, y: 1))
+        terminal.writeTextToBufferAtCursor("a")
+        currLineText = terminal.getCurrLineText()
+        XCTAssertEqual(currLineText, "        a")
+        // up
+        terminal.writeTextToBufferAtCursor(ESC_HEAD + "A")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 9, y: 0))
+
+        terminal.writeTextToBufferAtCursor(ESC_HEAD + "9;4H")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 3, y: 8))
+        terminal.writeTextToBufferAtCursor("a")
+        currLineText = terminal.getCurrLineText()
+        XCTAssertEqual(currLineText, "   a")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 4, y: 8))
+    }
 }
