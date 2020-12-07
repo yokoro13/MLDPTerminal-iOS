@@ -171,10 +171,22 @@ class Terminal {
             }
             for column in 0 ..< textBuffer[row].count {
                 attributes[.foregroundColor] = textBuffer[row][column].color
+                if screen.c.x == column && screen.c.y == row - topRow {
+                    attributes[.foregroundColor] = UIColor.white
+                    attributes[.backgroundColor] = UIColor.gray
+                }
                 text.append(NSMutableAttributedString(string: textBuffer[row][column].char, attributes: attributes))
+                attributes[.backgroundColor] = UIColor.white
+            }
+            if screen.c.x == textBuffer[row].count && screen.c.y == row - topRow {
+                text.append(NSMutableAttributedString(string: " ",
+                        attributes: [.backgroundColor: UIColor.gray,
+                                     .foregroundColor: UIColor.white,
+                                     .font: UIFont(name: "Courier", size: 12.0)!]))
             }
             text.append(NSMutableAttributedString(string: "\n", attributes: attributes))
         }
+
 
         return text
     }
