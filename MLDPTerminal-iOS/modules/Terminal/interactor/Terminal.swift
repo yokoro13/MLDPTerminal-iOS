@@ -264,7 +264,7 @@ class Terminal {
             }
         case .ansi:     // ステート2: ANSIがきたら実行　違えば貯める
             escString.append(text)
-            if escString.isANSI() {
+            if text.isANSI() {
                 print(escString)
                 identifyEscapeSequence(esStr: escString)
                 clearEscapeSequence()

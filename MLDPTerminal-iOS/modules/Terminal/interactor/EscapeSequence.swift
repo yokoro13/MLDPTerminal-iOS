@@ -16,6 +16,9 @@ class EscapeSequence {
     // 上にn移動する関数
     // n : 変位
     func moveUp(n: Int, c: cursor) {
+        if (c.y == 0){
+            return
+        }
         term.currentRow -= (0 < c.y - n) ? n : c.y
         if term.getLineTextCount(line: term.currentRow) < c.x {
             for _ in 0 ..< c.x - term.getLineTextCount(line: term.currentRow) {
@@ -28,6 +31,10 @@ class EscapeSequence {
     // 下にn移動する関数
     // n : 変位
     func moveDown(n: Int, c: cursor) {
+        if (c.y == term.screen.screenColumn - 1){
+            return
+        }
+
         term.currentRow += (c.y + n < term.screen.screenRow) ? n : term.screen.screenRow - c.y
         moveCursorY(n: n, c: c)
 
@@ -102,16 +109,16 @@ class EscapeSequence {
     }
 
     private func clearScreenFromCursor(c: cursor) {
-        clearLineFromCursor(line: c.y, from: c.x)
+        clearLineFromCursor(line: term.topRow + c.y, from: c.x)
         for y in c.y+1 ..< term.screen.screenRow {
-            clearLineFromCursor(line: y, from: 0)
+            clearLineFromCursor(line: term.topRow + y, from: 0)
         }
     }
 
     private func clearScreenToCursor(c: cursor) {
         clearLineToCursor(line: c.y, to: c.x)
         for y in 0 ..< c.y {
-            clearLineFromCursor(line: y, from: 0)
+            clearLineFromCursor(line: term.topRow + y, from: 0)
         }
     }
 
@@ -153,12 +160,12 @@ class EscapeSequence {
     func clearLine(n: Int, c: cursor) {
         switch n {
         case 0:
-            clearLineFromCursor(line: c.y, from: c.x)
+            clearLineFromCursor(line: term.topRow + c.y, from: c.x)
         case 1:
-            clearLineToCursor(line: c.y, to: c.x)
+            clearLineToCursor(line: term.topRow + c.y, to: c.x)
         case 2:
-            clearLineToCursor(line: c.y, to: c.x-1)
-            clearLineFromCursor(line: c.y, from: c.x)
+            clearLineToCursor(line: term.topRow + c.y, to: c.x-1)
+            clearLineFromCursor(line: term.topRow + c.y, from: c.x)
         default:
             print("Invalid Number")
             return
