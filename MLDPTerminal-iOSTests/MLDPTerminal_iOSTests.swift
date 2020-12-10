@@ -241,4 +241,21 @@ class MLDPTerminal_iOSTests: XCTestCase {
         XCTAssertEqual(currLineText, "   a")
         XCTAssertEqual(terminal.screen.c, cursor(x: 4, y: 8))
     }
+
+    func testInputManyEscapeSequence(){
+        let terminal: Terminal = Terminal(screenColumn: 48, screenRow: 20)
+        terminal.setupEscapeSequence()
+        let ESC_HEAD = "\u{1b}["
+
+        for _ in 0 ..< 1000 {
+            terminal.writeTextToBufferAtCursor(ESC_HEAD)
+            terminal.writeTextToBufferAtCursor("1;")
+            terminal.writeTextToBufferAtCursor("1H")
+        }
+
+        XCTAssertEqual(terminal.screen.c, cursor(x: 0, y: 0))
+
+        terminal.writeTextToBufferAtCursor(ESC_HEAD + "9;4H")
+        XCTAssertEqual(terminal.screen.c, cursor(x: 3, y: 8))
+    }
 }

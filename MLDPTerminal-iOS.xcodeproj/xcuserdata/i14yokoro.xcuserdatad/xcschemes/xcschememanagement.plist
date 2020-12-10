@@ -36,33 +36,33 @@
 			<key>orderHint</key>
 			<integer>5</integer>
 		</dict>
-		<key>MLDPTerminal_iOSTests.testWriteTextLF.xcscheme</key>
+		<key>MLDPTerminal_iOSTests.testAsync.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>6</integer>
 		</dict>
-		<key>MLDPTerminal_iOSTests.testAsync.xcscheme</key>
+		<key>MLDPTerminal_iOSTests.testResizeTextBuffer.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>7</integer>
 		</dict>
-		<key>MLDPTerminal_iOSTests.testResizeTextBuffer.xcscheme</key>
+		<key>MLDPTerminal_iOSTests.testEscapeSequenceWithInput.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
-		<key>MLDPTerminal_iOSTests.testEscapeSequenceWithInput.xcscheme</key>
+		<key>MLDPTerminal_iOSTests.testInputManyEscapeSequence.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false />
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>14</integer>
 		</dict>
 	</dict>
 </dict>
