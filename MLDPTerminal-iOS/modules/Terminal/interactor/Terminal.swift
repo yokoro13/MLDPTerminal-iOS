@@ -196,7 +196,6 @@ class Terminal {
 
         if screen.screenColumn == newScreenColumn {
             screen.screenRow = newScreenRow
-            currentRow = textBuffer.count > 0 ? textBuffer.count - 1 : 0
             topRow = currentRow - newScreenRow > 0 ? currentRow - newScreenRow + 1 : 0
             screen.c = cursor(x: screen.c.x, y: currentRow - topRow)
             return
@@ -242,7 +241,7 @@ class Terminal {
 
         currentRow = newTextBuffer.count > 0 ? newTextBuffer.count - 1 : 0
         topRow = currentRow - newScreenRow >= 0 ? currentRow - newScreenRow + 1 : 0
-        screen.c = cursor(x: newTextBuffer[writeLine].count-1, y: currentRow - topRow)
+        screen.c = cursor(x: newTextBuffer[currentRow].count-1, y: currentRow - topRow)
     }
 
     private func checkEscapeSequence(_ text: String) {

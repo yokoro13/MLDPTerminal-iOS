@@ -126,7 +126,7 @@ final class BleManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
                     userInfo: ["text": data])
         }
     }
-
+    
     func scanDevice() {
         centralManager.scanForPeripherals(withServices: [MLDP_SERVICE_UUID], options: nil)
     }
