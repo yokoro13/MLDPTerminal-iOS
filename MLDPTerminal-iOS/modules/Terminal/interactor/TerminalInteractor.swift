@@ -60,8 +60,7 @@ class TerminalInteractor: TerminalUseCase {
     }
 
     func writePeripheral(_ message: String) {
-        // bleManager.write(message)
-        bleManager.receivedDummyData(data: message.data(using: .utf8)!)
+        bleManager.write(message)
     }
 
     func tapUp() {
@@ -102,7 +101,7 @@ class TerminalInteractor: TerminalUseCase {
 
     func scrollUp() {
         // 下にスクロールできるとき
-        if term.topRow <= term.getTotalLineCount() - term.screen.screenRow {
+        if term.topRow < term.getTotalLineCount() - term.screen.screenRow {
             // 基底位置を下げる
             term.topRow += 1
             output.textChanged(term.makeScreenText())

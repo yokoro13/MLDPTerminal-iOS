@@ -111,6 +111,9 @@ class EscapeSequence {
     private func clearScreenFromCursor(c: cursor) {
         clearLineFromCursor(line: term.topRow + c.y, from: c.x)
         for y in c.y+1 ..< term.screen.screenRow {
+            if (term.topRow + y <= term.getTotalLineCount()) {
+                break
+            }
             clearLineFromCursor(line: term.topRow + y, from: 0)
         }
     }
