@@ -318,7 +318,7 @@ class TerminalViewController: UIViewController {
     // キーボード追加ボタンの背景色を変更する関数
     func buttonColorChange(button: UIButton) {
         button.backgroundColor = UIColor.white
-        UIView.animate(withDuration: TimeInterval(0.3)) {
+        UIView.animate(withDuration: TimeInterval(0.1)) {
             button.backgroundColor = UIColor.lightGray
         }
     }
