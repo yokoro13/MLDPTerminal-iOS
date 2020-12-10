@@ -126,6 +126,7 @@ class TerminalInteractor: TerminalUseCase {
         if bleManager.state == .closed {
             return
         }
+        bleManager.disconnect()
     }
 
     private func moveToInputRange(){
@@ -135,7 +136,7 @@ class TerminalInteractor: TerminalUseCase {
             term.topRow = 0
         }
 
-        term.screen.c.y = term.currentRow - term.topRow
+        // term.screen.c.y = term.currentRow - term.topRow
     }
 
     func showKeyboard(keyboardHeight: Int) {

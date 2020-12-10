@@ -24,9 +24,6 @@ class Terminal {
             if oldValue < 0 {
                 currentRow = 0
             }
-            if oldValue >= textBuffer.count {
-                currentRow = textBuffer.count - 1
-            }
         }
     }
 
