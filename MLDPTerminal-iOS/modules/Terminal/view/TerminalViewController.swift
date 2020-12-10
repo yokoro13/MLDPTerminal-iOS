@@ -191,7 +191,7 @@ class TerminalViewController: UIViewController {
         textview.frame = CGRect(origin: textview.frame.origin, size: CGSize(width: self.view.frame.width, height: self.view.frame.height - keyboardHeight - textview.frame.origin.y))
         // 画面サイズを設定する
         setSize()
-        presenter.didShowKeyboard(keyboardHeight: Int(keyboardHeight / textHeight) + 1)
+        // presenter.didShowKeyboard(keyboardHeight: Int(keyboardHeight / textHeight) + 1)
     }
 
     // キーボードが消えるときに画面を戻す関数
@@ -204,7 +204,7 @@ class TerminalViewController: UIViewController {
         // キーボードの高さを取得する
         let keyboardHeight = (notification?.userInfo![UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue.height
 
-        presenter.didHideKeyboard(keyboardHeight: Int(keyboardHeight / textHeight) + 1)
+        // presenter.didHideKeyboard(keyboardHeight: Int(keyboardHeight / textHeight) + 1)
     }
 
     // 画面が回転したときに呼ばれる関数
