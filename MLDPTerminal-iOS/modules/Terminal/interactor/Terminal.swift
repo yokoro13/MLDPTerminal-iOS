@@ -168,7 +168,7 @@ class Terminal {
             }
             for column in 0 ..< textBuffer[row].count {
                 attributes[.foregroundColor] = textBuffer[row][column].color
-                if screen.c.x == column && screen.c.y == row - topRow {
+                if screen.c.x == column && row == currentRow {
                     attributes[.foregroundColor] = UIColor.white
                     attributes[.backgroundColor] = UIColor.gray
                 }
